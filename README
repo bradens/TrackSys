@@ -1,0 +1,8 @@
+This is the readme for TrackSys, the seng 330 final project for our team.
+The src folder contains the java code being served by Jetty (http://jetty.codehaus.org/jetty/).  
+	ServletHandler is a the javax servlet which will redirect requests to their appropriate views.
+	
+
+The public folder is the html/css/js files that will be served with apache, which then make calls to the java servlet.  
+
+To get this project running you need java 5+, apache configured to serve the directory at /public/.

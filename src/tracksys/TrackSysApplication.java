@@ -1,6 +1,7 @@
 package tracksys;
 
-import tracksys.controller.*;
+import tracksys.servletHandler.ServletHandler;
+
 import org.eclipse.jetty.server.Server;
 
 public class TrackSysApplication {
@@ -8,8 +9,7 @@ public class TrackSysApplication {
 	{
 		System.out.println("Starting Program");
 		Server server = new Server(8080);
-        server.setHandler(new ArenaManager());
- 
+        server.setHandler(new ServletHandler());
         try {
 	        server.start();
 	        server.join();
