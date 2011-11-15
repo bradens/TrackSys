@@ -16,6 +16,9 @@ public class LoginView {
 	
 	public void Login(HttpServletRequest req, HttpServletResponse resp, String target)
 	{
-		
+		if ( == null)
+		{
+			
+		}
 	}
 }

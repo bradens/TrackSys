@@ -10,6 +10,11 @@ public class ArenaManager {
 	
 	public static LoginView loginView;
 	
+	public static void getUserCookie(String cookieName, HttpServletRequest req)
+	{
+		
+	}
+	
 	public static void Login(HttpServletRequest req, HttpServletResponse resp, String target)
 	{
 		loginView.Login(req, resp, target);
