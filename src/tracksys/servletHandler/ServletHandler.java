@@ -7,6 +7,9 @@ import java.io.IOException;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.handler.AbstractHandler;
 
+import tracksys.controller.ArenaManager;
+import tracksys.controller.ArenaManager.Views;
+
 public class ServletHandler extends AbstractHandler {
 	public void handle(String target,
 					   Request baseReq,
@@ -14,10 +17,33 @@ public class ServletHandler extends AbstractHandler {
 					   HttpServletResponse response)
 	throws IOException, ServletException
 	{
+		Views baseView = getBaseView(target);
+		switch (baseView)
+		{
+			case Root:
+				ArenaManager.doRoot();
+				break;
+			case LoginView:
+				ArenaManager.doLogin(request, response, target);
+				break;
+		}
 		response.setContentType("text/html;charset=utf-8");
 		response.addHeader("Access-Control-Allow-Origin", "*");	// This is just used to debug, it allows ajax calls from localhost -> localhost
-        response.setStatus(HttpServletResponse.SC_OK);
+		response.setStatus(HttpServletResponse.SC_OK);
         baseReq.setHandled(true);
         response.getWriter().println("<h1>This is a text response</h1>");	
+	}
+	
+	public static Views getBaseView(String target)
+	{
+		if (target == "/")
+			return ArenaManager.Views.Root;
+		else {
+			String viewStr = target.split("/")[1];
+			if (viewStr.equals("login"))
+				return ArenaManager.Views.LoginView;
+			else
+				return ArenaManager.Views.Root;
+		}
 	}
 }
