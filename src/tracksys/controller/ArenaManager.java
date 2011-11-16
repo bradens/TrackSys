@@ -20,17 +20,17 @@ public class ArenaManager {
 	 * @param cookieName
 	 * @param req
 	 */
-	public static void getUserCookie(String cookieName, HttpServletRequest req)
+	public static Cookie getUserCookie(String cookieName, HttpServletRequest req)
 	{
 		Cookie[] cookies = req.getCookies();
-		Cookie toFind;
 		for (Cookie c : cookies)
 		{
 			if (c.getName() == cookieName)
 			{
-				
+				return c;
 			}
 		}
+		return null;
 	}
 	
 	/**
@@ -64,7 +64,7 @@ public class ArenaManager {
 		loginView = new LoginView(this);
 	}
 	
-	public ArenaManager getInstance() 
+	public static ArenaManager getInstance() 
 	{
 		if (ref == null)
 			ref = new ArenaManager();

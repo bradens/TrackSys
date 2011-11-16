@@ -10,6 +10,7 @@ public class TrackSysApplication {
 		System.out.println("Starting Program");
 		Server server = new Server(8080);
         server.setHandler(new ServletHandler());
+        
         try {
 	        server.start();
 	        server.join();

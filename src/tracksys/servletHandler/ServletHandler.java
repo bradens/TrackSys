@@ -11,6 +11,11 @@ import tracksys.controller.ArenaManager;
 import tracksys.controller.ArenaManager.Views;
 
 public class ServletHandler extends AbstractHandler {
+	private static ArenaManager manager;
+	public ServletHandler () {
+		manager = ArenaManager.getInstance();
+	}
+	
 	public void handle(String target,
 					   Request baseReq,
 					   HttpServletRequest request,
