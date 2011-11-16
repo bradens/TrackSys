@@ -1,6 +1,7 @@
 package tracksys.entity;
 
-public class Address {
+public class Address 
+{
 	public String street;
 	public String city;
 	public String province;
@@ -19,7 +20,7 @@ public class Address {
 	Address(String street)
 	{
 		this.street = street;
-		city = "";
+		city 	= "";
 		province = "";
 		phone = "";
 		postal = "";
