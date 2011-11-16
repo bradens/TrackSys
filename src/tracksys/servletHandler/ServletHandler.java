@@ -21,7 +21,7 @@ public class ServletHandler extends AbstractHandler {
 		switch (baseView)
 		{
 			case Root:
-				ArenaManager.doRoot();
+				ArenaManager.doRoot(request, response, target);
 				break;
 			case LoginView:
 				ArenaManager.doLogin(request, response, target);
@@ -34,6 +34,12 @@ public class ServletHandler extends AbstractHandler {
         response.getWriter().println("<h1>This is a text response</h1>");	
 	}
 	
+	/**
+	 * Gets the base view from the request 
+	 * ex. a request to url:8080/login/ will return Views.LoginView
+	 * @param target
+	 * @return
+	 */
 	public static Views getBaseView(String target)
 	{
 		if (target == "/")

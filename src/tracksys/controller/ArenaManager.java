@@ -19,12 +19,19 @@ public class ArenaManager {
 		
 	}
 	
+	/**
+	 * Performs some logic on the request and calls the specific
+	 * operation in the login view.
+	 * @param req
+	 * @param resp
+	 * @param target
+	 */
 	public static void doLogin(HttpServletRequest req, HttpServletResponse resp, String target)
 	{
 		loginView.Login(req, resp, target);
 	}
 	
-	public static void doRoot()
+	public static void doRoot(HttpServletRequest req, HttpServletResponse resp, String target)
 	{
 		
 	}
