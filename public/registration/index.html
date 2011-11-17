@@ -1,0 +1,50 @@
+<html>
+	<head>
+		<script type='text/javascript' src='../js/lib/jquery.js'></script>
+		<script type="text/javascript" src="../js/lib/jquery.xdomainajax.js"></script>
+		<script type='text/javascript' src='../js/core.js'></script>
+		<script type='text/javascript' src='js/registration.js'></script>
+		<style type='text/css'>
+			@import url("../css/reset.css");
+			@import url("../css/css3buttons.css");
+			@import url("../css/core.css");
+			@import url("../css/registration.css");
+		</style>		
+	</head>
+	<body>
+	<div class="underlay">
+		<div class="BannerWrap">
+			<div class="Banner">
+				<span class="bannerText1">Track</span><span class="bannerText2">Sys</span>
+			</div>
+		</div>
+		<div class="mainColumnWrap">
+			<div class="mainColumn">
+				<span class="register">Registration</span><br/>
+				<span class="registerDesc">Fill in the form below to register your club.</span>
+				<div class="registerForm">
+					<span class="clubNameLabel label">Club Name: </span><input id="registerInputBox" class="registerInput formInputBox" type="text" />
+					<span class="passLabel label">Password: </span><input id ="registerInputBox" class="registerPass formInputBox" type="password" />
+					<span class="passLabel label">Confirm Password: </span><input id ="registerInputBox" class="registerPass formInputBox" type="password" />
+					
+					<div class="registrationHr"><hr /></div>
+					
+					
+					<span class="addLabel label">Address: </span><input id="registerInputBox" class="registerInput formInputBox" type="text" />
+					<span class="cityLabel label">City: </span><input id="registerInputBox" class="registerInput formInputBox" type="text" />
+					<span class="provinceLabel label">Province: </span><input id="registerInputBox" class="registerInput formInputBox" type="text" />
+					<span class="postalLabel label">Postal Code: </span><input id="registerInputBox" class="registerInput formInputBox" type="text" />
+					
+					<div class="registrationHr"><hr /></div>
+					
+					<span class="phoneLabel label">Phone Number: </span><input id="registerInputBox" class="registerInput formInputBox" type="text" />
+					<span class="emailLabel label">Email: </span><input id="registerInputBox" class="registerInput formInputBox" type="text" />
+				</div>
+				<div class="columnFooter">
+					<a onclick="register();" class="submitBtn big button">Submit</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	</body>
+</html>
