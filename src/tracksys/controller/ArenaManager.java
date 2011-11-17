@@ -13,7 +13,7 @@ public class ArenaManager {
 	
 	private static ArenaManager ref;
 	
-	public static LoginView loginView;
+	public LoginView loginView;
 	
 	/**
 	 * Retrieve the cookie object with a specified name.
@@ -34,24 +34,12 @@ public class ArenaManager {
 	}
 	
 	/**
-	 * Performs some logic on the request and calls the specific
-	 * operation in the login view.
-	 * @param req
-	 * @param resp
-	 * @param target
-	 */
-	public static void doLogin(HttpServletRequest req, HttpServletResponse resp, String target)
-	{
-		loginView.Login(req, resp, target);
-	}
-	
-	/**
 	 * Performs a request on the core view, used for redirects mainly.
 	 * @param req
 	 * @param resp
 	 * @param target
 	 */
-	public static void doRoot(HttpServletRequest req, HttpServletResponse resp, String target)
+	public void doRoot(HttpServletRequest req, HttpServletResponse resp, String target)
 	{
 		
 	}

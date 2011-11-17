@@ -26,10 +26,10 @@ public class ServletHandler extends AbstractHandler {
 		switch (baseView)
 		{
 			case Root:
-				ArenaManager.doRoot(request, response, target);
+				manager.doRoot(request, response, target);
 				break;
 			case LoginView:
-				ArenaManager.doLogin(request, response, target);
+				manager.loginView.handle(request, response, target);
 				break;
 		}
 		response.setContentType("text/html;charset=utf-8");

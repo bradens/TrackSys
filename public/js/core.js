@@ -8,7 +8,7 @@
  */
 $.ajax({
 	type: "GET",
-	url: "http://localhost:8080/login/",
+	url: "http://localhost:5000/login/",
 	success: onSuccess,
 	error: function(data, err, thrown) {
 		console.log(err);

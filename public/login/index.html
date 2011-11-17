@@ -1,0 +1,39 @@
+<html>
+	<head>
+		<script type='text/javascript' src='../js/lib/jquery.js'></script>
+		<script type="text/javascript" src="../js/lib/jquery.xdomainajax.js"></script>
+		<script type='text/javascript' src='../js/core.js'></script>
+		<style type='text/css'>
+			@import url("../css/reset.css");
+			@import url("../css/css3buttons.css");
+			@import url("../css/core.css");
+			@import url("../css/login.css");
+		</style>		
+		<link rel='stylesheet' type='text/css' href='../css/reset.css'/>
+		<link rel='stylesheet' type='text/css' href='../css/core.css'/>
+		<link rel='stylesheet' type='text/css' href='../css/login.css'/>
+	</head>
+	<body>
+	<div class="underlay">
+		<div class="BannerWrap">
+			<div class="Banner">
+				<span class="bannerText1">Track</span><span class="bannerText2">Sys</span>
+			</div>
+		</div>
+		<div class="mainColumnWrap">
+			<div class="mainColumn">
+				<span class="welcome">Welcome</span><br/>
+				<span class="welcomeDesc">Please login, or register if you need an account.</span>
+				<div class="loginForm">
+					<span class="usrnameLabel">Username: </span><input class="loginInput" type="text" />
+					<span class="passLabel">Password: </span><input class="loginPass" type="password" />
+				</div>
+				<div class="columnFooter">
+					<a onclick="login();" class="submitBtn big primary button">Login</a>
+					<a onclick="javascript:" class="button big positive" id="register">Register</a>
+					<a onclick="javascript:" class="button big" id="forgotPass">Forgot your password?</a>
+				</div>
+			</div>
+	</div>
+	</body>
+</html>

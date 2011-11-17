@@ -14,7 +14,14 @@ public class LoginView {
 		this.manager = manager;
 	}
 	
-	public void Login(HttpServletRequest req, HttpServletResponse resp, String target)
+	/**
+	 * Performs some logic on the request and calls the specific
+	 * operation in the login view.
+	 * @param req
+	 * @param resp
+	 * @param target
+	 */
+	public void handle(HttpServletRequest req, HttpServletResponse resp, String target)
 	{
 		if (null == null)
 		{
