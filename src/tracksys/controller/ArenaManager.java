@@ -14,9 +14,11 @@ public class ArenaManager {
 		Root, LoginView
 	}
 	
+	public int activeClub;
 	private static ArenaManager ref;
 	
 	public LoginView loginView;
+	public HomeView homeView;
 	
 	/**
 	 * Retrieve the cookie object with a specified name.

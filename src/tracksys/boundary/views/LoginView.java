@@ -1,14 +1,13 @@
 package tracksys.boundary.views;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import tracksys.Resources;
 import tracksys.controller.ArenaManager; 
+import tracksys.entity.Club;
 
 public class LoginView {
-	public static String username;
+	public int activeClub; 
 	public ArenaManager manager;
 	
 	public LoginView(ArenaManager manager)
@@ -42,6 +41,7 @@ public class LoginView {
 		if (username.equals("admin") && password.equals("tracksys"))
 		{
 			ArenaManager.writeResponse("true", resp);
+			manager.activeClub = -1; // temporary manager id.
 			return true;
 		}
 		return false;
