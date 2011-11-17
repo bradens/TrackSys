@@ -1,12 +1,16 @@
 /**
  * LoginView styles.
  */
+.underlay {
+	margin-top : -10px;
+}
+ 
 div.mainColumnWrap {
 	border-radius: 2px;
 	margin: 10px 10% 10% 10%;
-	min-height: 200px;
+	min-height: 20%;
 	min-width: 435px;
-	height:20%;
+	height:auto;
 	width: 80%;
 	border: thin solid rgba(0,0,0,.3);
 	background-color: #E7E8E8;
@@ -15,7 +19,7 @@ div.mainColumnWrap {
 }
 div.mainColumn {
 	font-size:15px;
-	height: 100%;
+	height: auto;
 	width: 100%;
 	color:#333;
 	text-shadow: 0px 1px 1px white;
@@ -67,25 +71,16 @@ span.bannerText2 {
 	width: 120px;
 }
 
-.loginForm input {
-	font-weight: inherit;
-	font-style: inherit;
-	font-family: inherit;
-	display: block;
-	margin: 0px 2px 10px 10px;
-	white-space: nowrap;
-	overflow: hidden;
-	width: 60%;
-	-webkit-box-shadow: 0px 0px 3px 2px rgba(0,0,150,.15);
+.errorPopup {
+	display: none;
+	width: 90%;
+	margin: 10px 0 10px 0;
 	padding: 4px;
-	-webkit-border-radius: 3px;
-	border: #999 thin solid;
-	font-size: 14px;
-	background-color: rgba(195,195,255, .3);
-	-webkit-transition: background-color .25s ease-in;
-	line-height: 1.5;
+	border-radius: 3px;
+	border: thin solid #666;
+	background-color: rgba(255, 150, 150, .5);
 }
 
-.loginForm input:focus {
-	background-color: rgba(255,255,255, .5);
+.errorTitle {
+	font-size: 16px;
 }

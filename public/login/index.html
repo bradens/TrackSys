@@ -11,7 +11,7 @@
 			@import url("../css/login.css");
 		</style>		
 	</head>
-	<body>
+	<body onload="init();">
 	<div class="underlay">
 		<div class="BannerWrap">
 			<div class="Banner">
@@ -22,10 +22,14 @@
 			<div class="mainColumn">
 				<span class="welcome">Welcome</span><br/>
 				<span class="welcomeDesc">Please login, or register if you need an account.</span>
-				<div class="loginForm">
+				<div class="errorPopup">
+					<span class="errorTitle">Oops.</span><br/>
+					<span class="errorDesc">The username and password combination entered is invalid.</span>
+				</div>
+				<form class="loginForm">
 					<span class="usrnameLabel label">Username: </span><input id="loginInputBox" class="loginInput formInputBox" type="text" />
 					<span class="passLabel label">Password: </span><input id ="passwdInputBox" class="loginPass formInputBox" type="password" />
-				</div>
+				</form>
 				<div class="columnFooter">
 					<a onclick="login.submit();" class="submitBtn big button">Login</a>
 					<a onclick="javascript:" class="button big" id="register">Register</a>
