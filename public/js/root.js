@@ -1,13 +1,7 @@
-$.ajax({
-	type: "GET",
-	url: SERVER_LOC + PORT + "/isLoggedIn",
-	success: _continueCheckLogin,
-	error: function(data, err, thrown) {
-		console.log(err);
-	}
-});
+CommHandler.doGet(SERVER_LOC + PORT + "/isLoggedIn", null, _continueCheckLogin, null);
 function _continueCheckLogin(data)
 {
+	debugger;
 	if (data != null)
 	{
 		window.location = "/login/";

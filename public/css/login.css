@@ -60,15 +60,11 @@ span.bannerText2 {
 .loginForm span.usrnameLabel { 
 	margin-top:2px;
 	width: 120px;
-	float: left;
-	display:inline-block;
 }
 
 .loginForm span.passLabel {
-margin-top:2px;
+	margin-top:2px;
 	width: 120px;
-	float:left;
-	display:inline-block;
 }
 
 .loginForm input {
