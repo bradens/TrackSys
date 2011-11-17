@@ -1,9 +1,12 @@
 package tracksys.controller;
 
+import java.io.IOException;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import tracksys.Resources;
 import tracksys.boundary.views.*;
 
 public class ArenaManager {
@@ -20,14 +23,16 @@ public class ArenaManager {
 	 * @param cookieName
 	 * @param req
 	 */
-	public static Cookie getUserCookie(String cookieName, HttpServletRequest req)
+	public static Cookie getCookie(String cookieName, HttpServletRequest req)
 	{
 		Cookie[] cookies = req.getCookies();
-		for (Cookie c : cookies)
+		if (cookies == null)
+			return null;
+		for (int i = 0; i < cookies.length;i++)
 		{
-			if (c.getName() == cookieName)
+			if (cookies[i].getName() == cookieName)
 			{
-				return c;
+				return cookies[i];
 			}
 		}
 		return null;
@@ -41,7 +46,20 @@ public class ArenaManager {
 	 */
 	public void doRoot(HttpServletRequest req, HttpServletResponse resp, String target)
 	{
-		
+		if (target.endsWith("/isLoggedIn"))
+		{
+			Cookie usr = getCookie(Resources.COOKIE_USERNAME, req);
+			try{
+				resp.setStatus(HttpServletResponse.SC_OK);
+				if (usr != null)
+					resp.getWriter().write("true");	
+				else
+					resp.getWriter().write("false");
+			}
+			catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	/**

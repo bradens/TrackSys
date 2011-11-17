@@ -19,3 +19,6 @@ function onSuccess (data)
 {
 	document.write(data);
 }*/
+
+var SERVER_LOC 	= "localhost:";
+var PORT 		= "8080";

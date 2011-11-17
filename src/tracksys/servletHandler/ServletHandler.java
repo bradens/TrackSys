@@ -23,6 +23,9 @@ public class ServletHandler extends AbstractHandler {
 	throws IOException, ServletException
 	{
 		Views baseView = getBaseView(target);
+		response.setContentType("text/html;charset=utf-8");
+		response.addHeader("Access-Control-Allow-Origin", "*");	// This is just used to debug, it allows ajax calls from localhost -> localhost
+		baseReq.setHandled(true);
 		switch (baseView)
 		{
 			case Root:
@@ -32,12 +35,8 @@ public class ServletHandler extends AbstractHandler {
 				manager.loginView.handle(request, response, target);
 				break;
 		}
-		response.setContentType("text/html;charset=utf-8");
-		response.addHeader("Access-Control-Allow-Origin", "*");	// This is just used to debug, it allows ajax calls from localhost -> localhost
 		response.setStatus(HttpServletResponse.SC_OK);
-        baseReq.setHandled(true);
-        response.getWriter().println("<h1>This is a text response</h1>");	
-	}
+    }
 	
 	/**
 	 * Gets the base view from the request 

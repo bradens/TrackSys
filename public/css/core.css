@@ -1,16 +1,21 @@
+/**
+ * This is the css file that will be included into all html files.
+ * only put the most core styles in here....nothing specific to a view.
+ */
 body {
 	font: 12px Helvetica, sans-serif;
 	width: 100%;
 	height: 100%;
 	background: repeat url("../images/bg_stripes.png");
 	background-color: rgba(255,255,255,.8);
+	font-weight:lighter;
 }
 
 .underlay {
-	margin-top: -10px; /* why do i have to do this? */
+	margin-top: -10px;
 	height:100%;
 	width:100%;
-	background-color: rgba(0,0,0,.09);
+	background-color: rgba(0,0,0,.05);
 }	
 
 a.link {
@@ -22,4 +27,14 @@ a.link {
 
 a.link:hover {
 	border-bottom: 1px dashed #999;
+}
+
+
+/** Button css overrides **/
+
+a.button, button {
+	font-family: inherit;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
 }
