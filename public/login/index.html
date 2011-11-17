@@ -3,6 +3,7 @@
 		<script type='text/javascript' src='../js/lib/jquery.js'></script>
 		<script type="text/javascript" src="../js/lib/jquery.xdomainajax.js"></script>
 		<script type='text/javascript' src='../js/core.js'></script>
+		<script type='text/javascript' src='js/login.js'></script>
 		<style type='text/css'>
 			@import url("../css/reset.css");
 			@import url("../css/css3buttons.css");
@@ -22,11 +23,11 @@
 				<span class="welcome">Welcome</span><br/>
 				<span class="welcomeDesc">Please login, or register if you need an account.</span>
 				<div class="loginForm">
-					<span class="usrnameLabel">Username: </span><input class="loginInput" type="text" />
-					<span class="passLabel">Password: </span><input class="loginPass" type="password" />
+					<span class="usrnameLabel">Username: </span><input id="loginInputBox" class="loginInput" type="text" />
+					<span class="passLabel">Password: </span><input id ="passwdInputBox" class="loginPass" type="password" />
 				</div>
 				<div class="columnFooter">
-					<a onclick="login();" class="submitBtn big button">Login</a>
+					<a onclick="login.submit();" class="submitBtn big button">Login</a>
 					<a onclick="javascript:" class="button big" id="register">Register</a>
 					<a onclick="javascript:" class="button big" id="forgotPass">Forgot your password?</a>
 				</div>

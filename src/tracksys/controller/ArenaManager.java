@@ -49,16 +49,10 @@ public class ArenaManager {
 		if (target.endsWith("/isLoggedIn"))
 		{
 			Cookie usr = getCookie(Resources.COOKIE_USERNAME, req);
-			try{
-				resp.setStatus(HttpServletResponse.SC_OK);
-				if (usr != null)
-					resp.getWriter().write("true");	
-				else
-					resp.getWriter().write("false");
-			}
-			catch (IOException e) {
-				e.printStackTrace();
-			}
+			if (usr != null)
+				writeResponse("true", resp);
+			else
+				writeResponse("false", resp);
 		}
 	}
 	
@@ -75,5 +69,17 @@ public class ArenaManager {
 		if (ref == null)
 			ref = new ArenaManager();
 		return ref;
+	}
+	
+	public static void writeResponse(String resp, HttpServletResponse r)
+	{
+		try {
+			r.setStatus(HttpServletResponse.SC_OK);
+			r.getWriter().write(resp);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 }

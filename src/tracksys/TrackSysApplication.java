@@ -8,7 +8,7 @@ public class TrackSysApplication {
 	public static void main(String[] args)
 	{
 		System.out.println("Starting Program");
-		Server server = new Server(8080);
+		Server server = new Server(1234);
         server.setHandler(new ServletHandler());
         
         try {

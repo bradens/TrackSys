@@ -1,4 +1,5 @@
 package tracksys.servletHandler;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.ServletException;
@@ -35,7 +36,6 @@ public class ServletHandler extends AbstractHandler {
 				manager.loginView.handle(request, response, target);
 				break;
 		}
-		response.setStatus(HttpServletResponse.SC_OK);
     }
 	
 	/**
