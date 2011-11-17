@@ -22,5 +22,9 @@ function init() {
 	$(".loginForm input").focus(function() {
 		$(".errorPopup").fadeOut('fast');
 	});
+	$(".loginForm input").keyup(function(k) {
+		if (k.keyCode == '13')
+			login.submit();
+	});
 }
 

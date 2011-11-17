@@ -12,7 +12,8 @@ body {
 }
 
 .underlay {
-	height:100%;
+	min-height:100%;
+	height:auto;
 	width:100%;
 	background-color: rgba(0,0,0,.05);
 }	
