@@ -5,10 +5,10 @@
 
 /*
  * This is an example of how to do ajax calls to our jetty servlet.
- */
+ *
 $.ajax({
 	type: "GET",
-	url: "http://localhost:5000/login/",
+	url: "http://localhost:1234/login/",
 	success: onSuccess,
 	error: function(data, err, thrown) {
 		console.log(err);
@@ -18,4 +18,4 @@ $.ajax({
 function onSuccess (data)
 {
 	document.write(data);
-}
+}*/
