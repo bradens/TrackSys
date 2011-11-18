@@ -14,7 +14,9 @@ var CommHandler = {
 			url: url,
 			data: data,
 			success: success,
-			error: error
+			error: error,
+			//crossDomain: true,
+			contentType: "application/x-www-form-urlencoded;charset-utf8"
 		});
 	},
 	

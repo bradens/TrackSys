@@ -1,13 +1,14 @@
 package tracksys.boundary.views;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import tracksys.Resources;
 import tracksys.controller.ArenaManager; 
-import tracksys.entity.Club;
 
 public class LoginView {
-	public int activeClub; 
 	public ArenaManager manager;
 	
 	public LoginView(ArenaManager manager)
@@ -40,10 +41,15 @@ public class LoginView {
 			return false;
 		if (username.equals("admin") && password.equals("tracksys"))
 		{
+			Cookie c = new Cookie(Resources.COOKIE_USERNAME, username);
+			c.setDomain("localhost");
+			c.setPath("/");
+			resp.addCookie(c);
 			ArenaManager.writeResponse("true", resp);
-			manager.activeClub = -1; // temporary manager id.
 			return true;
 		}
+		else
+			ArenaManager.writeResponse("false", resp);
 		return false;
 	}
 }

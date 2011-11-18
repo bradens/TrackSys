@@ -1,43 +1,68 @@
 package tracksys.servletHandler;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.ServletException;
  
 import java.io.IOException;
-import org.eclipse.jetty.server.Request;
-import org.eclipse.jetty.server.handler.AbstractHandler;
 
 import tracksys.controller.ArenaManager;
 import tracksys.controller.ArenaManager.Views;
 
-public class ServletHandler extends AbstractHandler {
+public class ServletHandler extends HttpServlet
+{
 	private static ArenaManager manager;
+
 	public ServletHandler () {
 		manager = ArenaManager.getInstance();
 	}
 	
-	public void handle(String target,
-					   Request baseReq,
-					   HttpServletRequest request,
-					   HttpServletResponse response)
-	throws IOException, ServletException
-	{
-		Views baseView = getBaseView(target);
-		response.setContentType("text/html;charset=utf-8");
-		response.addHeader("Access-Control-Allow-Origin", "*");	// This is just used to debug, it allows ajax calls from localhost -> localhost
-		baseReq.setHandled(true);
-		switch (baseView)
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws 
+		ServletException, IOException
 		{
-			case Root:
-				manager.doRoot(request, response, target);
-				break;
-			case LoginView:
-				manager.loginView.handle(request, response, target);
-				break;
+			String target = req.getServletPath();
+			Views baseView = getBaseView(target);
+			resp.setContentType("text/html");
+			resp.addHeader("Access-Control-Allow-Origin", "*");	// This is just used to debug, it allows ajax calls from localhost -> localhost
+			switch (baseView)
+			{
+				case ROOT:
+					manager.doRoot(req, resp, target);
+					break;
+				case LOGIN:
+					manager.loginView.handle(req, resp, target);
+					break;
+				case HOME:
+					manager.homeView.handle(req, resp, target);
+					break;
+			}
 		}
-    }
 	
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws 
+		ServletException, IOException
+	{
+		this.doGet(req, resp);
+//		String target = req.getServletPath();
+//		Views baseView = getBaseView(target);
+//		resp.setContentType("text/html");
+//		resp.addHeader("Access-Control-Allow-Origin", "*");	// This is just used to debug, it allows ajax calls from localhost -> localhost
+//		switch (baseView)
+//		{
+//			case ROOT:
+//				manager.doRoot(req, resp, target);
+//				break;
+//			case LOGIN:
+//				manager.loginView.handle(req, resp, target);
+//				break;
+//			case HOME:
+//				manager.homeView.handle(req, resp, target);
+//				break;
+//		}
+	}
 	/**
 	 * Gets the base view from the request 
 	 * ex. a request to url:8080/login/ will return Views.LoginView
@@ -47,13 +72,15 @@ public class ServletHandler extends AbstractHandler {
 	public static Views getBaseView(String target)
 	{
 		if (target == "/")
-			return ArenaManager.Views.Root;
+			return ArenaManager.Views.ROOT;
 		else {
 			String viewStr = target.split("/")[1];
 			if (viewStr.equals("login"))
-				return ArenaManager.Views.LoginView;
+				return ArenaManager.Views.LOGIN;
+			else if (viewStr.equals("home"))
+				return ArenaManager.Views.HOME;
 			else
-				return ArenaManager.Views.Root;
+				return ArenaManager.Views.ROOT;
 		}
 	}
 }

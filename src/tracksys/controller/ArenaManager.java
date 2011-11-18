@@ -11,15 +11,33 @@ import tracksys.boundary.views.*;
 
 public class ArenaManager {
 	public enum Views {
-		Root, LoginView
+		ROOT, LOGIN, HOME
 	}
-	
-	public int activeClub;
 	private static ArenaManager ref;
 	
 	public LoginView loginView;
 	public HomeView homeView;
 	
+	public boolean isAdmin(HttpServletRequest req)
+	{
+		// Once db is implemented, do a search on the cookie_uID to find out
+		// the type of user. Then reimplement these two methods, use dummy vals for now
+		
+		Cookie c = ArenaManager.getCookie(Resources.COOKIE_USERNAME, req);
+		if (c != null && c.getValue() == "admin")
+		{
+			return true;
+		}
+		return false;
+	}
+	public boolean isClub(HttpServletRequest req)
+	{
+		Cookie c = ArenaManager.getCookie(Resources.COOKIE_USERNAME, req);
+		if (c != null && c.getValue().equals("babyseals"))
+			return true;
+		return false;
+	}
+
 	/**
 	 * Retrieve the cookie object with a specified name.
 	 * @param cookieName
@@ -64,6 +82,7 @@ public class ArenaManager {
 	private ArenaManager()
 	{
 		loginView = new LoginView(this);
+		homeView = new HomeView(this);
 	}
 	
 	public static ArenaManager getInstance() 

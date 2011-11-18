@@ -1,0 +1,23 @@
+.underlay {
+	margin:0;
+}
+
+div.BannerWrap {
+	font-size:30px;
+	width:220px;
+	margin:0px auto 10px auto;
+}
+.column {
+	background-color:#E7E8E8;
+	text-shadow: 0px 1px 0px #FFF;
+	display: inline-block;
+	border-bottom:thin solid #666;
+	border-left:thin solid #666;
+	border-right:thin solid #666;
+}
+div.leftColumn {
+	float: left;
+	width: 20%;
+	height: 100%;
+	min-width: 300px;
+}

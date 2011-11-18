@@ -1,23 +1,23 @@
 package tracksys;
 
+
+import org.mortbay.http.HttpContext;
+import org.mortbay.http.HttpListener;
+import org.mortbay.jetty.Server;
+import org.mortbay.jetty.servlet.ServletHolder;
+import org.mortbay.jetty.servlet.ServletHttpContext;
+import org.mortbay.xml.XmlConfiguration;
+
 import tracksys.servletHandler.ServletHandler;
 
-import org.eclipse.jetty.server.Server;
 
 public class TrackSysApplication {
-	public static void main(String[] args)
+	public static void main(String[] args) throws Exception
 	{
-		System.out.println("Starting Program");
-		Server server = new Server(1234);
-        server.setHandler(new ServletHandler());
-        
-        try {
-	        server.start();
-	        server.join();
-        }
-        catch (Exception e)
-        {
-        	e.printStackTrace();
-        }
+		Server server = new Server();
+        server.addListener(":1234");        
+		ServletHttpContext context = (ServletHttpContext) server.getContext("/");
+		context.addServlet("/", "tracksys.servletHandler.ServletHandler");
+        server.start();
 	}
 }
