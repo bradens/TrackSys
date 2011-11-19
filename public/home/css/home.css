@@ -15,10 +15,12 @@ div.BannerWrap {
 	text-shadow: 0px 1px 0px #FFF;
 	display: inline-block;
 	border:thin solid #666;
+	margin: 0 5px 0 5px;
 }
 
 .column.leftColumnWrap {
-	width: 30%;	
+	width: 25%;
+	min-width: 200px;	
 	height:95%;
 }
 
@@ -31,6 +33,7 @@ div.leftColumn {
 div.rightColumnWrap {
 	width: 69%;
 	height:95%;
+	min-width:540px;
 }
 
 div.rightColumn {
