@@ -9,8 +9,9 @@ public class Club {
 	private String phone;
 	private boolean electronicBilling;
 	private boolean signedWaiver;
+	private int admin;
 	
-	public Club(int id, String name, String passwd, Address address, String email, String phone, boolean electronic, boolean signed)
+	public Club(int id, String name, String passwd, Address address, String email, String phone, boolean electronic, boolean signed, int admin)
 	{
 		this.id = id;
 		this.name = name;
@@ -20,6 +21,7 @@ public class Club {
 		this.phone = phone;
 		this.electronicBilling = electronic;
 		this.signedWaiver = signed;
+		this.admin = admin;
 	}
 	
 	public Club(String name, String passwd, Address address, String email, String phone, boolean electronic, boolean signed)
@@ -73,6 +75,11 @@ public class Club {
 		return phone;
 	}
 	
+	public int getAdmin()
+	{
+		return admin;
+	}
+	
 	public void setName(String name)
 	{
 		this.name = name;
@@ -98,6 +105,11 @@ public class Club {
 	{
 		this.signedWaiver = setting;
 		return this.signedWaiver;
+	}
+	
+	public void setAdmin(int a)
+	{
+		this.admin = a;
 	}
 	
 	
