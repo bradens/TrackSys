@@ -22,22 +22,25 @@ public class ArenaManager {
 	public HomeView homeView;
 	
 	public boolean isAdmin(HttpServletRequest req)
-	{
-		// Once db is implemented, do a search on the cookie_uID to find out
-		// the type of user. Then reimplement these two methods, use dummy vals for now
-		
-		Cookie c = ArenaManager.getCookie(Resources.COOKIE_USERNAME, req);
-		if (c != null && c.getValue().equals("admin"))
+	{	
+		Cookie c = ArenaManager.getCookie(Resources.COOKIE_CLUBID, req);
+		if (c != null)
 		{
-			return true;
+			Club reqClub = this.getClubID(Integer.parseInt(c.getValue()));
+			if (reqClub != null && reqClub.getAdmin() == 1)
+				return true;
 		}
 		return false;
 	}
 	public boolean isClub(HttpServletRequest req)
 	{
-		Cookie c = ArenaManager.getCookie(Resources.COOKIE_USERNAME, req);
-		if (c != null && c.getValue().equals("babyseals"))
-			return true;
+		Cookie c = ArenaManager.getCookie(Resources.COOKIE_CLUBID, req);
+		if (c != null)
+		{
+			Club reqClub = this.getClubID(Integer.parseInt(c.getValue()));
+			if (reqClub != null && reqClub.getAdmin() != 1)
+				return true;
+		}
 		return false;
 	}
 

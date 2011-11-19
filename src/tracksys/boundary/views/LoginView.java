@@ -44,33 +44,19 @@ public class LoginView {
 			return false;
 		}
 		Club reqClub = manager.getClubName(username);
-		if (reqClub.getPassword().equals(password))
-			
-		if (reqClub.getAdmin())
-		{
-			
-		}
-		// Need to do an actual lookup here......this is temp
-		if (username.equals("admin") && password.equals("tracksys"))
-		{
-			Cookie c = new Cookie(Resources.COOKIE_USERNAME, username);
-			c.setMaxAge(60*3600*24);
-			c.setPath("/");
-			resp.addCookie(c);
-			ArenaManager.writeResponse("true", resp);
-			return true;
-		}
-		else if (username.equals("babyseals") && password.equals("clubbin"))
-		{
-			Cookie c = new Cookie(Resources.COOKIE_USERNAME, username);
-			c.setMaxAge(60*3600*24);
-			c.setPath("/");
-			resp.addCookie(c);
-			ArenaManager.writeResponse("true", resp);
-			return true;
+		if (!reqClub.getPassword().equals(password))
+		{	
+			ArenaManager.writeResponse("false", resp);
+			return false;
 		}
 		else
-			ArenaManager.writeResponse("false", resp);
-		return false;
+		{
+			Cookie c = new Cookie(Resources.COOKIE_CLUBID, Integer.toString(reqClub.getID()));
+			c.setMaxAge(60*3600*24);
+			c.setPath("/");
+			resp.addCookie(c);
+			ArenaManager.writeResponse("true", resp);
+			return true;
+		}
 	}
 }
