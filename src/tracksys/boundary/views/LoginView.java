@@ -38,11 +38,26 @@ public class LoginView {
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
 		if (username == null || password == null)
+		{
+			ArenaManager.writeResponse("false", resp);
 			return false;
+		}
+		// Need to do an actual lookup here......this is temp
 		if (username.equals("admin") && password.equals("tracksys"))
 		{
 			Cookie c = new Cookie(Resources.COOKIE_USERNAME, username);
-			c.setDomain("localhost");
+			c.setMaxAge(60*3600*24);
+			//c.setDomain("t.s.local");
+			c.setPath("/");
+			resp.addCookie(c);
+			ArenaManager.writeResponse("true", resp);
+			return true;
+		}
+		else if (username.equals("babyseals") && password.equals("clubbin"))
+		{
+			Cookie c = new Cookie(Resources.COOKIE_USERNAME, username);
+			c.setMaxAge(60*3600*24);
+			//c.setDomain("");
 			c.setPath("/");
 			resp.addCookie(c);
 			ArenaManager.writeResponse("true", resp);

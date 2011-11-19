@@ -1,4 +1,4 @@
-var SERVER_LOC 	= "http://localhost:";
+var SERVER_LOC 	= "http://t.s.local:";
 var PORT 		= "1234";
 var CommHandler = {
 	defaultErr: function(data, err, thrown) {
@@ -15,8 +15,10 @@ var CommHandler = {
 			data: data,
 			success: success,
 			error: error,
-			//crossDomain: true,
-			contentType: "application/x-www-form-urlencoded;charset-utf8"
+			xhrFields: {
+			       withCredentials: true
+			},
+			crossDomain: true
 		});
 	},
 	
@@ -29,7 +31,8 @@ var CommHandler = {
 			url: url,
 			data: data,
 			success: success,
-			error: error
+			error: error,
+			crossDomain: true
 		});
 	}	
 };

@@ -26,8 +26,6 @@ public class ServletHandler extends HttpServlet
 		{
 			String target = req.getServletPath();
 			Views baseView = getBaseView(target);
-			resp.setContentType("text/html");
-			resp.addHeader("Access-Control-Allow-Origin", "*");	// This is just used to debug, it allows ajax calls from localhost -> localhost
 			switch (baseView)
 			{
 				case ROOT:
@@ -40,28 +38,15 @@ public class ServletHandler extends HttpServlet
 					manager.homeView.handle(req, resp, target);
 					break;
 			}
+			resp.setContentType("text/html");
+			resp.addHeader("Access-Control-Allow-Origin", "http://t.s.local");	// This is just used to debug, it allows ajax calls from localhost -> localhost
+			resp.addHeader("Access-Control-Allow-Credentials", "true");	// This is just used to debug, it allows ajax calls from localhost -> localhost
 		}
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws 
 		ServletException, IOException
 	{
 		this.doGet(req, resp);
-//		String target = req.getServletPath();
-//		Views baseView = getBaseView(target);
-//		resp.setContentType("text/html");
-//		resp.addHeader("Access-Control-Allow-Origin", "*");	// This is just used to debug, it allows ajax calls from localhost -> localhost
-//		switch (baseView)
-//		{
-//			case ROOT:
-//				manager.doRoot(req, resp, target);
-//				break;
-//			case LOGIN:
-//				manager.loginView.handle(req, resp, target);
-//				break;
-//			case HOME:
-//				manager.homeView.handle(req, resp, target);
-//				break;
-//		}
 	}
 	/**
 	 * Gets the base view from the request 

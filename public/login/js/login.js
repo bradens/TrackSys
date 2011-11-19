@@ -6,10 +6,10 @@
  */
 
 // check if the user is already logged in.  If so, redirect home.
-//CommHandler.doGet(SERVER_LOC+PORT+"/home/homeLocation", null, function(data){
-//	if (data != "/login/")
-//		setTimeout(function() { window.location.href = data; }, 50);	
-//});
+CommHandler.doPost(SERVER_LOC+PORT+"/home/homeLocation", null, function(data){
+	if (data != "/login/")
+		window.location.href = data;	
+});
 
 var login = { 
 	submit : function()
@@ -21,11 +21,8 @@ var login = {
 	loginSuccess : function(data)
 	{
 		if (data == "true"){
-			CommHandler.doGet(SERVER_LOC+PORT+"/home/homeLocation", null, function(data){
-				console.log(data);	
-			});
+			window.location.href = "/home/";	
 		}
-			//setTimeout(function() { window.location.href = "/home/"; }, 50);	
 		else
 		{
 			$("#loginInputBox").val();

@@ -24,7 +24,7 @@ public class ArenaManager {
 		// the type of user. Then reimplement these two methods, use dummy vals for now
 		
 		Cookie c = ArenaManager.getCookie(Resources.COOKIE_USERNAME, req);
-		if (c != null && c.getValue() == "admin")
+		if (c != null && c.getValue().equals("admin"))
 		{
 			return true;
 		}
@@ -50,7 +50,7 @@ public class ArenaManager {
 			return null;
 		for (int i = 0; i < cookies.length;i++)
 		{
-			if (cookies[i].getName() == cookieName)
+			if (cookies[i].getName().equals(cookieName))
 			{
 				return cookies[i];
 			}
