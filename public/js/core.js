@@ -1,4 +1,4 @@
-var SERVER_LOC 	= "http://t.s.local:";
+var SERVER_LOC 	= "http://localhost:";
 var PORT 		= "1234";
 var CommHandler = {
 	defaultErr: function(data, err, thrown) {

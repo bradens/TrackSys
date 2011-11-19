@@ -53,7 +53,6 @@ public class RegistrationView {
 			Club club = new Club(name, passwd, address, email, phone, false, false);
 			manager.AddNewClub(club);
 			ArenaManager.writeResponse("true", resp);
-			manager.activeClub = -1; // temporary manager id.
 			return true;
 		}
 	}

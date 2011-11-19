@@ -47,7 +47,6 @@ public class LoginView {
 		{
 			Cookie c = new Cookie(Resources.COOKIE_USERNAME, username);
 			c.setMaxAge(60*3600*24);
-			//c.setDomain("t.s.local");
 			c.setPath("/");
 			resp.addCookie(c);
 			ArenaManager.writeResponse("true", resp);
@@ -57,7 +56,6 @@ public class LoginView {
 		{
 			Cookie c = new Cookie(Resources.COOKIE_USERNAME, username);
 			c.setMaxAge(60*3600*24);
-			//c.setDomain("");
 			c.setPath("/");
 			resp.addCookie(c);
 			ArenaManager.writeResponse("true", resp);

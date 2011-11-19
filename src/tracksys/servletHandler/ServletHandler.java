@@ -1,9 +1,7 @@
 package tracksys.servletHandler;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.servlet.ServletException;
  
 import java.io.IOException;
@@ -39,7 +37,7 @@ public class ServletHandler extends HttpServlet
 					break;
 			}
 			resp.setContentType("text/html");
-			resp.addHeader("Access-Control-Allow-Origin", "http://t.s.local");	// This is just used to debug, it allows ajax calls from localhost -> localhost
+			resp.addHeader("Access-Control-Allow-Origin", "http://localhost");	// This is just used to debug, it allows ajax calls from localhost -> localhost
 			resp.addHeader("Access-Control-Allow-Credentials", "true");	// This is just used to debug, it allows ajax calls from localhost -> localhost
 		}
 	

@@ -1,11 +1,8 @@
 package tracksys.boundary.views;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import tracksys.Resources;
 import tracksys.controller.ArenaManager;
 
 public class HomeView {
