@@ -113,4 +113,10 @@ public class ArenaManager {
 		ClubDB db = new ClubDB();
 		db.insertClub(club);
 	}
+	
+	public Club getClubID(int ID)
+	{
+		ClubDB db = new ClubDB();
+		return db.getClubFromID(ID);
+	}
 }
