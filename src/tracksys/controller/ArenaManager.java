@@ -13,7 +13,7 @@ import tracksys.boundary.views.*;
 
 public class ArenaManager {
 	public enum Views {
-		ROOT, LOGIN, HOME
+		ROOT, LOGIN, REGISTRATION, HOME
 	}
 	private static ArenaManager ref;
 	
@@ -86,6 +86,7 @@ public class ArenaManager {
 	{
 		loginView = new LoginView(this);
 		homeView = new HomeView(this);
+		registrationView = new RegistrationView(this);
 	}
 	
 	public static ArenaManager getInstance() 
@@ -111,5 +112,17 @@ public class ArenaManager {
 	{
 		ClubDB db = new ClubDB();
 		db.insertClub(club);
+	}
+	
+	public Club getClubID(int ID)
+	{
+		ClubDB db = new ClubDB();
+		return db.getClubFromID(ID);
+	}
+	
+	public Club getClubName(String name)
+	{
+		ClubDB db = new ClubDB();
+		return db.getClubFromName(name);
 	}
 }

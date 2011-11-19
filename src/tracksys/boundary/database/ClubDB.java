@@ -5,9 +5,9 @@ import java.sql.*;
 public class ClubDB {
 	private String username = "modus";
 	private String password = "pwnens";
-	private String database = "bradensimpson.com";
+	private String database = "jdbc:mysql://bradensimpson.com";
 	
-	private String table = "club";
+	private String table = "tracksys.club";
 	
 	private Connection conn = null;
 	
@@ -15,6 +15,7 @@ public class ClubDB {
 	{
 		try
 		{
+			Class.forName ("com.mysql.jdbc.Driver").newInstance ();
 			conn = DriverManager.getConnection(database, username, password);
 		}
 		catch (Exception e)
@@ -59,15 +60,16 @@ public class ClubDB {
 	{
 		String query = "INSERT INTO " + table + " (";
 		
-		query += "name, street, city, province, postal, email, phone) VALUES (";
+		query += "name, passwd, street, city, province, postal, email, phone) VALUES (";
 		
-		query += club.getName() + ", ";
-		query += club.getAddress().getStreet() + ", ";
-		query += club.getAddress().getCity() + ", ";
-		query += club.getAddress().getProvince() + ", ";
-		query += club.getAddress().getPostal() + ", ";
-		query += club.getEmail() + ", ";
-		query += club.getPhoneNumber() + ")";
+		query += "\'" + club.getName() + "\', ";
+		query += "\'" + club.getPassword() + "\', ";
+		query += "\'" + club.getAddress().getStreet() + "\', ";
+		query += "\'" + club.getAddress().getCity() + "\', ";
+		query += "\'" + club.getAddress().getProvince() + "\', ";
+		query += "\'" + club.getAddress().getPostal() + "\', ";
+		query += "\'" + club.getEmail() + "\', ";
+		query += "\'" + club.getPhoneNumber() + "\')";
 		
 		return query;
 	}
@@ -120,6 +122,7 @@ public class ClubDB {
 			Statement s = conn.createStatement();
 			s.executeQuery(query);
 			ResultSet rs = s.getResultSet();
+			rs.next();
 			
 			Address address = new Address(rs.getString("street"), rs.getString("city"), rs.getString("province"), "", rs.getString("postal"));
 			Club club = new Club(rs.getInt("id"), rs.getString("name"), rs.getString("passwd"), address, rs.getString("name"), rs.getString("name"), false, false);

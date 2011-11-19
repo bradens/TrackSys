@@ -16,7 +16,7 @@ var register = {
 	registerSuccess : function(data)
 	{
 		if (data == "true")
-			window.location = "/home/";
+			window.location.href = "/home/";
 		else
 		{
 			$(".errorPopup").fadeIn('fast');

@@ -32,6 +32,9 @@ public class ServletHandler extends HttpServlet
 				case LOGIN:
 					manager.loginView.handle(req, resp, target);
 					break;
+				case REGISTRATION:
+					manager.registrationView.handle(req, resp, target);
+					break;
 				case HOME:
 					manager.homeView.handle(req, resp, target);
 					break;
@@ -60,6 +63,8 @@ public class ServletHandler extends HttpServlet
 			String viewStr = target.split("/")[1];
 			if (viewStr.equals("login"))
 				return ArenaManager.Views.LOGIN;
+			else if (viewStr.equals("registration"))
+				return ArenaManager.Views.REGISTRATION;
 			else if (viewStr.equals("home"))
 				return ArenaManager.Views.HOME;
 			else
