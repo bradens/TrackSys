@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import tracksys.Resources;
 import tracksys.controller.ArenaManager; 
+import tracksys.entity.Club;
 
 public class LoginView {
 	public ArenaManager manager;
@@ -41,6 +42,13 @@ public class LoginView {
 		{
 			ArenaManager.writeResponse("false", resp);
 			return false;
+		}
+		Club reqClub = manager.getClubName(username);
+		if (reqClub.getPassword().equals(password))
+			
+		if (reqClub.getAdmin())
+		{
+			
 		}
 		// Need to do an actual lookup here......this is temp
 		if (username.equals("admin") && password.equals("tracksys"))
