@@ -38,12 +38,14 @@ public class LoginView {
 	{
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
-		if (username == null || password == null)
+		Club reqClub = manager.getClubName(username);
+
+		if (reqClub == null || username == null || password == null)
 		{
 			ArenaManager.writeResponse("false", resp);
 			return false;
 		}
-		Club reqClub = manager.getClubName(username);
+		
 		if (!reqClub.getPassword().equals(password))
 		{	
 			ArenaManager.writeResponse("false", resp);
