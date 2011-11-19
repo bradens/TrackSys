@@ -122,6 +122,7 @@ public class ClubDB {
 			Statement s = conn.createStatement();
 			s.executeQuery(query);
 			ResultSet rs = s.getResultSet();
+			rs.next();
 			
 			Address address = new Address(rs.getString("street"), rs.getString("city"), rs.getString("province"), "", rs.getString("postal"));
 			Club club = new Club(rs.getInt("id"), rs.getString("name"), rs.getString("passwd"), address, rs.getString("name"), rs.getString("name"), false, false);

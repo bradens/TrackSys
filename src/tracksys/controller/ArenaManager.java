@@ -119,4 +119,10 @@ public class ArenaManager {
 		ClubDB db = new ClubDB();
 		return db.getClubFromID(ID);
 	}
+	
+	public Club getClubName(String name)
+	{
+		ClubDB db = new ClubDB();
+		return db.getClubFromName(name);
+	}
 }

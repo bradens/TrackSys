@@ -1,8 +1,10 @@
 package tracksys.boundary.views;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import tracksys.Resources;
 import tracksys.controller.ArenaManager;
 import tracksys.entity.*;
 
@@ -52,6 +54,14 @@ public class RegistrationView {
 			Address address = new Address(street, city, province, "", postal);
 			Club club = new Club(name, passwd, address, email, phone, false, false);
 			manager.AddNewClub(club);
+			
+			//Set the cookie
+			Club club2 = manager.getClubName(name);
+			
+			Cookie c = new Cookie(Resources.COOKIE_CLUBID, Integer.toString(club2.getID()));
+			c.setMaxAge(60*3600*24);
+			c.setPath("/");
+			resp.addCookie(c);
 			ArenaManager.writeResponse("true", resp);
 			return true;
 		}
