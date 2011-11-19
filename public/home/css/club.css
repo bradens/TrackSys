@@ -1,0 +1,53 @@
+/*
+ * CSS for the club view.
+ */
+
+/* Payment tab stuff */
+.paymentColumn {
+	background-color:#FFFFFF;
+	text-shadow: 0px 1px 0px #FFF;
+	display: inline-block;
+	border:thin solid #AAA;
+	border-radius: 3px;
+	margin: 0 5px 0 5px;
+	padding: 2px 2px 2px 2px;
+	box-shadow: 0px 1px 4px 4px rgba(200,200,255, .7);
+}
+div.paymentLeftColumnWrap {
+	width: 55%;
+	height: 100%;
+	min-width: 55%;
+}
+div.paymentLeftColumn {
+	float: left;
+	width: 100%
+	height: 100%;
+}
+div.paymentRightColumnWrap {
+	width: 40%;
+	height: 100%;
+	min-width: 40%;
+}
+div.paymentRightColumn {
+	float: left;
+	width: 100%
+	height: 100%;
+}
+/* Payment font stuff */
+div.paymentHeader {
+	font-family: georgia;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	cursor: pointer;
+	font-size: 25px;
+	text-shadow: 0px 2px 3px #CCC;
+	font-weight:100;
+}
+
+span.paymentText1 {
+	color: #666;
+}
+span.paymentText2 {
+	color: #999;
+}
