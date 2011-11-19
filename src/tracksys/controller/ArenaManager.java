@@ -1,6 +1,8 @@
 package tracksys.controller;
 
 import java.io.IOException;
+import tracksys.entity.*;
+import tracksys.boundary.database.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +18,7 @@ public class ArenaManager {
 	private static ArenaManager ref;
 	
 	public LoginView loginView;
+	public RegistrationView registrationView;
 	public HomeView homeView;
 	
 	public boolean isAdmin(HttpServletRequest req)
@@ -102,5 +105,11 @@ public class ArenaManager {
 		{
 			e.printStackTrace();
 		}
+	}
+	
+	public void AddNewClub(Club club)
+	{
+		ClubDB db = new ClubDB();
+		db.insertClub(club);
 	}
 }

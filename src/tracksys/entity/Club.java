@@ -3,16 +3,29 @@ package tracksys.entity;
 public class Club {
 	private int id;
 	private String name;
+	private String passwd;
 	private Address address;
 	private String email;
 	private String phone;
 	private boolean electronicBilling;
 	private boolean signedWaiver;
 	
-	public Club(int id, String name, Address address, String email, String phone, boolean electronic, boolean signed)
+	public Club(int id, String name, String passwd, Address address, String email, String phone, boolean electronic, boolean signed)
 	{
 		this.id = id;
 		this.name = name;
+		this.passwd = passwd;
+		this.address = address;
+		this.email = email;
+		this.phone = phone;
+		this.electronicBilling = electronic;
+		this.signedWaiver = signed;
+	}
+	
+	public Club(String name, String passwd, Address address, String email, String phone, boolean electronic, boolean signed)
+	{
+		this.name = name;
+		this.passwd = passwd;
 		this.address = address;
 		this.email = email;
 		this.phone = phone;
@@ -38,6 +51,11 @@ public class Club {
 	public String getName()
 	{
 		return name;
+	}
+	
+	public String getPassword()
+	{
+		return passwd;
 	}
 	
 	public Address getAddress()

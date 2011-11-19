@@ -8,7 +8,7 @@ public class Address
 	public String phone;
 	public String postal;
 	
-	Address(String street, String city, String province, String phone, String postal)
+	public Address(String street, String city, String province, String phone, String postal)
 	{
 		this.street = street;
 		this.city = city;
@@ -17,7 +17,7 @@ public class Address
 		this.postal = postal;
 	}
 	
-	Address(String street)
+	public Address(String street)
 	{
 		this.street = street;
 		city 	= "";
@@ -25,4 +25,25 @@ public class Address
 		phone = "";
 		postal = "";
 	}
+	
+	public String getStreet()
+	{
+		return street;
+	}
+	
+	public String getCity()
+	{
+		return city;
+	}
+	
+	public String getProvince()
+	{
+		return province;
+	}
+	
+	public String getPostal()
+	{
+		return postal;
+	}
+	
 }
