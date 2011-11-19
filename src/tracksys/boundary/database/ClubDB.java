@@ -101,7 +101,7 @@ public class ClubDB {
 			ResultSet rs = s.getResultSet();
 			
 			Address address = new Address(rs.getString("street"), rs.getString("city"), rs.getString("province"), "", rs.getString("postal"));
-			Club club = new Club(rs.getInt("id"), rs.getString("name"), rs.getString("passwd"), address, rs.getString("name"), rs.getString("name"), false, false);
+			Club club = new Club(rs.getInt("id"), rs.getString("name"), rs.getString("passwd"), address, rs.getString("name"), rs.getString("name"), false, false, rs.getInt("admin"));
 			return club;
 			
 		}
@@ -125,7 +125,7 @@ public class ClubDB {
 			rs.next();
 			
 			Address address = new Address(rs.getString("street"), rs.getString("city"), rs.getString("province"), "", rs.getString("postal"));
-			Club club = new Club(rs.getInt("id"), rs.getString("name"), rs.getString("passwd"), address, rs.getString("name"), rs.getString("name"), false, false);
+			Club club = new Club(rs.getInt("id"), rs.getString("name"), rs.getString("passwd"), address, rs.getString("name"), rs.getString("name"), false, false, rs.getInt("admin"));
 			return club;
 			
 		}
