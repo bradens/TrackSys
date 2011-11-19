@@ -19,7 +19,7 @@ var register = {
 			window.location = "/home/";
 		else
 		{
-			
+			$(".errorPopup").fadeIn('fast');
 		}
 	}
 };

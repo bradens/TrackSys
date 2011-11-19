@@ -20,6 +20,7 @@ public class ArenaManager {
 	private static ArenaManager ref;
 	
 	public LoginView loginView;
+	public RegistrationView registrationView;
 	public HomeView homeView;
 	
 	/**

@@ -120,3 +120,18 @@ div.registrationHr {
 .registerForm input:focus {
 	background-color: rgba(255,255,255, .5);
 }
+
+/* Error stuff */
+.errorPopup {
+	display: none;
+	width: 90%;
+	margin: 10px 0 10px 0;
+	padding: 4px;
+	border-radius: 3px;
+	border: thin solid #666;
+	background-color: rgba(255, 150, 150, .5);
+}
+
+.errorTitle {
+	font-size: 16px;
+}
