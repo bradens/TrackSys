@@ -1,13 +1,17 @@
 var club = {
 		init : function()
 		{
-			$("#tabs").tabs();
-			
-			$("#accordion").accordion();
+			// Left column initialization
+			$("#leftAccordion").accordion({
+				fillSpace: true
+			});
 			
 			$('.accordion .head').click(function() {
-				$(this).next().toggle('fast');
+				$(this).next().toggle('slow');
 				return false;
 			}).next().hide();
+			
+			// Right column initialization
+			$("#tabs").tabs();
 		}
 }
