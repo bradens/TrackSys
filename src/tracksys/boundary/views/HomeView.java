@@ -1,9 +1,19 @@
 package tracksys.boundary.views;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.google.gson.*;
 
+import tracksys.Resources;
+import tracksys.boundary.database.NotificationsDB;
 import tracksys.controller.ArenaManager;
+import tracksys.entity.Notification;
+import tracksys.servletHandler.ServletHandler;
 
 public class HomeView {
 	public ArenaManager manager;
@@ -27,18 +37,59 @@ public class HomeView {
 			this.directToHome(req, resp);
 			return true;
 		}
+		else if (target.endsWith("getNotifications"))
+		{
+			return this.getNotifications(req, resp);
+		}
+		else if (target.endsWith("addNotification"))
+		{
+			if (manager.isAdmin(req))
+				return this.addNotification(req, resp);
+			else
+				ServletHandler.writeErr("Not an admin", req, resp);
+		}
 		return false;
+	}
+	
+	/**
+	 * Returns a JSON encoded response of the first 100 notifications.
+	 * @param req
+	 * @param resp
+	 */
+	public boolean getNotifications(HttpServletRequest req, HttpServletResponse resp)
+	{
+		NotificationsDB ndb = new NotificationsDB();
+		List<Notification> notifications = ndb.getNotifications();
+		Gson g = new Gson();
+		String s = g.toJson(notifications);
+		ServletHandler.writeResponse(s, resp);
+		return true;
+	}
+	
+	/**
+	 * Adds a notification.
+	 * @param req
+	 * @param resp
+	 */
+	public boolean addNotification(HttpServletRequest req, HttpServletResponse resp)
+	{
+		NotificationsDB ndb = new NotificationsDB();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		ndb.addNotification(req.getParameter(Resources.NOTIFICATION_TITLE_PARAM), 
+				req.getParameter(Resources.NOTIFICATION_MESSAGE_PARAM), dateFormat.format(date));
+		return true;
 	}
 	
 	public void directToHome(HttpServletRequest req, HttpServletResponse resp)
 	{	
 		if (manager.isAdmin(req))
 		{
-			ArenaManager.writeResponse("/home/admin.html", resp);
+			ServletHandler.writeResponse("/home/admin.html", resp);
 		}
 		else if (manager.isClub(req))
-			ArenaManager.writeResponse("/home/club.html", resp);
+			ServletHandler.writeResponse("/home/club.html", resp);
 		else
-			ArenaManager.writeResponse("/login/", resp);
+			ServletHandler.writeResponse("/login/", resp);
 	}
 }

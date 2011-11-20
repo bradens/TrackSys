@@ -3,11 +3,11 @@ package tracksys.boundary.views;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import tracksys.Resources;
-import tracksys.controller.ArenaManager; 
+import tracksys.controller.ArenaManager;
 import tracksys.entity.Club;
+import tracksys.servletHandler.ServletHandler;
 
 public class LoginView {
 	public ArenaManager manager;
@@ -42,13 +42,13 @@ public class LoginView {
 
 		if (reqClub == null || username == null || password == null)
 		{
-			ArenaManager.writeResponse("false", resp);
+			ServletHandler.writeResponse("false", resp);
 			return false;
 		}
 		
 		if (!reqClub.getPassword().equals(password))
 		{	
-			ArenaManager.writeResponse("false", resp);
+			ServletHandler.writeResponse("false", resp);
 			return false;
 		}
 		else
@@ -57,7 +57,7 @@ public class LoginView {
 			c.setMaxAge(60*3600*24);
 			c.setPath("/");
 			resp.addCookie(c);
-			ArenaManager.writeResponse("true", resp);
+			ServletHandler.writeResponse("true", resp);
 			return true;
 		}
 	}

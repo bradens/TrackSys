@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import tracksys.Resources;
 import tracksys.controller.ArenaManager;
 import tracksys.entity.*;
+import tracksys.servletHandler.ServletHandler;
 
 public class RegistrationView {
 	public int activeClub; 
@@ -62,7 +63,7 @@ public class RegistrationView {
 			c.setMaxAge(60*3600*24);
 			c.setPath("/");
 			resp.addCookie(c);
-			ArenaManager.writeResponse("true", resp);
+			ServletHandler.writeResponse("true", resp);
 			return true;
 		}
 	}

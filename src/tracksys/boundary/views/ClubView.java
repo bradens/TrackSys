@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import tracksys.controller.ArenaManager;
+import tracksys.servletHandler.ServletHandler;
 
 public class ClubView {
 	public ArenaManager manager;
@@ -34,11 +35,11 @@ public class ClubView {
 	{	
 		if (manager.isAdmin(req))
 		{
-			ArenaManager.writeResponse("/home/admin.html", resp);
+			ServletHandler.writeResponse("/home/admin.html", resp);
 		}
 		else if (manager.isClub(req))
-			ArenaManager.writeResponse("/home/club.html", resp);
+			ServletHandler.writeResponse("/home/club.html", resp);
 		else
-			ArenaManager.writeResponse("/login/", resp);
+			ServletHandler.writeResponse("/login/", resp);
 	}
 }

@@ -1,15 +1,16 @@
 package tracksys.controller;
 
-import java.io.IOException;
-import tracksys.entity.*;
-import tracksys.boundary.database.*;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import tracksys.Resources;
-import tracksys.boundary.views.*;
+import tracksys.boundary.database.ClubDB;
+import tracksys.boundary.views.HomeView;
+import tracksys.boundary.views.LoginView;
+import tracksys.boundary.views.RegistrationView;
+import tracksys.entity.Club;
+import tracksys.servletHandler.ServletHandler;
 
 public class ArenaManager {
 	public enum Views {
@@ -76,9 +77,9 @@ public class ArenaManager {
 		{
 			Cookie usr = getCookie(Resources.COOKIE_USERNAME, req);
 			if (usr != null)
-				writeResponse("true", resp);
+				ServletHandler.writeResponse("true", resp);
 			else
-				writeResponse("false", resp);
+				ServletHandler.writeResponse("false", resp);
 		}
 	}
 	
@@ -97,18 +98,6 @@ public class ArenaManager {
 		if (ref == null)
 			ref = new ArenaManager();
 		return ref;
-	}
-	
-	public static void writeResponse(String resp, HttpServletResponse r)
-	{
-		try {
-			r.setStatus(HttpServletResponse.SC_OK);
-			r.getWriter().write(resp);
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
 	}
 	
 	public void AddNewClub(Club club)

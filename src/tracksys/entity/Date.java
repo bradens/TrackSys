@@ -16,6 +16,15 @@ public class Date {
 		this.hour = hour;
 	}
 	
+	public Date(String day, String month, String year, String minute, String hour)
+	{
+		this.day = Integer.parseInt(day);
+		this.month = Integer.parseInt(month);
+		this.year = Integer.parseInt(year);
+		this.minute = Integer.parseInt(minute);
+		this.hour = Integer.parseInt(hour);
+	}
+	
 	public Date(int day, int month, int year)
 	{
 		this.day = day;

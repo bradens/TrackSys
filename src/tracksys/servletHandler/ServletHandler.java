@@ -71,4 +71,28 @@ public class ServletHandler extends HttpServlet
 				return ArenaManager.Views.ROOT;
 		}
 	}
+	
+	public static void writeResponse(String resp, HttpServletResponse r)
+	{
+		try {
+			r.setStatus(HttpServletResponse.SC_OK);
+			r.getWriter().write(resp);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	public static void writeErr(String message, HttpServletRequest req, HttpServletResponse resp)
+	{
+		try {
+			resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			resp.getWriter().write(message);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
 }

@@ -1,14 +1,10 @@
 package tracksys.boundary.database;
+import tracksys.Resources;
 import tracksys.entity.*;
 import java.sql.*;
 
 public class ClubDB {
-	private String username = "modus";
-	private String password = "pwnens";
-	private String database = "jdbc:mysql://bradensimpson.com";
-	
-	private String table = "tracksys.club";
-	
+	private String table = "tracksys.club";	
 	private Connection conn = null;
 	
 	public ClubDB()
@@ -16,7 +12,7 @@ public class ClubDB {
 		try
 		{
 			Class.forName ("com.mysql.jdbc.Driver").newInstance ();
-			conn = DriverManager.getConnection(database, username, password);
+			conn = DriverManager.getConnection(Resources.database, Resources.username, Resources.password);
 		}
 		catch (Exception e)
 		{
