@@ -68,9 +68,7 @@ public class BookingsDB {
 	public List<Booking> getRecentBookings()
 	{
 		List<Booking> bookings = new ArrayList<Booking>();
-		String query = "SELECT tracksys.club.name, tracksys.bookings.id, tracksys.bookings.clubid, tracksys.bookings.trackid, " +
-				"tracksys.bookings.startTime, tracksys.bookings.endTime, tracksys.bookings.bookTime, tracksys.bookings.comment" +
-				" FROM tracksys.bookings FULL JOIN tracksys.club ON tracksys.club.id=tracksys.bookings.clubid ORDER BY bookedTime DESC LIMIT 50";
+		String query = "SELECT * FROM tracksys.bookings FULL JOIN tracksys.club ORDER BY bookedTime DESC LIMIT 50";
 		DateFormat d = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		try {
 			Booking tB;
@@ -95,9 +93,7 @@ public class BookingsDB {
 	/* Retrieve a list of bookings from the database by ID */
 	public List<Booking> getBookingsByClubID(int ID)
 	{
-		String query = "SELECT tracksys.club.name, tracksys.bookings.id, tracksys.bookings.clubid, tracksys.bookings.trackid, " +
-		"tracksys.bookings.startTime, tracksys.bookings.endTime, tracksys.bookings.bookTime, tracksys.bookings.comment" +
-		" FROM tracksys.bookings FULL JOIN tracksys.club ON tracksys.club.id=tracksys.bookings.clubid WHERE clubid=\'" + ID + "\' ORDER BY bookedTime";
+		String query = "SELECT * FROM tracksys.bookings FULL JOIN tracksys.club WHERE clubid=\'" + ID + "\' ORDER BY bookedTime";
 		List<Booking> bookings = new ArrayList<Booking>();
 		DateFormat d = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		
