@@ -2,9 +2,7 @@ package tracksys.boundary.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -14,7 +12,6 @@ import java.util.List;
 import tracksys.Resources;
 import tracksys.entity.Booking;
 import tracksys.entity.Date;
-import tracksys.entity.Notification;
 
 public class BookingsDB {
 	private Connection conn = null;
