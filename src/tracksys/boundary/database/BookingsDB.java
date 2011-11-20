@@ -71,7 +71,9 @@ public class BookingsDB {
 	public List<Booking> getRecentBookings()
 	{
 		List<Booking> bookings = new ArrayList<Booking>();
-		String query = "SELECT * FROM tracksys.bookings ORDER BY bookedTime DESC LIMIT 50";
+		String query = "SELECT tracksys.club.name, tracksys.bookings.id, tracksys.bookings.clubid, tracksys.bookings.trackid, " +
+				"tracksys.bookings.startTime, tracksys.bookings.endTime, tracksys.bookings.bookTime, tracksys.bookings.comment" +
+				" FROM tracksys.bookings FULL JOIN tracksys.club ON tracksys.club.id=tracksys.bookings.clubid ORDER BY bookedTime DESC LIMIT 50";
 		DateFormat d = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		try {
 			Booking tB;
@@ -80,7 +82,7 @@ public class BookingsDB {
 			ResultSet rs = s.getResultSet();
 			while(rs.next())
 			{
-				tB = new Booking(Integer.parseInt(rs.getString("id")), Integer.parseInt(rs.getString("clubid")), Integer.parseInt(rs.getString("trackid")),
+				tB = new Booking(Integer.parseInt(rs.getString("id")), Integer.parseInt(rs.getString("clubid")), rs.getString("name"), Integer.parseInt(rs.getString("trackid")),
 						Date.convertDate(d.parse(rs.getString("startTime"))), Date.convertDate(d.parse(rs.getString("endTime"))), Date.convertDate(d.parse(rs.getString("bookTime"))), rs.getString("comment"));
 				bookings.add(tB);
 			}
@@ -96,7 +98,9 @@ public class BookingsDB {
 	/* Retrieve a list of bookings from the database by ID */
 	public List<Booking> getBookingsByClubID(int ID)
 	{
-		String query = "SELECT * FROM " + table + " WHERE clubid=\'" + ID + "\' ORDER BY bookedTime";
+		String query = "SELECT tracksys.club.name, tracksys.bookings.id, tracksys.bookings.clubid, tracksys.bookings.trackid, " +
+		"tracksys.bookings.startTime, tracksys.bookings.endTime, tracksys.bookings.bookTime, tracksys.bookings.comment" +
+		" FROM tracksys.bookings FULL JOIN tracksys.club ON tracksys.club.id=tracksys.bookings.clubid WHERE clubid=\'" + ID + "\' ORDER BY bookedTime";
 		List<Booking> bookings = new ArrayList<Booking>();
 		DateFormat d = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		
@@ -109,7 +113,7 @@ public class BookingsDB {
 			
 			while(rs.next())
 			{
-				tB = new Booking(Integer.parseInt(rs.getString("id")), Integer.parseInt(rs.getString("clubid")), Integer.parseInt(rs.getString("trackid")),
+				tB = new Booking(Integer.parseInt(rs.getString("id")), Integer.parseInt(rs.getString("clubid")), rs.getString("name"), Integer.parseInt(rs.getString("trackid")),
 						Date.convertDate(d.parse(rs.getString("startTime"))), Date.convertDate(d.parse(rs.getString("endTime"))), Date.convertDate(d.parse(rs.getString("bookTime"))), rs.getString("comment"));
 				bookings.add(tB);
 			}

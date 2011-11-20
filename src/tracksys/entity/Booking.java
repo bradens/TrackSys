@@ -3,15 +3,17 @@ package tracksys.entity;
 public class Booking {
 	private int id;
 	private int clubID;
+	private String clubName;
 	private int trackID;
 	private Date startTime;
 	private Date endTime;
 	private Date bookedTime;
 	private String comment;
 	
-	public Booking(int id, int clubID, int trackID, Date start, Date end, Date booked, String comment)
+	public Booking(int id, int clubID, String clubName, int trackID, Date start, Date end, Date booked, String comment)
 	{
 		this.id = id;
+		this.clubName = clubName;
 		this.clubID = clubID;
 		this.trackID = trackID;
 		this.startTime = start;
@@ -20,9 +22,10 @@ public class Booking {
 		this.comment = comment;
 	}
 	
-	public Booking(int clubID, int trackID, Date start, Date end, Date booked, String comment)
+	public Booking(int clubID, String clubName, int trackID, Date start, Date end, Date booked, String comment)
 	{
 		this.clubID = clubID;
+		this.clubName = clubName;
 		this.trackID = trackID;
 		this.startTime = start;
 		this.endTime = end;
@@ -43,6 +46,11 @@ public class Booking {
 	public int getClubID()
 	{
 		return clubID;
+	}
+	
+	public String getClubName()
+	{
+		return clubName;
 	}
 	
 	public Date getStartTime()
@@ -73,6 +81,11 @@ public class Booking {
 	public void setClubID(int clubID)
 	{
 		this.clubID = clubID;
+	}
+	
+	public void setClubName(String clubName)
+	{
+		this.clubName = clubName;
 	}
 	
 	public void setTrackID(int trackID)
