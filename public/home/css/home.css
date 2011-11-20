@@ -53,3 +53,23 @@ div.leftAccordion {
 .ui-tabs .ui-tabs-panel {
 	height: 100%;
 }
+
+table { 
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+table th, table td {
+    padding : 4px;
+}
+table th{
+    border-bottom: 2px solid lightblue;
+    font-weight:bold;
+}
+table tbody tr:nth-child(odd) {
+    background-color:#EFF2FF;
+}
+table tbody tr:hover {
+    background-color:lightblue;
+    color: #369;
+}
