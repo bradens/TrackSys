@@ -18,6 +18,7 @@ import tracksys.entity.Notification;
 
 public class BookingsDB {
 	private Connection conn = null;
+	private String table = "tracksys.bookings";
 	public BookingsDB() {
 		try
 		{
@@ -27,6 +28,38 @@ public class BookingsDB {
 		catch (Exception e)
 		{
 			e.printStackTrace();
+		}
+	}
+	
+	/* The insert functionality */
+	private String BuildInsert(Booking booking)
+	{
+		String query = "INSERT INTO " + table + " (";
+		
+		query += "clubid, trackid, startTime, endTime, bookedTime, comment) VALUES (";
+		
+		query += "\'" + booking.getClubID() + "\', ";
+		query += "\'" + booking.getTrackID() + "\', ";
+		query += "\'" + booking.getStartTime() + "\', ";
+		query += "\'" + booking.getEndTime() + "\', ";
+		query += "\'" + booking.getBookedTime() + "\', ";
+		query += "\'" + booking.getComment() + "\')";
+		
+		return query;
+	}
+	
+	public void insertBooking(Booking booking)
+	{
+		String query = BuildInsert(booking);
+		
+		try
+		{
+			Statement s = conn.createStatement();
+			s.executeUpdate(query);
+		}
+		catch (Exception e)
+		{
+			System.err.println("Error running database query");
 		}
 	}
 	
@@ -58,5 +91,35 @@ public class BookingsDB {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	/* Retrieve a list of bookings from the database by ID */
+	public List<Booking> getBookingsByClubID(int ID)
+	{
+		String query = "SELECT * FROM " + table + " WHERE clubid=\'" + ID + "\' ORDER BY bookedTime";
+		List<Booking> bookings = new ArrayList<Booking>();
+		DateFormat d = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		
+		try
+		{
+			Statement s = conn.createStatement();
+			s.executeQuery(query);
+			ResultSet rs = s.getResultSet();
+			Booking tB;
+			
+			while(rs.next())
+			{
+				tB = new Booking(Integer.parseInt(rs.getString("id")), Integer.parseInt(rs.getString("clubid")), Integer.parseInt(rs.getString("trackid")),
+						Date.convertDate(d.parse(rs.getString("startTime"))), Date.convertDate(d.parse(rs.getString("endTime"))), Date.convertDate(d.parse(rs.getString("bookTime"))), rs.getString("comment"));
+				bookings.add(tB);
+			}
+			
+			return bookings;
+		}
+		catch (Exception e)
+		{
+			System.err.println("Error running database query");
+			return null;
+		}
 	}
 }

@@ -20,6 +20,16 @@ public class Booking {
 		this.comment = comment;
 	}
 	
+	public Booking(int clubID, int trackID, Date start, Date end, Date booked, String comment)
+	{
+		this.clubID = clubID;
+		this.trackID = trackID;
+		this.startTime = start;
+		this.endTime = end;
+		this.bookedTime = booked;
+		this.comment = comment;
+	}
+	
 	public int getID()
 	{
 		return id;
