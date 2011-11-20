@@ -1,0 +1,30 @@
+.titleBox {
+	width: 100%;
+}
+.notifLabel {
+	margin: 5px 5px 0 0;
+}
+.titleInput {
+	width: 83% !important;
+}
+.notifInput {
+	max-width:100%;
+	width: 100%;
+	font-weight: inherit;
+	font-style: inherit;
+	font-family: inherit;
+	display: block;
+	margin: 10px 0px 10px 0px;
+	overflow: hidden;
+	-webkit-box-shadow: 0px 0px 3px 2px rgba(0,0,150,.15);
+	padding: 4px;
+	-webkit-border-radius: 3px;
+	border: #999 thin solid;
+	font-size: 14px;
+	background-color: rgba(195,195,255, .3);
+	-webkit-transition: background-color .25s ease-in;
+	line-height: 1.5;
+}
+.notifInput:focus {
+	background-color: rgba(255,255,255, .5);
+}

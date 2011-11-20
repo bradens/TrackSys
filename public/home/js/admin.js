@@ -1,13 +1,18 @@
 var admin = {
 		init: function()
 		{
-			/*$("#accordion").accordion();
+			// Left pane init
+			$("#leftAccordion").accordion({
+				fillSpace: true
+			});
 			
 			$('.accordion .head').click(function() {
 				$(this).next().toggle('slow');
 				return false;
-			}).next().hide();*/
-			$("#tabs").tabs();
+			}).next().hide();
+			
+			// Right pane init
+			$("#rightTabs").tabs();
 		}
 		
 }
