@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.*;
 
 import tracksys.Resources;
+import tracksys.boundary.database.BookingsDB;
 import tracksys.boundary.database.NotificationsDB;
 import tracksys.controller.ArenaManager;
+import tracksys.entity.Booking;
 import tracksys.entity.Notification;
 import tracksys.servletHandler.ServletHandler;
 
@@ -48,7 +50,24 @@ public class HomeView {
 			else
 				ServletHandler.writeErr("Not an admin", req, resp);
 		}
+		else if (target.endsWith("getRecentBookings"))
+		{
+			if (manager.isAdmin(req))
+				return this.getRecentBookings(req, resp);
+			else
+				ServletHandler.writeErr("Not an admin", req, resp);
+		}
 		return false;
+	}
+	
+	public boolean getRecentBookings(HttpServletRequest req, HttpServletResponse resp)
+	{
+		BookingsDB bdb = new BookingsDB();
+		List<Booking> bookings = bdb.getRecentBookings();
+		Gson g = new Gson();
+		String s = g.toJson(bookings);
+		ServletHandler.writeResponse(s, resp);
+		return true;
 	}
 	
 	/**

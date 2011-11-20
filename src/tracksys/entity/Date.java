@@ -1,5 +1,5 @@
 package tracksys.entity;
-
+import java.util.*;
 public class Date {
 	private int day;
 	private int month;
@@ -55,6 +55,12 @@ public class Date {
 	public int getHour()
 	{
 		return hour;
+	}
+	
+	@SuppressWarnings("deprecation")
+	public static tracksys.entity.Date convertDate(java.util.Date d)
+	{
+		return new tracksys.entity.Date(d.getDay(), d.getMonth(), d.getYear(), d.getHours(), d.getMinutes());
 	}
 	
 	public String getDate()
