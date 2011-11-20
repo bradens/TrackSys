@@ -7,7 +7,6 @@ div.BannerWrap {
 	font-weight: 100;
 	color: #666;
 	text-shadow: 0px 2px 3px #BBB;
-	font-size:30px;
 	width:220px;
 	padding: 3px;
 	margin:0px auto 0 10px;
@@ -21,7 +20,12 @@ div.BannerWrap {
 	box-shadow: 0px 1px 4px 4px rgba(200,200,255, .3);
 }
 
+<<<<<<< HEAD
+.column.leftColumnWrap {
+	border:none;
+=======
 div.leftColumnWrap {
+>>>>>>> 37c338cde1cd3977a16c973bc855b17932039610
 	width: 25%;
 	min-width: 270px;	
 	height:95%;

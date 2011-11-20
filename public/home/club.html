@@ -1,31 +1,71 @@
 <html>
 	<head>
-		<script type='text/javascript' src='../js/lib/jquery.js'></script>
+		<script type="text/javascript" src="../jqueryui/js/jquery-1.6.2.min.js"></script>
 		<script type="text/javascript" src="../js/lib/jquery.xdomainajax.js"></script>
+		<script type="text/javascript" src="../jqueryui/js/jquery-ui.min.js"></script>
 		<script type='text/javascript' src='../js/core.js'></script>
 		<script type='text/javascript' src='js/club.js'></script>
 		<style type='text/css'>
 			@import url("../css/reset.css");
 			@import url("../css/css3buttons.css");
+			@import url("../jqueryui/css/TrackSys/jquery-ui.css");
 			@import url("../css/core.css");
 			@import url("css/home.css");
 			@import url("css/club.css");
-			@import url("../jqueryui/css/TrackSys/jquery-ui.css");
 		</style>
 	</head>
 	<body>
+	<body onload="club.init();">
 	<div class="underlay">
 		<div class="column leftColumnWrap">
 			<div class="leftColumn">
+				<div class="paymentHeader">
+					<span class="paymentText1">Club</span><span class="paymentText2">Profile</span>
+				</div>	
 			</div>
 		</div>
 		<div class="column rightColumnWrap">
 			<div class="rightColumn">
-				<div id="accordian">
-					<h3><a href="#">First header</a></h3>
-				    <div>First content</div>
-				    <h3><a href="#">Second header</a></h3>
-				    <div>Second content</div>
+				<div id="tabs">
+					<ul>
+						<li><a href="#tabs-1">Bookings</a></li>
+						<li><a href="#tabs-2">Payments</a></li>
+						<li><a href="#tabs-3">Edit</a></li>
+					</ul>
+					<div id="tabs-1">
+						<p><div id="accordion">
+						    <h3><a href="#">Make a Booking</a></h3>
+						    <div>Form for making a booking.</div>
+						    <h3><a href="#">Future Bookings</a></h3>
+						    <div>Future booking information goes here.</div>
+						    <h3><a href="#">Booking History</a></h3>
+						    <div>Booking history content goes here.</div>
+							</div>
+						</p>
+					</div>
+					<div id="tabs-2">
+						<p>
+							<div class="paymentColumn paymentLeftColumnWrap">
+								<div class="paymentLeftColumn">
+									<div class="paymentHeader">
+										<span class="paymentText1">Payment</span><span class="paymentText2">History</span>
+									</div>
+								</div>
+							</div>
+							<div class="paymentColumn paymentRightColumnWrap">
+								<div class="paymentRightColumn">
+									<div class="paymentHeader">
+										<span class="paymentText1">Pay</span><span class="paymentText2">Now</span>
+									</div>		
+								</div>
+							</div>
+						</p>
+					</div>
+					<div id="tabs-3">
+						<div class="paymentHeader">
+							<span class="paymentText1">Edit</span><span class="paymentText2">Profile</span>
+						</div>	
+					</div>
 				</div>
 			</div>
 		</div>

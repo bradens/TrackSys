@@ -1,6 +1,13 @@
-jQuery(document).ready(function(){
-	$('.accordion .head').click(function() {
-		$(this).next().toggle('slow');
-		return false;
-	}).next().hide();
-});
+var club = {
+		init : function()
+		{
+			$("#tabs").tabs();
+			
+			$("#accordion").accordion();
+			
+			$('.accordion .head').click(function() {
+				$(this).next().toggle('fast');
+				return false;
+			}).next().hide();
+		}
+}
