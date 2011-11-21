@@ -1,7 +1,10 @@
 package tracksys.boundary.database;
 import tracksys.Resources;
 import tracksys.entity.*;
+
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ClubDB {
 	private String table = "tracksys.club";	
@@ -135,5 +138,32 @@ public class ClubDB {
 		}
 	}
 	
+	/* Get all clubs */
+	public List<Club> getClubs()
+	{
+		List<Club> rgClubs = new ArrayList<Club>(); 
+				
+		String query = "SELECT * FROM " + table;
+		
+		try
+		{
+			Statement s = conn.createStatement();
+			s.executeQuery(query);
+			ResultSet rs = s.getResultSet();
+			while(rs.next())
+			{
+				Address address = new Address(rs.getString("street"), rs.getString("city"), rs.getString("province"), rs.getString("phone"), rs.getString("postal"));
+				Club club = new Club(rs.getInt("id"), rs.getString("name"), rs.getString("passwd"), address, rs.getString("email"), rs.getString("phone"), false, false, rs.getInt("admin"));
+				rgClubs.add(club);
+			}
+			
+			return rgClubs;
+		}
+		catch (Exception e)
+		{
+			System.err.println("Error running database query");
+			return null;
+		}
+	}
 	
 }

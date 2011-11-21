@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import tracksys.Resources;
 import tracksys.controller.ArenaManager;
 import tracksys.entity.Booking;
+import tracksys.entity.Club;
 import tracksys.entity.Notification;
 import tracksys.entity.Transaction;
 import tracksys.servletHandler.ServletHandler;
@@ -60,6 +61,13 @@ public class HomeView {
 			else
 				ServletHandler.writeErr("Not an admin", req, resp);
 		}
+		else if (target.endsWith("getAllClubs"))
+		{
+			if (manager.isAdmin(req))
+				return this.getClubs(req, resp);
+			else
+				ServletHandler.writeErr("Not an admin", req, resp);
+		}
 		else if (target.endsWith("submitBooking"))
 		{
 			return this.addBooking(req, resp);
@@ -72,6 +80,18 @@ public class HomeView {
 		List<Booking> bookings = manager.getRecentBookings();
 		Gson g = new Gson();
 		String s = g.toJson(bookings);
+		resp.setContentType("application/json");
+		ServletHandler.writeResponse(s, resp);
+		return true;
+	}
+	
+	////////////////////////////////////////////////////////////////////////////////
+	// Get all clubs
+	public boolean getClubs(HttpServletRequest req, HttpServletResponse resp)
+	{
+		List<Club> clubs = manager.getClubs();
+		Gson g = new Gson();
+		String s = g.toJson(clubs);
 		resp.setContentType("application/json");
 		ServletHandler.writeResponse(s, resp);
 		return true;
