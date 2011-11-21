@@ -19,12 +19,16 @@ var club = {
 			
 			// Get all the notifications
 			CommHandler.doPost(SERVER_LOC+PORT+"/home/getNotifications", null, this.writeNotifications);
+			$(".loadingNotifications").show('fast');
 			// Get all the future bookings
 			CommHandler.doPost(SERVER_LOC+PORT+"/home/getFutureBookings", null, this.writeFutureBookings);
+			$(".loadingBookingFuture").show('fast');
 			// Get all the history bookings
 			CommHandler.doPost(SERVER_LOC+PORT+"/home/getHistoricBookings", null, this.writeHistoricBookings);
+			$(".loadingBookingHistory").show('fast');
 			// get all transactions
 			CommHandler.doPost(SERVER_LOC+PORT+"/home/getTransactions", null, this.fillTransactionsTable);
+			$(".loadingTransactions").show('fast');
 		},
 		
 		writeNotifications: function(data)
@@ -34,6 +38,7 @@ var club = {
 				console.log("Failed to get notifications");
 				return;
 			}
+			$(".loadingNotifications").hide('fast');
 			for (var i = 0;i < data.length;i++)
 			{
 				$('.notificationsBox').append('<li><div class="notification">' +
@@ -49,6 +54,7 @@ var club = {
 				console.log("Failed to get future bookings");
 				return;
 			}
+			$(".loadingBookingFuture").css('display', 'none');
 			$('#futureBookings').append('<tr class="header">' + 
 											'<th>Track</th>' +
 											'<th>Start Time</th>' + 
@@ -72,6 +78,7 @@ var club = {
 				console.log("Failed to get future bookings");
 				return;
 			}
+			$(".loadingBookingHistory").css('display', 'none');
 			$('#historyBookings').append('<tr class="header">' + 
 											'<th>Track</th>' +
 											'<th>Start Time</th>' + 
@@ -113,6 +120,7 @@ var club = {
 				console.log("Failed to write transactions.");
 				return;
 			}
+			$(".loadingTransactions").css('display', 'none');
 			for (var i = 0;i < data.length;i++)
 			{
 				$('.transactionTable tr:last').after('<tr class="transactionTableRow">' + 

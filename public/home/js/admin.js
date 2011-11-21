@@ -16,8 +16,12 @@ var admin = {
 		
 		// Get all the notifications
 		CommHandler.doPost(SERVER_LOC+PORT+"/home/getNotifications", null, this.writeNotifications);
+		$(".loadingNotifications").show('fast');
 		CommHandler.doPost(SERVER_LOC+PORT+"/home/getRecentBookings", null, this.fillRecentBookings);
+		$(".loadingBookings").show('fast');
 		CommHandler.doPost(SERVER_LOC+PORT+"/home/getAllClubs", null, this.writeClubsList);
+		$(".loadingClubs").show('fast');
+
 	},
 	
 	writeNotifications : function(data)
@@ -27,6 +31,7 @@ var admin = {
 			console.log("Failed to get notifications");
 			return;
 		}
+		$(".loadingNotifications").hide('fast');
 		for (var i = 0;i < data.length;i++)
 		{
 			$('.notificationsBox').append('<li><div class="notification">' +
@@ -38,22 +43,29 @@ var admin = {
 	writeClubsList : function(data)
 	{
 		if (!data)
-			{
-				console.log("Failed to get clubs");
-				return;
-			}
-			for (var i = 0;i < data.length;i++)
-			{
-				$('.clubsTable tr:last').after('<tr class="clubsTableRow">' + 
-				'<td>' + data[i].id + '</td>' + '<td>' + data[i].name + '</td>' + 
-				'<td>' + data[i].address['city'] + '</td>' + '<td>' + data[i].email + '</td>' +
-				'<td>' + data[i].phone + '</td>' + '<td>' + data[i].electronicBilling + '</td>' +
-				'<td>' + data[i].signedWaiver + '</td>' + '</tr>');
-			}
+		{
+			console.log("Failed to get clubs");
+			return;
+		}
+		$(".loadingClubs").css('display', 'none');
+		for (var i = 0;i < data.length;i++)
+		{
+			$('.clubsTable tr:last').after('<tr class="clubsTableRow">' + 
+			'<td>' + data[i].id + '</td>' + '<td>' + data[i].name + '</td>' + 
+			'<td>' + data[i].address['city'] + '</td>' + '<td>' + data[i].email + '</td>' +
+			'<td>' + data[i].phone + '</td>' + '<td>' + data[i].electronicBilling + '</td>' +
+			'<td>' + data[i].signedWaiver + '</td>' + '</tr>');
+		}
 	},
 	
 	fillRecentBookings: function(data)
 	{
+		if (!data)
+		{
+			console.log(data);
+			return;
+		}
+		$(".loadingBookings").css('display', 'none');
 		for (var i = 0;i < data.length;i++)
 		{
 			$('.recentBookingTable tr:last').after('<tr class="recentBookingRow">' + 

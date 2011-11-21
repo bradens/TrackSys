@@ -29,6 +29,10 @@
 					    <hr/>
 					    <span class="notificationsTitle">Notifications:</span>
 					    <ul class="notificationsBox">
+					    	<li class="loadingNotifications" style="display:none;">
+					  			<div class="ajaxLoading">
+					  			</div>
+					  		</li>
 					    </ul>
 				    </div>
 				</div>
@@ -44,11 +48,12 @@
 						<li><a href="#tabs-4">Payments</a></li>
 					</ul>
 					<div id="tabs-1">
-						<p>
-							<table class="table transactionTable" id="futureBookings">
-								<!-- future bookings get inserted here -->
-							</table>
-						</p>
+						<table class="table transactionTable" id="futureBookings">
+							<!-- future bookings get inserted here -->
+						</table>
+						<div class="loadingBookingFuture" style="display:none;">
+							<div class="ajaxLoading"></div>
+						</div>
 					</div>
 					<div id="tabs-2">
 						<p>
@@ -107,11 +112,12 @@
 						</div>
 					</div>
 					<div id="tabs-3">
-						<p>
-							<table class="table transactionTable" id="historyBookings">
-								<!-- history bookings get inserted here -->
-							</table>
-						</p>
+						<table class="table transactionTable" id="historyBookings">
+							<!-- history bookings get inserted here -->
+						</table>
+						<div class="loadingBookingHistory" style="display:none;">
+							<div class="ajaxLoading"></div>
+						</div>
 					</div>
 					<div id="tabs-4">
 						<p>
@@ -129,6 +135,9 @@
 												<th>Comment</th>
 											</tr>
 										</table>
+										<div class="loadingTransactions" style="display:none">
+											<div class="ajaxLoading"></div>
+										</div>
 									</div>
 								</div>
 							</div>

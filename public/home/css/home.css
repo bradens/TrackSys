@@ -74,6 +74,10 @@ div.leftAccordion {
 	background-color: rgba(240,240,255, .8);
 }
 
+.notificationsBox {
+	list-style-type:none;
+}
+
 .notificationsBox .date {
 	display:block;
 	font-size:11px;

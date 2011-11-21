@@ -5,6 +5,7 @@
 		<script type="text/javascript" src="../jqueryui/js/jquery-ui.min.js"></script>
 		<script type='text/javascript' src='../js/core.js'></script>
 		<script type='text/javascript' src='js/admin.js'></script>
+		<script type='text/javascript' src='js/home.js'></script>
 		<style type='text/css'>
 			@import url("../css/reset.css");
 			@import url("../css/css3buttons.css");
@@ -34,6 +35,10 @@
 						<a class="button big sendNotifBtn" onclick="admin.addNotification();">Send Notification</a>
 						<span class="notificationsTitle">Notifications:</span>
 					    <ul class="notificationsBox">
+					  		<li class="loadingNotifications" style="display:none;">
+					  			<div class="ajaxLoading">
+					  			</div>
+					  		</li>
 					    </ul>
 					</div>
 				</div>
@@ -56,28 +61,11 @@
 								<th>EndTime</th>
 								<th>Comment</th>
 							</tr>
-							<!-- <tr class="recentBookingRow">
-								<td>TestClub</td>
-								<td>1</td>
-								<td>starttime</td>
-								<td>endtime</td>
-								<td>This is a comment</td>
-							</tr>
-							<tr class="recentBookingRow">
-								<td>TestClub</td>
-								<td>1</td>
-								<td>starttime</td>
-								<td>endtime</td>
-								<td>This is a comment</td>
-							</tr>
-							<tr class="recentBookingRow">
-								<td>TestClub</td>
-								<td>1</td>
-								<td>starttime</td>
-								<td>endtime</td>
-								<td>This is a comment</td>
-							</tr>-->
 						</table>
+						<div class="loadingBookings" style="display:none;">
+							<div class="ajaxLoading">
+				  			</div>
+						</div>
 					</div>
 					<div id="tabs-2">
 						<table class="clubsTable">
@@ -91,6 +79,10 @@
 								<th>Signed Waiver</th>
 							</tr>
 						</table>
+						<div class="loadingClubs" style="display:none;">
+							<div class="ajaxLoading">
+				  			</div>
+						</div>
 					</div>
 					<div id="tabs-3">
 						<p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
@@ -99,6 +91,9 @@
 				</div>
 			</div>
 		</div>
+	</div>
+	<div class="dialogBody">
+		<p>asdfahsdfaklsjdhfasdlkjfhasdflkasjdhfasldkajhsdflaksjh</p>
 	</div>
 	</body>
 </html>
