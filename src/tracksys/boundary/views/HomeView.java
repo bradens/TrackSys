@@ -7,17 +7,17 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.google.gson.*;
 
 import tracksys.Resources;
 import tracksys.boundary.database.BookingsDB;
-import tracksys.boundary.database.NotificationsDB;
 import tracksys.boundary.database.TransactionsDB;
 import tracksys.controller.ArenaManager;
 import tracksys.entity.Booking;
 import tracksys.entity.Notification;
 import tracksys.entity.Transaction;
 import tracksys.servletHandler.ServletHandler;
+
+import com.google.gson.Gson;
 
 public class HomeView {
 	public ArenaManager manager;

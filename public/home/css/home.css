@@ -50,6 +50,30 @@ div.leftAccordion {
 	height: 100%;
 }
 
+.notificationsTitle {
+	font-size:14px;
+}
+
+.notification {
+	border: thin solid #AAA;
+	border-radius: 3px;
+	padding: 3px;
+	background-color: rgba(200, 200, 255, .5);
+	box-shadow: 0px 1px 4px 4px rgba(200,200,255, .3);
+	-webkit-transition: background-color .15s ease-in;
+}
+
+.notification:hover {
+	background-color: rgba(240,240,255, .8);
+}
+
+.notificationsBox .title {
+	display: block;
+	font-size: 13px;
+	text-decoration: underline;
+	margin-bottom: 2px;
+}
+
 .ui-tabs .ui-tabs-panel {
 	height: 100%;
 }
@@ -67,6 +91,7 @@ table th{
     font-weight:bold;
 }
 table tbody tr:nth-child(odd) {
+	-webkit-transition: background-color .15s ease-in;
     background-color:#EFF2FF;
 }
 table tbody tr:hover {
