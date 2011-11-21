@@ -1,4 +1,4 @@
-var SERVER_LOC 	= "http://silvia.local:";
+var SERVER_LOC 	= "http://localhost:";
 var PORT 		= "1234";
 
 function logout() 
