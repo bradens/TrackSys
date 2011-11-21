@@ -33,6 +33,10 @@ var club = {
 			{
 				$(".errorPopup").fadeIn('fast');
 			}
+		},
+		getTransactions: function()
+		{
+			//CommHandler.doPost(SERVER_LOC+PORT+"/home/getTransactions", , );
 		}
 }
 

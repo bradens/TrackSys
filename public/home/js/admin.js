@@ -13,6 +13,24 @@ var admin = {
 		
 		// Right pane init
 		$("#rightTabs").tabs();
+		
+		CommHandler.doPost(SERVER_LOC+PORT+"/home/getRecentBookings", null, this.fillRecentBookings);
+	},
+	
+	fillRecentBookings: function(data)
+	{
+		if (!data)
+		{
+			console.log(err);
+			return;
+		}
+		for (var i = 0;i < data.length;i++)
+		{
+			$('.recentBookingTable tr:last').after('<tr class="recentBookingRow">' + 
+				'<td>' + data[i].clubName + '</td>' + '<td>' + data[i].trackID + '</td>' + 
+				'<td>' + data[i].startTime + '</td>' + '<td>' + data[i].endTime + '</td>' +
+				'<td>' + data[i].comment + '</td></tr>');
+		}
 	},
 	
 	addNotification: function()
@@ -26,4 +44,7 @@ var admin = {
 	{
 		console.log("Successfully added notification.");
 	}
+	
+	
+	
 }

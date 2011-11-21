@@ -12,9 +12,11 @@ import com.google.gson.*;
 import tracksys.Resources;
 import tracksys.boundary.database.BookingsDB;
 import tracksys.boundary.database.NotificationsDB;
+import tracksys.boundary.database.TransactionsDB;
 import tracksys.controller.ArenaManager;
 import tracksys.entity.Booking;
 import tracksys.entity.Notification;
+import tracksys.entity.Transaction;
 import tracksys.servletHandler.ServletHandler;
 
 public class HomeView {
@@ -50,6 +52,10 @@ public class HomeView {
 			else
 				ServletHandler.writeErr("Not an admin", req, resp);
 		}
+		else if (target.endsWith("getTransactions"))
+		{
+			return this.getTransactions(req, resp);
+		}
 		else if (target.endsWith("getRecentBookings"))
 		{
 			if (manager.isAdmin(req))
@@ -70,6 +76,7 @@ public class HomeView {
 		List<Booking> bookings = bdb.getRecentBookings();
 		Gson g = new Gson();
 		String s = g.toJson(bookings);
+		resp.setContentType("application/json");
 		ServletHandler.writeResponse(s, resp);
 		return true;
 	}
@@ -121,6 +128,20 @@ public class HomeView {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
 		
+		return true;
+	}
+	
+	/* Returns a JSON encoded response of the all past transactions.
+	 * @param req
+	 * @param resp
+	 */
+	public boolean getTransactions(HttpServletRequest req, HttpServletResponse resp)
+	{
+		TransactionsDB tdb = new TransactionsDB();
+		List<Transaction> transactions = tdb.getTransactions();
+		Gson g = new Gson();
+		String s = g.toJson(transactions);
+		ServletHandler.writeResponse(s, resp);
 		return true;
 	}
 	
