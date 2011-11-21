@@ -45,8 +45,57 @@
 					</div>
 					<div id="tabs-2">
 						<p>
-							Make a booking form.
+							Please fill in the information below to request a booking.
 						</p>
+						<div class="errorPopup">
+							<span class="errorTitle">Error.</span><br/>
+							<span class="errorDesc">The booking you requested was not available, or your input was invalid.</span>
+						</div>
+						<div class="bookingForm">
+							<span class="dayLabel label">Day: </span>
+							<input id="datepicker" />
+							
+							<span class="startLabel label">Start Time: </span>
+							<div class="bookingSelect">
+							<select id="startTimeSelect">
+							<option>09:00</option>
+							<option>10:00</option>
+							<option>11:00</option>
+							<option>12:00</option>
+							<option>13:00</option>
+							<option>14:00</option>
+							<option>15:00</option>
+							<option>16:00</option>
+							<option>17:00</option>
+							<option>18:00</option>
+							<option>19:00</option>
+							<option>20:00</option>
+							</select>
+							</div>
+							
+							<span class="endLabel label">End Time: </span>
+							<div class="bookingSelect">
+							<select id="endTimeSelect">
+							<option>10:00</option>
+							<option>10:00</option>
+							<option>11:00</option>
+							<option>12:00</option>
+							<option>13:00</option>
+							<option>14:00</option>
+							<option>15:00</option>
+							<option>16:00</option>
+							<option>17:00</option>
+							<option>18:00</option>
+							<option>19:00</option>
+							<option>20:00</option>
+							<option>21:00</option>
+							</select>
+							</div>
+						</div>
+						
+						<div class="columnFooter">
+							<a onclick="club.makeBooking();" class="submitBtn big button">Submit</a>
+						</div>
 					</div>
 					<div id="tabs-3">
 						<p>
@@ -59,6 +108,34 @@
 								<div class="paymentLeftColumn">
 									<div class="paymentHeader">
 										<span class="paymentText1">Payment</span><span class="paymentText2">History</span>
+									</div>
+									<div class="paymentTable">
+										<table class="table">
+											<tr class="header">
+												<th>Transaction ID</th>
+												<th>Fee</th>
+												<th>Time</th>
+												<th>Comment</th>
+											</tr>
+											<tr >
+												<td>12</td>
+												<td>$100</td>
+												<td>11/11/2011</td>
+												<td>This is a comment</td>
+											</tr>
+											<tr >
+												<td>15</td>
+												<td>$100</td>
+												<td>11/11/2011</td>
+												<td>This is a comment</td>
+											</tr>
+											<tr >
+												<td>18</td>
+												<td>$100</td>
+												<td>11/11/2011</td>
+												<td>This is a comment</td>
+											</tr>
+										</table>
 									</div>
 								</div>
 							</div>

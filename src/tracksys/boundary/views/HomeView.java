@@ -12,9 +12,11 @@ import com.google.gson.*;
 import tracksys.Resources;
 import tracksys.boundary.database.BookingsDB;
 import tracksys.boundary.database.NotificationsDB;
+import tracksys.boundary.database.TransactionsDB;
 import tracksys.controller.ArenaManager;
 import tracksys.entity.Booking;
 import tracksys.entity.Notification;
+import tracksys.entity.Transaction;
 import tracksys.servletHandler.ServletHandler;
 
 public class HomeView {
@@ -50,12 +52,20 @@ public class HomeView {
 			else
 				ServletHandler.writeErr("Not an admin", req, resp);
 		}
+		else if (target.endsWith("getTransactions"))
+		{
+			return this.getTransactions(req, resp);
+		}
 		else if (target.endsWith("getRecentBookings"))
 		{
 			if (manager.isAdmin(req))
 				return this.getRecentBookings(req, resp);
 			else
 				ServletHandler.writeErr("Not an admin", req, resp);
+		}
+		else if (target.endsWith("submitBooking"))
+		{
+			return this.addBooking(req, resp);
 		}
 		return false;
 	}
@@ -98,6 +108,40 @@ public class HomeView {
 		Date date = new Date();
 		ndb.addNotification(req.getParameter(Resources.NOTIFICATION_TITLE_PARAM), 
 				req.getParameter(Resources.NOTIFICATION_MESSAGE_PARAM), dateFormat.format(date));
+		return true;
+	}
+	
+	/**
+	 * Adds a booking.
+	 * @param req
+	 * @param resp
+	 */
+	public boolean addBooking(HttpServletRequest req, HttpServletResponse resp)
+	{
+		String name = req.getParameter("date");
+		String start = req.getParameter("start");
+		String end = req.getParameter("end");
+		
+		System.out.println(name + " " + start + " " + end);
+		
+		BookingsDB db = new BookingsDB();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		
+		return true;
+	}
+	
+	/* Returns a JSON encoded response of the all past transactions.
+	 * @param req
+	 * @param resp
+	 */
+	public boolean getTransactions(HttpServletRequest req, HttpServletResponse resp)
+	{
+		TransactionsDB tdb = new TransactionsDB();
+		List<Transaction> transactions = tdb.getTransactions();
+		Gson g = new Gson();
+		String s = g.toJson(transactions);
+		ServletHandler.writeResponse(s, resp);
 		return true;
 	}
 	
