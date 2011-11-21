@@ -19,6 +19,9 @@ var club = {
 			
 			// Get all the notifications
 			CommHandler.doPost(SERVER_LOC+PORT+"/home/getNotifications", null, this.writeNotifications);
+			
+			// get all transactions
+			CommHandler.doPost(SERVER_LOC+PORT+"/home/getTransactions", null, this.fillTransactionsTable);
 		},
 		
 		writeNotifications: function(data)
@@ -41,9 +44,6 @@ var club = {
 				if (k.keyCode == '13')
 					register.submit();
 			});
-			
-			// get all transactions
-			this.getTransactions();
 		},
 		
 		makeBooking : function()
@@ -64,15 +64,11 @@ var club = {
 				$(".errorPopup").fadeIn('fast');
 			}
 		},
-		getTransactions : function()
-		{
-			CommHandler.doPost(SERVER_LOC+PORT+"/home/getTransactions", null, this.fillTransactionsTable);
-		},
 		fillTransactionsTable : function(data)
 		{
 			if (!data)
 			{
-				console.log(err);
+				console.log("Failed to write transactions.");
 				return;
 			}
 			for (var i = 0;i < data.length;i++)
