@@ -15,7 +15,7 @@ var club = {
 			$("#tabs").tabs();
 			
 			// Initialize all date pickers here
-			$('#datepicker').datepicker();
+			$('#datepicker').datepicker({ dateFormat: 'yy-mm-dd' });
 		},
 		makeBooking : function()
 		{
@@ -23,12 +23,12 @@ var club = {
 			var start = $("#startTimeSelect").val();
 			var end = $("#endTimeSelect").val();
 			
-			CommHandler.doPost(SERVER_LOC+PORT+"/registration/submitregistration", { date: date, start: start, end: end}, club.bookingSuccess);
+			CommHandler.doPost(SERVER_LOC+PORT+"/home/submitBooking", { date: date, start: start, end: end}, club.bookingSuccess);
 		},
 		bookingSuccess : function(data)
 		{
 			if (data == "true")
-				window.location.href = "/home/club.html#tabs-1";
+				window.location.href = "/home/club.html";
 			else
 			{
 				$(".errorPopup").fadeIn('fast');
