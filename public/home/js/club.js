@@ -16,7 +16,26 @@ var club = {
 			
 			// Initialize all date pickers here
 			$('#datepicker').datepicker({ dateFormat: 'yy-mm-dd' });
+			
+			// Get all the notifications
+			CommHandler.doPost(SERVER_LOC+PORT+"/home/getNotifications", null, this.writeNotifications);
 		},
+		
+		writeNotifications: function(data)
+		{
+			if (!data)
+			{
+				console.log("Failed to get notifications");
+				return;
+			}
+			for (var i = 0;i < data.length;i++)
+			{
+				$('.notificationsBox').append('<li><div class="notification">' +
+						'<span class="date">' + data[i].timestamp + '</span><span class="title">' + data[i].title + '</span>' + 
+						'<span class="message">' + data[i].message + '</span></div></li>');
+			}
+		},
+		
 		makeBooking : function()
 		{
 			var date = $("#datepicker").val();
