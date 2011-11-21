@@ -21,6 +21,8 @@ import tracksys.entity.Notification;
 import tracksys.entity.Transaction;
 import tracksys.servletHandler.ServletHandler;
 
+import java.util.*;
+
 public class HomeView {
 	public ArenaManager manager;
 	public HomeView() { }
@@ -119,6 +121,7 @@ public class HomeView {
 		String date = req.getParameter("date");
 		String start = req.getParameter("start");
 		String end = req.getParameter("end");
+		String comment = req.getParameter("comment");
 		
 		try 
 		{
@@ -127,7 +130,11 @@ public class HomeView {
 			Date stamp = new Date();
 			Resources.DATE_FORMAT.format(stamp);
 			
-			Booking booking = new Booking(0, "name", 1, startDate, endDate, stamp, "Comment");
+			Random generator = new Random();
+			int track = generator.nextInt(8) + 1;
+			int clubid = manager.getClubIDFromCookie(req);
+			
+			Booking booking = new Booking(clubid, "", track, startDate, endDate, stamp, comment);
 			manager.addBooking(booking);
 			ServletHandler.writeResponse("true", resp);
 		}
