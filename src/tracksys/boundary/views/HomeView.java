@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import tracksys.Resources;
 import tracksys.controller.ArenaManager;
 import tracksys.entity.Booking;
+import tracksys.entity.Club;
 import tracksys.entity.Notification;
 import tracksys.entity.Transaction;
 import tracksys.servletHandler.ServletHandler;
@@ -71,6 +72,10 @@ public class HomeView {
 		else if (target.endsWith("getHistoricBookings"))
 		{
 			return this.getHistoricBookings(req, resp);
+		}
+		else if (target.endsWith("getAllClubs"))
+		{
+			return this.getAllClubs(req, resp);
 		}
 		return false;
 	}
@@ -189,6 +194,15 @@ public class HomeView {
 		Gson g = new Gson();
 		resp.setContentType("application/json");
 		String s = g.toJson(transactions);
+		ServletHandler.writeResponse(s, resp);
+		return true;
+	}
+	public boolean getAllClubs(HttpServletRequest req, HttpServletResponse resp)
+	{
+		List<Club> clubs = manager.getAllClubs();
+		Gson g = new Gson();
+		resp.setContentType("application/json");
+		String s = g.toJson(clubs);
 		ServletHandler.writeResponse(s, resp);
 		return true;
 	}

@@ -42,7 +42,6 @@ public class TransactionsDB {
 			ResultSet rs = s.getResultSet();
 			while(rs.next())
 			{
-				//make this do stuff and stuff
 				tempTrans = new Transaction(Integer.parseInt(rs.getString("id")),Integer.parseInt(rs.getString("clubid")),Float.parseFloat(rs.getString("paymentfee")),Resources.DATE_FORMAT.parse(rs.getString("paymenttime")), rs.getString("comment"));
 				transaction.add(tempTrans);
 			}

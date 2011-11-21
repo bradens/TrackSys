@@ -15,6 +15,24 @@ var admin = {
 		$("#rightTabs").tabs();
 		
 		CommHandler.doPost(SERVER_LOC+PORT+"/home/getRecentBookings", null, this.fillRecentBookings);
+		CommHandler.doPost(SERVER_LOC+PORT+"/home/getAllClubs", null, this.writeClubsList);
+	},
+	
+	writeClubsList: function(data)
+	{
+		if (!data)
+			{
+				console.log("Failed to get clubs");
+				return;
+			}
+			for (var i = 0;i < data.length;i++)
+			{
+				$('.clubsTable tr:last').after('<tr class="clubsTableRow">' + 
+				'<td>' + data[i].id + '</td>' + '<td>' + data[i].name + '</td>' + 
+				'<td>' + data[i].address['city'] + '</td>' + '<td>' + data[i].email + '</td>' +
+				'<td>' + data[i].phone + '</td>' + '<td>' + data[i].electronicBilling + '</td>' +
+				'<td>' + data[i].signedWaiver + '</td>' + '</tr>');
+			}
 	},
 	
 	fillRecentBookings: function(data)

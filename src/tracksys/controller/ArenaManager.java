@@ -140,6 +140,11 @@ public class ArenaManager {
 		return db.getClubFromName(name);
 	}
 	
+	public List<Club> getAllClubs()
+	{
+		ClubDB db = new ClubDB();
+		return db.getAllClubs();
+	}
 	/**
 	 * Notification methods
 	 */
