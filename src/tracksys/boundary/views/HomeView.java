@@ -57,6 +57,10 @@ public class HomeView {
 			else
 				ServletHandler.writeErr("Not an admin", req, resp);
 		}
+		else if (target.endsWith("submitBooking"))
+		{
+			return this.addBooking(req, resp);
+		}
 		return false;
 	}
 	
@@ -97,6 +101,26 @@ public class HomeView {
 		Date date = new Date();
 		ndb.addNotification(req.getParameter(Resources.NOTIFICATION_TITLE_PARAM), 
 				req.getParameter(Resources.NOTIFICATION_MESSAGE_PARAM), dateFormat.format(date));
+		return true;
+	}
+	
+	/**
+	 * Adds a booking.
+	 * @param req
+	 * @param resp
+	 */
+	public boolean addBooking(HttpServletRequest req, HttpServletResponse resp)
+	{
+		String name = req.getParameter("date");
+		String start = req.getParameter("start");
+		String end = req.getParameter("end");
+		
+		System.out.println(name + " " + start + " " + end);
+		
+		BookingsDB db = new BookingsDB();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		
 		return true;
 	}
 	
