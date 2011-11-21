@@ -40,13 +40,6 @@ var club = {
 						'<span class="date">' + data[i].timestamp + '</span><span class="title">' + data[i].title + '</span>' + 
 						'<span class="message">' + data[i].message + '</span></div></li>');
 			}
-			$(".loginForm input").focus(function() {
-				$(".errorPopup").fadeOut('fast');
-			});
-			$(".loginForm input").keyup(function(k) {
-				if (k.keyCode == '13')
-					register.submit();
-			});
 		},
 		
 		writeFutureBookings: function(data)
@@ -70,13 +63,6 @@ var club = {
 						data[i].endTime + '</td><td>' + 
 						data[i].comment + '</td></tr>');
 			}
-			$(".loginForm input").focus(function() {
-				$(".errorPopup").fadeOut('fast');
-			});
-			$(".loginForm input").keyup(function(k) {
-				if (k.keyCode == '13')
-					register.submit();
-			});
 		},
 		
 		writeHistoricBookings: function(data)
@@ -100,13 +86,6 @@ var club = {
 						data[i].endTime + '</td><td>' + 
 						data[i].comment + '</td></tr>');
 			}
-			$(".loginForm input").focus(function() {
-				$(".errorPopup").fadeOut('fast');
-			});
-			$(".loginForm input").keyup(function(k) {
-				if (k.keyCode == '13')
-					register.submit();
-			});
 		},
 		
 		makeBooking : function()
