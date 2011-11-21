@@ -8,9 +8,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 
 import tracksys.Resources;
-import tracksys.entity.Date;
 import tracksys.entity.Notification;
 import tracksys.entity.Transaction;
 
