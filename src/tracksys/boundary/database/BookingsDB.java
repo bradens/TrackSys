@@ -53,7 +53,7 @@ public class BookingsDB {
 		}
 		catch (Exception e)
 		{
-			System.err.println("Error running database query");
+			e.printStackTrace();
 		}
 	}
 	
@@ -109,7 +109,7 @@ public class BookingsDB {
 		}
 		catch (Exception e)
 		{
-			System.err.println("Error running database query");
+			e.printStackTrace();
 			return null;
 		}
 	}
@@ -137,7 +137,7 @@ public class BookingsDB {
 		}
 		catch (Exception e)
 		{
-			System.err.println("Error running database query");
+			e.printStackTrace();
 			return null;
 		}
 	}
@@ -165,7 +165,7 @@ public class BookingsDB {
 		}
 		catch (Exception e)
 		{
-			System.err.println("Error running database query");
+			e.printStackTrace();
 			return null;
 		}
 	}
