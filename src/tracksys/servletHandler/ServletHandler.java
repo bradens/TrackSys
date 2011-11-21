@@ -24,6 +24,7 @@ public class ServletHandler extends HttpServlet
 		{
 			String target = req.getServletPath();
 			Views baseView = getBaseView(target);
+			resp.setContentType("text/html");
 			switch (baseView)
 			{
 				case ROOT:
@@ -39,7 +40,6 @@ public class ServletHandler extends HttpServlet
 					manager.homeView.handle(req, resp, target);
 					break;
 			}
-			resp.setContentType("text/html");
 			resp.addHeader("Access-Control-Allow-Origin", "http://localhost");	// This is just used to debug, it allows ajax calls from localhost -> localhost
 			resp.addHeader("Access-Control-Allow-Credentials", "true");	// This is just used to debug, it allows ajax calls from localhost -> localhost
 		}

@@ -11,7 +11,6 @@ import java.util.List;
 
 import tracksys.Resources;
 import tracksys.entity.Booking;
-import tracksys.entity.Date;
 
 public class BookingsDB {
 	private Connection conn = null;
@@ -68,8 +67,8 @@ public class BookingsDB {
 	public List<Booking> getRecentBookings()
 	{
 		List<Booking> bookings = new ArrayList<Booking>();
-		String query = "SELECT * FROM tracksys.bookings FULL JOIN tracksys.club ORDER BY bookedTime DESC LIMIT 50";
-		DateFormat d = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		String query = "SELECT * FROM tracksys.bookings JOIN tracksys.club on bookings.clubid=club.id ORDER BY bookedTime DESC LIMIT 50";
+		DateFormat d = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		try {
 			Booking tB;
 			Statement s = conn.createStatement();
@@ -78,7 +77,7 @@ public class BookingsDB {
 			while(rs.next())
 			{
 				tB = new Booking(Integer.parseInt(rs.getString("id")), Integer.parseInt(rs.getString("clubid")), rs.getString("name"), Integer.parseInt(rs.getString("trackid")),
-						Date.convertDate(d.parse(rs.getString("startTime"))), Date.convertDate(d.parse(rs.getString("endTime"))), Date.convertDate(d.parse(rs.getString("bookTime"))), rs.getString("comment"));
+						d.parse(rs.getString("startTime")), d.parse(rs.getString("endTime")), d.parse(rs.getString("bookedTime")), rs.getString("comment"));
 				bookings.add(tB);
 			}
 			return bookings;
@@ -107,7 +106,7 @@ public class BookingsDB {
 			while(rs.next())
 			{
 				tB = new Booking(Integer.parseInt(rs.getString("id")), Integer.parseInt(rs.getString("clubid")), rs.getString("name"), Integer.parseInt(rs.getString("trackid")),
-						Date.convertDate(d.parse(rs.getString("startTime"))), Date.convertDate(d.parse(rs.getString("endTime"))), Date.convertDate(d.parse(rs.getString("bookTime"))), rs.getString("comment"));
+						d.parse(rs.getString("startTime")), d.parse(rs.getString("endTime")), d.parse(rs.getString("bookTime")), rs.getString("comment"));
 				bookings.add(tB);
 			}
 			

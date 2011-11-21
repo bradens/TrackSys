@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tracksys.Resources;
-import tracksys.entity.Date;
 import tracksys.entity.Notification;
 
 public class NotificationsDB {
@@ -56,20 +55,14 @@ public class NotificationsDB {
 		try
 		{
 			Notification tempNot;
-			String resDate, resTime;
 			Statement s = conn.createStatement();
 			s.executeQuery(query);
 			
 			ResultSet rs = s.getResultSet();
 			while(rs.next())
 			{
-				resDate = rs.getString("date").split(" ")[0];
-				resTime = rs.getString("date").split(" ")[1];
-				String[] dateParts = resDate.split("-");
-				String[] timeParts = resTime.split(":");
 				
-				tempNot = new Notification(new Date(dateParts[2], dateParts[1], dateParts[0],
-						timeParts[1], timeParts[0]), rs.getString("title"), rs.getString("message"));
+				tempNot = new Notification(Resources.DATE_FORMAT.parse(rs.getString("date")), rs.getString("title"), rs.getString("message"));
 				notifications.add(tempNot);
 			}
 			return notifications;

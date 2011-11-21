@@ -1,5 +1,5 @@
 package tracksys.entity;
-
+import java.util.Date;
 public class Transaction {
 	private int id;
 	private int clubID;
