@@ -40,7 +40,7 @@ public class ServletHandler extends HttpServlet
 					manager.homeView.handle(req, resp, target);
 					break;
 			}
-			resp.addHeader("Access-Control-Allow-Origin", "http://localhost");	// This is just used to debug, it allows ajax calls from localhost -> localhost
+			resp.addHeader("Access-Control-Allow-Origin", "http://silvia.local");	// This is just used to debug, it allows ajax calls from localhost -> localhost
 			resp.addHeader("Access-Control-Allow-Credentials", "true");	// This is just used to debug, it allows ajax calls from localhost -> localhost
 		}
 	

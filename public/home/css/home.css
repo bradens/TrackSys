@@ -68,7 +68,6 @@ div.leftAccordion {
 	background-color: rgba(200, 200, 255, .5);
 	box-shadow: 0px 1px 4px 4px rgba(200,200,255, .3);
 	-webkit-transition: background-color .15s ease-in;
-	white-space:nowrap;
 }
 
 .notification:hover {
