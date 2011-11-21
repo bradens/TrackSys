@@ -92,10 +92,8 @@ public class BookingsDB {
 	/* Retrieve a list of bookings from the database by ID */
 	public List<Booking> getBookingsByClubID(int ID)
 	{
-		String query = "SELECT * FROM tracksys.bookings FULL JOIN tracksys.club WHERE clubid=\'" + ID + "\' ORDER BY bookedTime";
+		String query = "SELECT * FROM tracksys.bookings JOIN tracksys.club on bookings.clubid=club.id WHERE clubid=\'" + ID + "\' ORDER BY bookedTime";
 		List<Booking> bookings = new ArrayList<Booking>();
-		DateFormat d = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		
 		try
 		{
 			Statement s = conn.createStatement();
@@ -106,7 +104,7 @@ public class BookingsDB {
 			while(rs.next())
 			{
 				tB = new Booking(Integer.parseInt(rs.getString("id")), Integer.parseInt(rs.getString("clubid")), rs.getString("name"), Integer.parseInt(rs.getString("trackid")),
-						d.parse(rs.getString("startTime")), d.parse(rs.getString("endTime")), d.parse(rs.getString("bookTime")), rs.getString("comment"));
+						Resources.DATE_FORMAT.parse(rs.getString("startTime")), Resources.DATE_FORMAT.parse(rs.getString("endTime")), Resources.DATE_FORMAT.parse(rs.getString("bookTime")), rs.getString("comment"));
 				bookings.add(tB);
 			}
 			

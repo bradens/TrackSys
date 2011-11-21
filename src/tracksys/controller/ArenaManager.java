@@ -1,15 +1,24 @@
 package tracksys.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import tracksys.Resources;
+import tracksys.boundary.database.BookingsDB;
 import tracksys.boundary.database.ClubDB;
+import tracksys.boundary.database.NotificationsDB;
 import tracksys.boundary.views.HomeView;
 import tracksys.boundary.views.LoginView;
 import tracksys.boundary.views.RegistrationView;
+import tracksys.entity.Booking;
 import tracksys.entity.Club;
+import tracksys.entity.Notification;
 import tracksys.servletHandler.ServletHandler;
 
 public class ArenaManager {
@@ -100,6 +109,11 @@ public class ArenaManager {
 		return ref;
 	}
 	
+	/**
+	 * Club methods.
+	 * @param club
+	 */
+	
 	public void AddNewClub(Club club)
 	{
 		ClubDB db = new ClubDB();
@@ -116,5 +130,32 @@ public class ArenaManager {
 	{
 		ClubDB db = new ClubDB();
 		return db.getClubFromName(name);
+	}
+	
+	/**
+	 * Notification methods
+	 */
+	public List<Notification> getNotifications()
+	{
+		NotificationsDB ndb = new NotificationsDB();
+		List<Notification> notifications = ndb.getNotifications();
+		return notifications;
+	}
+	
+	public void addNotification(String title, String message)
+	{
+		NotificationsDB ndb = new NotificationsDB();
+		Date date = new Date();
+		ndb.addNotification(title, message, Resources.DATE_FORMAT.format(date));
+	}
+	
+	/**
+	 * Bookings methods
+	 */
+	public List<Booking> getRecentBookings()
+	{
+		BookingsDB bdb = new BookingsDB();
+		List<Booking> bookings = bdb.getRecentBookings();
+		return bookings;
 	}
 }

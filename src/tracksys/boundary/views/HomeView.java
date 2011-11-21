@@ -72,8 +72,7 @@ public class HomeView {
 	
 	public boolean getRecentBookings(HttpServletRequest req, HttpServletResponse resp)
 	{
-		BookingsDB bdb = new BookingsDB();
-		List<Booking> bookings = bdb.getRecentBookings();
+		List<Booking> bookings = manager.getRecentBookings();
 		Gson g = new Gson();
 		String s = g.toJson(bookings);
 		resp.setContentType("application/json");
@@ -88,9 +87,9 @@ public class HomeView {
 	 */
 	public boolean getNotifications(HttpServletRequest req, HttpServletResponse resp)
 	{
-		NotificationsDB ndb = new NotificationsDB();
-		List<Notification> notifications = ndb.getNotifications();
+		List<Notification> notifications = manager.getNotifications();
 		Gson g = new Gson();
+		resp.setContentType("application/json");
 		String s = g.toJson(notifications);
 		ServletHandler.writeResponse(s, resp);
 		return true;
@@ -103,11 +102,8 @@ public class HomeView {
 	 */
 	public boolean addNotification(HttpServletRequest req, HttpServletResponse resp)
 	{
-		NotificationsDB ndb = new NotificationsDB();
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		Date date = new Date();
-		ndb.addNotification(req.getParameter(Resources.NOTIFICATION_TITLE_PARAM), 
-				req.getParameter(Resources.NOTIFICATION_MESSAGE_PARAM), dateFormat.format(date));
+		manager.addNotification(req.getParameter(Resources.NOTIFICATION_TITLE_PARAM), 
+				req.getParameter(Resources.NOTIFICATION_MESSAGE_PARAM));
 		return true;
 	}
 	
