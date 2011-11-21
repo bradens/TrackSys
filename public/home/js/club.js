@@ -16,6 +16,17 @@ var club = {
 			
 			// Initialize all date pickers here
 			$('#datepicker').datepicker({ dateFormat: 'yy-mm-dd' });
+			
+			$(".loginForm input").focus(function() {
+				$(".errorPopup").fadeOut('fast');
+			});
+			$(".loginForm input").keyup(function(k) {
+				if (k.keyCode == '13')
+					register.submit();
+			});
+			
+			// get all transactions
+			this.getTransactions();
 		},
 		makeBooking : function()
 		{
@@ -55,11 +66,5 @@ var club = {
 }
 
 function init() {
-	$(".loginForm input").focus(function() {
-		$(".errorPopup").fadeOut('fast');
-	});
-	$(".loginForm input").keyup(function(k) {
-		if (k.keyCode == '13')
-			register.submit();
-	});
+	
 }

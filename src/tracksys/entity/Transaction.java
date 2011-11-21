@@ -7,12 +7,12 @@ public class Transaction {
 	private Date paymentTime;
 	private String comment;
 	
-	public Transaction(int id, int clubID, float payment, Date start, Date end, Date submitted, Date received, String comment)
+	public Transaction(int id, int clubID, float payment, Date time, String comment)
 	{
 		this.id = id;
 		this.clubID = clubID;
 		this.paymentFee = payment;
-		this.paymentTime = submitted;
+		this.paymentTime = time;
 		this.comment = comment;
 	}
 	
