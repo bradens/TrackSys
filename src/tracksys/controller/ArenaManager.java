@@ -176,4 +176,18 @@ public class ArenaManager {
 		List<Booking> bookings = bdb.getRecentBookings();
 		return bookings;
 	}
+	
+	public void addBooking(Booking booking)
+	{
+		
+		BookingsDB db = new BookingsDB();
+		try 
+		{
+			db.insertBooking(booking);
+		}
+		catch (Exception e)
+		{
+			System.out.println("Error inserting new booking");
+		}
+	}
 }
