@@ -168,6 +168,7 @@ public class HomeView {
 		int clubID = manager.getClubIDFromCookie(req);
 		List<Transaction> transactions = manager.getTransactions(clubID);
 		Gson g = new Gson();
+		resp.setContentType("application/json");
 		String s = g.toJson(transactions);
 		ServletHandler.writeResponse(s, resp);
 		return true;
