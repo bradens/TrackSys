@@ -22,8 +22,9 @@ var club = {
 			var date = $("#datepicker").val();
 			var start = $("#startTimeSelect").val();
 			var end = $("#endTimeSelect").val();
+			var comment = $("#commentInputBox").val();
 			
-			CommHandler.doPost(SERVER_LOC+PORT+"/home/submitBooking", { date: date, start: start, end: end}, club.bookingSuccess);
+			CommHandler.doPost(SERVER_LOC+PORT+"/home/submitBooking", { date: date, start: start, end: end, comment: comment}, club.bookingSuccess);
 		},
 		bookingSuccess : function(data)
 		{

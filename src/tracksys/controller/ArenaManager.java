@@ -114,8 +114,7 @@ public class ArenaManager {
 	public int getClubIDFromCookie(HttpServletRequest req)
 	{
 		Cookie c = ArenaManager.getCookie(Resources.COOKIE_CLUBID, req);
-		Club reqClub = this.getClubID(Integer.parseInt(c.getValue()));
-		return reqClub.getID();
+		return Integer.parseInt(c.getValue());
 	}
 	
 	/**
