@@ -33,13 +33,12 @@ var admin = {
 		var title = $(".titleInput").val();
 		var message = $(".notifInput").val();
 		CommHandler.doPost(SERVER_LOC+PORT+"/home/addNotification", {title: title, message: message}, this._notificationAdded);
+		$(".titleInput").val("");
+		$(".notifInput").val("");
 	},
 	
 	_notificationAdded: function(data)
 	{
 		console.log("Successfully added notification.");
 	}
-	
-	
-	
 }

@@ -8,9 +8,13 @@ div.BannerWrap {
 	color: #666;
 	text-shadow: 0px 2px 3px #BBB;
 	font-size:30px;
-	width:220px;
+	width: 94%;
 	padding: 3px;
 	margin:0px auto 0 10px;
+}
+
+.logoutBtn {
+	float:right;
 }
 
 .column {

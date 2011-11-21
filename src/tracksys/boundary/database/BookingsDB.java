@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,7 +66,6 @@ public class BookingsDB {
 	{
 		List<Booking> bookings = new ArrayList<Booking>();
 		String query = "SELECT * FROM tracksys.bookings JOIN tracksys.club on bookings.clubid=club.id ORDER BY bookedTime DESC LIMIT 50";
-		DateFormat d = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		try {
 			Booking tB;
 			Statement s = conn.createStatement();
@@ -77,7 +74,7 @@ public class BookingsDB {
 			while(rs.next())
 			{
 				tB = new Booking(Integer.parseInt(rs.getString("id")), Integer.parseInt(rs.getString("clubid")), rs.getString("name"), Integer.parseInt(rs.getString("trackid")),
-						d.parse(rs.getString("startTime")), d.parse(rs.getString("endTime")), d.parse(rs.getString("bookedTime")), rs.getString("comment"));
+						Resources.DATE_FORMAT.parse(rs.getString("startTime")), Resources.DATE_FORMAT.parse(rs.getString("endTime")), Resources.DATE_FORMAT.parse(rs.getString("bookedTime")), rs.getString("comment"));
 				bookings.add(tB);
 			}
 			return bookings;
