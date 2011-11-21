@@ -43,7 +43,9 @@ public class LoginView {
 		// Delete the login cookie
 		Cookie c = ArenaManager.getCookie(Resources.COOKIE_CLUBID, req);
 		c.setMaxAge(0);
+		c.setPath("/");
 		resp.addCookie(c);
+		ServletHandler.writeResponse("true", resp);
 		return false;
 	}
 	
