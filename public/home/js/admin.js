@@ -19,11 +19,6 @@ var admin = {
 	
 	fillRecentBookings: function(data)
 	{
-		if (!data)
-		{
-			console.log(err);
-			return;
-		}
 		for (var i = 0;i < data.length;i++)
 		{
 			$('.recentBookingTable tr:last').after('<tr class="recentBookingRow">' + 

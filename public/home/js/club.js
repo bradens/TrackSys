@@ -34,6 +34,16 @@ var club = {
 						'<span class="date">' + data[i].timestamp + '</span><span class="title">' + data[i].title + '</span>' + 
 						'<span class="message">' + data[i].message + '</span></div></li>');
 			}
+			$(".loginForm input").focus(function() {
+				$(".errorPopup").fadeOut('fast');
+			});
+			$(".loginForm input").keyup(function(k) {
+				if (k.keyCode == '13')
+					register.submit();
+			});
+			
+			// get all transactions
+			this.getTransactions();
 		},
 		
 		makeBooking : function()
@@ -75,11 +85,5 @@ var club = {
 }
 
 function init() {
-	$(".loginForm input").focus(function() {
-		$(".errorPopup").fadeOut('fast');
-	});
-	$(".loginForm input").keyup(function(k) {
-		if (k.keyCode == '13')
-			register.submit();
-	});
+	
 }
