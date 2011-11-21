@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.google.gson.*;
@@ -15,6 +16,7 @@ import tracksys.boundary.database.NotificationsDB;
 import tracksys.boundary.database.TransactionsDB;
 import tracksys.controller.ArenaManager;
 import tracksys.entity.Booking;
+import tracksys.entity.Club;
 import tracksys.entity.Notification;
 import tracksys.entity.Transaction;
 import tracksys.servletHandler.ServletHandler;
@@ -133,8 +135,8 @@ public class HomeView {
 	 */
 	public boolean getTransactions(HttpServletRequest req, HttpServletResponse resp)
 	{
-		TransactionsDB tdb = new TransactionsDB();
-		List<Transaction> transactions = tdb.getTransactions();
+		int clubID = manager.getClubIDFromCookie(req);
+		List<Transaction> transactions = manager.getTransactions(clubID);
 		Gson g = new Gson();
 		String s = g.toJson(transactions);
 		ServletHandler.writeResponse(s, resp);

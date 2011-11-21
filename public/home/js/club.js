@@ -34,9 +34,23 @@ var club = {
 				$(".errorPopup").fadeIn('fast');
 			}
 		},
-		getTransactions: function()
+		getTransactions : function()
 		{
-			//CommHandler.doPost(SERVER_LOC+PORT+"/home/getTransactions", , );
+			CommHandler.doPost(SERVER_LOC+PORT+"/home/getTransactions", null, this.fillTransactionsTable);
+		},
+		fillTransactionsTable : function(data)
+		{
+			if (!data)
+			{
+				console.log(err);
+				return;
+			}
+			for (var i = 0;i < data.length;i++)
+			{
+				$('.transactionTable tr:last').after('<tr class="transactionTableRow">' + 
+					'<td>' + data[i].id + '</td>' + '<td>' + data[i].paymentFee + '</td>' + 
+					'<td>' + data[i].paymentTime + '</td>' + '<td>' + data[i].comment + '</tr>');
+			}
 		}
 }
 
