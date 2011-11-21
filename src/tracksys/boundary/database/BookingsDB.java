@@ -36,9 +36,9 @@ public class BookingsDB {
 		
 		query += "\'" + booking.getClubID() + "\', ";
 		query += "\'" + booking.getTrackID() + "\', ";
-		query += "\'" + booking.getStartTime() + "\', ";
-		query += "\'" + booking.getEndTime() + "\', ";
-		query += "\'" + booking.getBookedTime() + "\', ";
+		query += "\'" + Resources.DATE_FORMAT.format(booking.getStartTime()) + "\', ";
+		query += "\'" + Resources.DATE_FORMAT.format(booking.getEndTime()) + "\', ";
+		query += "\'" + Resources.DATE_FORMAT.format(booking.getBookedTime()) + "\', ";
 		query += "\'" + booking.getComment() + "\')";
 		
 		return query;

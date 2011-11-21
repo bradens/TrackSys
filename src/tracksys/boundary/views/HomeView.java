@@ -118,9 +118,6 @@ public class HomeView {
 		String start = req.getParameter("start");
 		String end = req.getParameter("end");
 		
-		System.out.println(date + " " + start + " " + end);
-		
-		BookingsDB db = new BookingsDB();
 		try 
 		{
 			Date startDate = Resources.DATE_FORMAT.parse(date + " " + start + ":00");
@@ -128,18 +125,16 @@ public class HomeView {
 			Date stamp = new Date();
 			Resources.DATE_FORMAT.format(stamp);
 			
-			System.out.println(date + " " + start + ":00");
-			System.out.println(endDate.toString());
-			
 			Booking booking = new Booking(0, "name", 1, startDate, endDate, stamp, "Comment");
-			db.insertBooking(booking);
+			manager.addBooking(booking);
+			ServletHandler.writeResponse("true", resp);
 		}
 		catch (Exception e)
 		{
 			System.out.println("Error creating booking date");
+			ServletHandler.writeResponse("false", resp);
 		}
 		
-		ServletHandler.writeResponse("true", resp);
 		return true;
 	}
 	
