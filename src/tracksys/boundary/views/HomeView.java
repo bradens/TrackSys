@@ -1,16 +1,13 @@
 package tracksys.boundary.views;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import tracksys.Resources;
-import tracksys.boundary.database.BookingsDB;
-import tracksys.boundary.database.TransactionsDB;
 import tracksys.controller.ArenaManager;
 import tracksys.entity.Booking;
 import tracksys.entity.Notification;
@@ -117,6 +114,7 @@ public class HomeView {
 		String date = req.getParameter("date");
 		String start = req.getParameter("start");
 		String end = req.getParameter("end");
+		String comment = req.getParameter("comment");
 		
 		try 
 		{
@@ -125,7 +123,11 @@ public class HomeView {
 			Date stamp = new Date();
 			Resources.DATE_FORMAT.format(stamp);
 			
-			Booking booking = new Booking(0, "name", 1, startDate, endDate, stamp, "Comment");
+			Random generator = new Random();
+			int track = generator.nextInt(8) + 1;
+			int clubid = manager.getClubIDFromCookie(req);
+			
+			Booking booking = new Booking(clubid, "", track, startDate, endDate, stamp, comment);
 			manager.addBooking(booking);
 			ServletHandler.writeResponse("true", resp);
 		}
@@ -144,8 +146,8 @@ public class HomeView {
 	 */
 	public boolean getTransactions(HttpServletRequest req, HttpServletResponse resp)
 	{
-		TransactionsDB tdb = new TransactionsDB();
-		List<Transaction> transactions = tdb.getTransactions();
+		int clubID = manager.getClubIDFromCookie(req);
+		List<Transaction> transactions = manager.getTransactions(clubID);
 		Gson g = new Gson();
 		String s = g.toJson(transactions);
 		ServletHandler.writeResponse(s, resp);

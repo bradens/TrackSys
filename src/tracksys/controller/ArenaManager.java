@@ -13,12 +13,14 @@ import tracksys.Resources;
 import tracksys.boundary.database.BookingsDB;
 import tracksys.boundary.database.ClubDB;
 import tracksys.boundary.database.NotificationsDB;
+import tracksys.boundary.database.TransactionsDB;
 import tracksys.boundary.views.HomeView;
 import tracksys.boundary.views.LoginView;
 import tracksys.boundary.views.RegistrationView;
 import tracksys.entity.Booking;
 import tracksys.entity.Club;
 import tracksys.entity.Notification;
+import tracksys.entity.Transaction;
 import tracksys.servletHandler.ServletHandler;
 
 public class ArenaManager {
@@ -109,6 +111,12 @@ public class ArenaManager {
 		return ref;
 	}
 	
+	public int getClubIDFromCookie(HttpServletRequest req)
+	{
+		Cookie c = ArenaManager.getCookie(Resources.COOKIE_CLUBID, req);
+		return Integer.parseInt(c.getValue());
+	}
+	
 	/**
 	 * Club methods.
 	 * @param club
@@ -149,6 +157,15 @@ public class ArenaManager {
 		ndb.addNotification(title, message, Resources.DATE_FORMAT.format(date));
 	}
 	
+	/**
+	 * Transaction methods
+	 */
+	public List<Transaction> getTransactions(int clubID)
+	{
+		TransactionsDB tdb = new TransactionsDB();
+		List<Transaction> transactions = tdb.getTransactions(clubID);
+		return transactions;
+	}
 	/**
 	 * Bookings methods
 	 */

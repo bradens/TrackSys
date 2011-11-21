@@ -6,11 +6,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 
 import tracksys.Resources;
-import tracksys.entity.Notification;
+import tracksys.entity.Club;
 import tracksys.entity.Transaction;
 
 
@@ -31,11 +34,11 @@ public class TransactionsDB {
 	 * Get all past transactions.
 	 * @return
 	 */
-	public List<Transaction> getTransactions()
+	public List<Transaction> getTransactions(int clubID)
 	{
 		List<Transaction> transaction = new ArrayList<Transaction>();
-		//make a real query to do stuff and stuff
-		String query = "";
+		String query = "SELECT * FROM tracksys.transactions WHERE clubid='" + clubID + "' ORDER BY date DESC LIMIT 100;";
+		DateFormat d = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		
 		try
 		{
