@@ -1,5 +1,5 @@
 package tracksys.entity;
-
+import java.util.Date;
 public class Notification {
 	private Date timestamp;
 	private String title;

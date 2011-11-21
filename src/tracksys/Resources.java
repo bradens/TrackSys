@@ -1,5 +1,8 @@
 package tracksys;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 /**
  * Static Resources class.  Put your global strings and enums here.
  *
@@ -16,4 +19,5 @@ public class Resources {
 	public static String database = "jdbc:mysql://bradensimpson.com";
 	public static String NOTIFICATION_TITLE_PARAM = "title";
 	public static String NOTIFICATION_MESSAGE_PARAM = "message";
+	public static DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 }

@@ -1,4 +1,5 @@
 package tracksys.entity;
+import java.util.Date;
 
 public class Booking {
 	private int id;

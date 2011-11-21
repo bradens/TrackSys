@@ -66,6 +66,7 @@ public class HomeView {
 		List<Booking> bookings = bdb.getRecentBookings();
 		Gson g = new Gson();
 		String s = g.toJson(bookings);
+		resp.setContentType("application/json");
 		ServletHandler.writeResponse(s, resp);
 		return true;
 	}

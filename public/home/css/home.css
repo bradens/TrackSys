@@ -71,5 +71,5 @@ table tbody tr:nth-child(odd) {
 }
 table tbody tr:hover {
     background-color:lightblue;
-    color: #369;
+    color: #333;
 }
