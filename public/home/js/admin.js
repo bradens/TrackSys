@@ -14,11 +14,28 @@ var admin = {
 		// Right pane init
 		$("#rightTabs").tabs();
 		
+		// Get all the notifications
+		CommHandler.doPost(SERVER_LOC+PORT+"/home/getNotifications", null, this.writeNotifications);
 		CommHandler.doPost(SERVER_LOC+PORT+"/home/getRecentBookings", null, this.fillRecentBookings);
 		CommHandler.doPost(SERVER_LOC+PORT+"/home/getAllClubs", null, this.writeClubsList);
 	},
 	
-	writeClubsList: function(data)
+	writeNotifications : function(data)
+	{
+		if (!data)
+		{
+			console.log("Failed to get notifications");
+			return;
+		}
+		for (var i = 0;i < data.length;i++)
+		{
+			$('.notificationsBox').append('<li><div class="notification">' +
+					'<span class="date">' + data[i].timestamp + '</span><span class="title">' + data[i].title + '</span>' + 
+					'<span class="message">' + data[i].message + '</span></div></li>');
+		}
+	},
+
+	writeClubsList : function(data)
 	{
 		if (!data)
 			{
