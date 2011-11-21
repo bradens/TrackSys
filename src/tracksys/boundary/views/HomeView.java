@@ -118,16 +118,32 @@ public class HomeView {
 	 */
 	public boolean addBooking(HttpServletRequest req, HttpServletResponse resp)
 	{
-		String name = req.getParameter("date");
+		String date = req.getParameter("date");
 		String start = req.getParameter("start");
 		String end = req.getParameter("end");
 		
-		System.out.println(name + " " + start + " " + end);
+		System.out.println(date + " " + start + " " + end);
 		
 		BookingsDB db = new BookingsDB();
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		Date date = new Date();
+		try 
+		{
+			Date startDate = Resources.DATE_FORMAT.parse(date + " " + start + ":00");
+			Date endDate = Resources.DATE_FORMAT.parse(date + " " + end + ":00");
+			Date stamp = new Date();
+			Resources.DATE_FORMAT.format(stamp);
+			
+			System.out.println(date + " " + start + ":00");
+			System.out.println(endDate.toString());
+			
+			Booking booking = new Booking(0, "name", 1, startDate, endDate, stamp, "Comment");
+			db.insertBooking(booking);
+		}
+		catch (Exception e)
+		{
+			System.out.println("Error creating booking date");
+		}
 		
+		ServletHandler.writeResponse("true", resp);
 		return true;
 	}
 	

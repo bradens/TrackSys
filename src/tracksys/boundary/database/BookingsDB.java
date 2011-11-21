@@ -51,6 +51,7 @@ public class BookingsDB {
 		try
 		{
 			Statement s = conn.createStatement();
+			System.out.println(query);
 			s.executeUpdate(query);
 		}
 		catch (Exception e)
