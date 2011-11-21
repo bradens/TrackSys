@@ -19,6 +19,9 @@ var club = {
 			
 			// Get all the notifications
 			CommHandler.doPost(SERVER_LOC+PORT+"/home/getNotifications", null, this.writeNotifications);
+			
+			// Get all the bookings
+			CommHandler.doPost(SERVER_LOC+PORT+"/home/getFutureBookings", null, this.writeFutureBookings);
 		},
 		
 		writeNotifications: function(data)
@@ -33,6 +36,39 @@ var club = {
 				$('.notificationsBox').append('<li><div class="notification">' +
 						'<span class="date">' + data[i].timestamp + '</span><span class="title">' + data[i].title + '</span>' + 
 						'<span class="message">' + data[i].message + '</span></div></li>');
+			}
+			$(".loginForm input").focus(function() {
+				$(".errorPopup").fadeOut('fast');
+			});
+			$(".loginForm input").keyup(function(k) {
+				if (k.keyCode == '13')
+					register.submit();
+			});
+			
+			// get all transactions
+			this.getTransactions();
+		},
+		
+		writeFutureBookings: function(data)
+		{
+			if (!data)
+			{
+				console.log("Failed to get future bookings");
+				return;
+			}
+			$('#futureBookings').append('<tr class="header">' + 
+											'<th>Track</th>' +
+											'<th>Start Time</th>' + 
+											'<th>End Time</th>' +
+											'<th>Comment</th>' +
+											'</tr>');
+			for (var i = 0;i < data.length;i++)
+			{
+				$('#futureBookings').append('<tr class="transactionTableRow"><td>' +
+						data[i].trackID + '</td><td>' + 
+						data[i].startTime + '</td><td>' + 
+						data[i].endTime + '</td><td>' + 
+						data[i].comment + '</td></tr>');
 			}
 			$(".loginForm input").focus(function() {
 				$(".errorPopup").fadeOut('fast');

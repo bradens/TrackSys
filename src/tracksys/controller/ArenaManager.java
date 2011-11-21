@@ -176,6 +176,13 @@ public class ArenaManager {
 		return bookings;
 	}
 	
+	public List<Booking> getFutureBookings(int ID)
+	{
+		BookingsDB bdb = new BookingsDB();
+		List<Booking> bookings = bdb.getFutureBookingsByClubID(ID);
+		return bookings;
+	}
+	
 	public void addBooking(Booking booking)
 	{
 		
