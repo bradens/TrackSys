@@ -31,6 +31,24 @@ public class LoginView {
 			boolean success = this.submitLogin(req, resp);
 			return success;
 		}
+		else if (target.endsWith("logout"))
+		{
+			return this.logout(req, resp);
+		}
+		return false;
+	}
+	
+	public boolean logout(HttpServletRequest req, HttpServletResponse resp)
+	{
+		// Delete the login cookie
+		Cookie c = ArenaManager.getCookie(Resources.COOKIE_CLUBID, req);
+		if (c!=null)
+		{
+			c.setMaxAge(0);
+			c.setPath("/");
+			resp.addCookie(c);
+		}
+		ServletHandler.writeResponse("true", resp);
 		return false;
 	}
 	

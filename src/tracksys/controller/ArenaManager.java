@@ -140,13 +140,12 @@ public class ArenaManager {
 		return db.getClubFromName(name);
 	}
 	
-	public List<Club> getClubs()
+	public List<Club> getAllClubs()
 	{
 		ClubDB db = new ClubDB();
-		List<Club> rgClubs = db.getClubs();
-		return  rgClubs;
+		return db.getAllClubs();
 	}
-	
+
 	/**
 	 * Notification methods
 	 */
@@ -180,6 +179,20 @@ public class ArenaManager {
 	{
 		BookingsDB bdb = new BookingsDB();
 		List<Booking> bookings = bdb.getRecentBookings();
+		return bookings;
+	}
+	
+	public List<Booking> getFutureBookings(int ID)
+	{
+		BookingsDB bdb = new BookingsDB();
+		List<Booking> bookings = bdb.getFutureBookingsByClubID(ID);
+		return bookings;
+	}
+	
+	public List<Booking> getHistoricBookings(int ID)
+	{
+		BookingsDB bdb = new BookingsDB();
+		List<Booking> bookings = bdb.getHistoricBookingsByClubID(ID);
 		return bookings;
 	}
 	

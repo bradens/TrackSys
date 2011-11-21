@@ -61,16 +61,21 @@ public class HomeView {
 			else
 				ServletHandler.writeErr("Not an admin", req, resp);
 		}
-		else if (target.endsWith("getAllClubs"))
-		{
-			if (manager.isAdmin(req))
-				return this.getClubs(req, resp);
-			else
-				ServletHandler.writeErr("Not an admin", req, resp);
-		}
 		else if (target.endsWith("submitBooking"))
 		{
 			return this.addBooking(req, resp);
+		}
+		else if (target.endsWith("getFutureBookings"))
+		{
+			return this.getFutureBookings(req, resp);
+		}
+		else if (target.endsWith("getHistoricBookings"))
+		{
+			return this.getHistoricBookings(req, resp);
+		}
+		else if (target.endsWith("getAllClubs"))
+		{
+			return this.getAllClubs(req, resp);
 		}
 		return false;
 	}
@@ -85,17 +90,6 @@ public class HomeView {
 		return true;
 	}
 	
-	////////////////////////////////////////////////////////////////////////////////
-	// Get all clubs
-	public boolean getClubs(HttpServletRequest req, HttpServletResponse resp)
-	{
-		List<Club> clubs = manager.getClubs();
-		Gson g = new Gson();
-		String s = g.toJson(clubs);
-		resp.setContentType("application/json");
-		ServletHandler.writeResponse(s, resp);
-		return true;
-	}
 	
 	/**
 	 * Returns a JSON encoded response of the first 100 notifications.
@@ -105,6 +99,36 @@ public class HomeView {
 	public boolean getNotifications(HttpServletRequest req, HttpServletResponse resp)
 	{
 		List<Notification> notifications = manager.getNotifications();
+		Gson g = new Gson();
+		resp.setContentType("application/json");
+		String s = g.toJson(notifications);
+		ServletHandler.writeResponse(s, resp);
+		return true;
+	}
+	
+	/**
+	 * Returns a JSON encoded response of the future bookings.
+	 * @param req
+	 * @param resp
+	 */
+	public boolean getFutureBookings(HttpServletRequest req, HttpServletResponse resp)
+	{
+		List<Booking> notifications = manager.getFutureBookings(manager.getClubIDFromCookie(req));
+		Gson g = new Gson();
+		resp.setContentType("application/json");
+		String s = g.toJson(notifications);
+		ServletHandler.writeResponse(s, resp);
+		return true;
+	}
+	
+	/**
+	 * Returns a JSON encoded response of the future bookings.
+	 * @param req
+	 * @param resp
+	 */
+	public boolean getHistoricBookings(HttpServletRequest req, HttpServletResponse resp)
+	{
+		List<Booking> notifications = manager.getHistoricBookings(manager.getClubIDFromCookie(req));
 		Gson g = new Gson();
 		resp.setContentType("application/json");
 		String s = g.toJson(notifications);
@@ -169,7 +193,17 @@ public class HomeView {
 		int clubID = manager.getClubIDFromCookie(req);
 		List<Transaction> transactions = manager.getTransactions(clubID);
 		Gson g = new Gson();
+		resp.setContentType("application/json");
 		String s = g.toJson(transactions);
+		ServletHandler.writeResponse(s, resp);
+		return true;
+	}
+	public boolean getAllClubs(HttpServletRequest req, HttpServletResponse resp)
+	{
+		List<Club> clubs = manager.getAllClubs();
+		Gson g = new Gson();
+		resp.setContentType("application/json");
+		String s = g.toJson(clubs);
 		ServletHandler.writeResponse(s, resp);
 		return true;
 	}

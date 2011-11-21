@@ -87,6 +87,32 @@ public class ClubDB {
 			System.err.println("Error running database query");
 		}
 	}
+	/* Get all clubs from the database */
+	public List<Club> getAllClubs()
+	{
+		List<Club> clubs = new ArrayList<Club>();
+		String query = "SELECT * From " + table;
+		try
+		{
+			Club tempClub;
+			Statement s = conn.createStatement();
+			s.executeQuery(query);
+			
+			ResultSet rs = s.getResultSet();
+			while(rs.next())
+			{
+				Address tempAddress = new Address(rs.getString("street"), rs.getString("city"), rs.getString("province"), "", rs.getString("postal"));
+				tempClub = new Club(rs.getInt("id"), rs.getString("name"), rs.getString("passwd"), tempAddress, rs.getString("email"), rs.getString("phone"),false,false, rs.getInt("admin"));
+				clubs.add(tempClub);
+			}
+			return clubs;
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+	}
 	
 	/* Retrieve a club from the database by ID */
 	public Club getClubFromID(int ID)
@@ -130,34 +156,6 @@ public class ClubDB {
 			Club club = new Club(rs.getInt("id"), rs.getString("name"), rs.getString("passwd"), address, rs.getString("name"), rs.getString("name"), false, false, rs.getInt("admin"));
 			return club;
 			
-		}
-		catch (Exception e)
-		{
-			System.err.println("Error running database query");
-			return null;
-		}
-	}
-	
-	/* Get all clubs */
-	public List<Club> getClubs()
-	{
-		List<Club> rgClubs = new ArrayList<Club>(); 
-				
-		String query = "SELECT * FROM " + table;
-		
-		try
-		{
-			Statement s = conn.createStatement();
-			s.executeQuery(query);
-			ResultSet rs = s.getResultSet();
-			while(rs.next())
-			{
-				Address address = new Address(rs.getString("street"), rs.getString("city"), rs.getString("province"), rs.getString("phone"), rs.getString("postal"));
-				Club club = new Club(rs.getInt("id"), rs.getString("name"), rs.getString("passwd"), address, rs.getString("email"), rs.getString("phone"), false, false, rs.getInt("admin"));
-				rgClubs.add(club);
-			}
-			
-			return rgClubs;
 		}
 		catch (Exception e)
 		{

@@ -3,7 +3,7 @@
  */
 
 /* Payment tab stuff */
-.paymentColumn {
+.paymentRow {
 	background-color:#FFFFFF;
 	text-shadow: 0px 1px 0px #FFF;
 	display: inline-block;
@@ -13,22 +13,23 @@
 	padding: 2px 2px 2px 2px;
 	box-shadow: 0px 1px 4px 4px rgba(200,200,255, .7);
 }
-div.paymentLeftColumnWrap {
-	width: 55%;
-	height: 100%;
-	min-width: 55%;
+div.paymentTopRowWrap {
+	width: 100%;
+	height: 70%;
+	min-width: 70%;
 }
-div.paymentLeftColumn {
+div.paymentTopRow {
 	float: left;
 	width: 100%;
 	height: 100%;
 }
-div.paymentRightColumnWrap {
-	width: 40%;
-	height: 100%;
-	min-width: 40%;
+div.paymentBottomRowWrap {
+	width: 100%;
+	height: 25%;
+	min-width: 25%;
+	margin-top: 20px;
 }
-div.paymentRightColumn {
+div.paymentBottomRow {
 	float: left;
 	width: 100%;
 	height: 100%;

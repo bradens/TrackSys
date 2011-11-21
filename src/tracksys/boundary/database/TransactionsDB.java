@@ -31,7 +31,7 @@ public class TransactionsDB {
 	public List<Transaction> getTransactions(int clubID)
 	{
 		List<Transaction> transaction = new ArrayList<Transaction>();
-		String query = "SELECT * FROM tracksys.transactions WHERE clubid='" + clubID + "' ORDER BY date DESC LIMIT 100;";
+		String query = "SELECT * FROM tracksys.transactions WHERE clubid='" + clubID + "' ORDER BY paymenttime DESC LIMIT 100";
 		
 		try
 		{
@@ -42,7 +42,6 @@ public class TransactionsDB {
 			ResultSet rs = s.getResultSet();
 			while(rs.next())
 			{
-				//make this do stuff and stuff
 				tempTrans = new Transaction(Integer.parseInt(rs.getString("id")),Integer.parseInt(rs.getString("clubid")),Float.parseFloat(rs.getString("paymentfee")),Resources.DATE_FORMAT.parse(rs.getString("paymenttime")), rs.getString("comment"));
 				transaction.add(tempTrans);
 			}

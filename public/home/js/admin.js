@@ -14,12 +14,58 @@ var admin = {
 		// Right pane init
 		$("#rightTabs").tabs();
 		
+		// Get all the notifications
+		CommHandler.doPost(SERVER_LOC+PORT+"/home/getNotifications", null, this.writeNotifications);
+		$(".loadingNotifications").show('fast');
 		CommHandler.doPost(SERVER_LOC+PORT+"/home/getRecentBookings", null, this.fillRecentBookings);
-		CommHandler.doPost(SERVER_LOC+PORT+"/home/getAllClubs"		, null, this.fillClubs);
+		$(".loadingBookings").show('fast');
+		CommHandler.doPost(SERVER_LOC+PORT+"/home/getAllClubs", null, this.writeClubsList);
+		$(".loadingClubs").show('fast');
+
+	},
+	
+	writeNotifications : function(data)
+	{
+		if (!data)
+		{
+			console.log("Failed to get notifications");
+			return;
+		}
+		$(".loadingNotifications").hide('fast');
+		for (var i = 0;i < data.length;i++)
+		{
+			$('.notificationsBox').append('<li><div class="notification">' +
+					'<span class="date">' + data[i].timestamp + '</span><span class="title">' + data[i].title + '</span>' + 
+					'<span class="message">' + data[i].message + '</span></div></li>');
+		}
+	},
+
+	writeClubsList : function(data)
+	{
+		if (!data)
+		{
+			console.log("Failed to get clubs");
+			return;
+		}
+		$(".loadingClubs").css('display', 'none');
+		for (var i = 0;i < data.length;i++)
+		{
+			$('.clubsTable tr:last').after('<tr class="clubsTableRow">' + 
+			'<td>' + data[i].id + '</td>' + '<td>' + data[i].name + '</td>' + 
+			'<td>' + data[i].address['city'] + '</td>' + '<td>' + data[i].email + '</td>' +
+			'<td>' + data[i].phone + '</td>' + '<td>' + data[i].electronicBilling + '</td>' +
+			'<td>' + data[i].signedWaiver + '</td>' + '</tr>');
+		}
 	},
 	
 	fillRecentBookings: function(data)
 	{
+		if (!data)
+		{
+			console.log(data);
+			return;
+		}
+		$(".loadingBookings").css('display', 'none');
 		for (var i = 0;i < data.length;i++)
 		{
 			$('.recentBookingTable tr:last').after('<tr class="recentBookingRow">' + 
@@ -29,31 +75,17 @@ var admin = {
 		}
 	},
 	
-	fillClubs: function(data)
-	{
-		for (var i = 0;i < data.length;i++)
-		{
-			$('.clubTable tr:last').after('<tr class="clubTableRow">' + 
-				'<td>' + data[i].name + '</td>' +
-				'<td>' + data[i].address.street + ', ' + data[i].address.city + ', ' + data[i].address.province + ', ' + data[i].address.postal + '</td>' + 
-				'<td>' + data[i].phone + '</td>' +
-				'<td>' + data[i].email + '</td>' +
-				'<td>' + data[i].comment + '</td></tr>');
-		}
-	},
-	
 	addNotification: function()
 	{
 		var title = $(".titleInput").val();
 		var message = $(".notifInput").val();
 		CommHandler.doPost(SERVER_LOC+PORT+"/home/addNotification", {title: title, message: message}, this._notificationAdded);
+		$(".titleInput").val("");
+		$(".notifInput").val("");
 	},
 	
 	_notificationAdded: function(data)
 	{
 		console.log("Successfully added notification.");
 	}
-	
-	
-	
 }

@@ -18,6 +18,7 @@
 	<div class="underlay">
 		<div class="BannerWrap">
 			<span id="bannerText">club</span>
+			<a onclick="logout();" class="button negative logoutBtn">Logout</a>	
 		</div>
 		<div class="column leftColumnWrap">
 			<div class="leftColumn">
@@ -28,6 +29,10 @@
 					    <hr/>
 					    <span class="notificationsTitle">Notifications:</span>
 					    <ul class="notificationsBox">
+					    	<li class="loadingNotifications" style="display:none;">
+					  			<div class="ajaxLoading">
+					  			</div>
+					  		</li>
 					    </ul>
 				    </div>
 				</div>
@@ -43,9 +48,12 @@
 						<li><a href="#tabs-4">Payments</a></li>
 					</ul>
 					<div id="tabs-1">
-						<p>
-							List the clubs future bookings
-						</p>
+						<table class="table transactionTable" id="futureBookings">
+							<!-- future bookings get inserted here -->
+						</table>
+						<div class="loadingBookingFuture" style="display:none;">
+							<div class="ajaxLoading"></div>
+						</div>
 					</div>
 					<div id="tabs-2">
 						<p>
@@ -104,14 +112,17 @@
 						</div>
 					</div>
 					<div id="tabs-3">
-						<p>
-							View historical bookings here.
-						</p>
+						<table class="table transactionTable" id="historyBookings">
+							<!-- history bookings get inserted here -->
+						</table>
+						<div class="loadingBookingHistory" style="display:none;">
+							<div class="ajaxLoading"></div>
+						</div>
 					</div>
 					<div id="tabs-4">
 						<p>
-							<div class="paymentColumn paymentLeftColumnWrap">
-								<div class="paymentLeftColumn">
+							<div class="paymentRow paymentTopRowWrap">
+								<div class="paymentTopRow">
 									<div class="paymentHeader">
 										<span class="paymentText1">Payment</span><span class="paymentText2">History</span>
 									</div>
@@ -123,32 +134,17 @@
 												<th>Time</th>
 												<th>Comment</th>
 											</tr>
-											<tr class="transactionTableRow">
-												<td>12</td>
-												<td>$100</td>
-												<td>11/11/2011</td>
-												<td>This is a comment</td>
-											</tr>
-											<tr class="transactionTableRow">
-												<td>15</td>
-												<td>$100</td>
-												<td>11/11/2011</td>
-												<td>This is a comment</td>
-											</tr>
-											<tr class="transactionTableRow">
-												<td>18</td>
-												<td>$100</td>
-												<td>11/11/2011</td>
-												<td>This is a comment</td>
-											</tr>
 										</table>
+										<div class="loadingTransactions" style="display:none">
+											<div class="ajaxLoading"></div>
+										</div>
 									</div>
 								</div>
 							</div>
-							<div class="paymentColumn paymentRightColumnWrap">
-								<div class="paymentRightColumn">
+							<div class="paymentRow paymentBottomRowWrap">
+								<div class="paymentBottomRow">
 									<div class="paymentHeader">
-										<span class="paymentText1">Pay</span><span class="paymentText2">Now</span>
+										<span class="paymentText1">Current</span><span class="paymentText2">Balance</span>
 									</div>		
 								</div>
 							</div>
