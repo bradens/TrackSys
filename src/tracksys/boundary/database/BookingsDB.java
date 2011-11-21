@@ -141,4 +141,32 @@ public class BookingsDB {
 			return null;
 		}
 	}
+	
+	/* Retrieve a list of future bookings from the database by ID */
+	public List<Booking> getHistoricBookingsByClubID(int ID)
+	{
+		String query = "SELECT * FROM tracksys.bookings JOIN tracksys.club on bookings.clubid=club.id WHERE clubid=\'" + ID + "\' AND startTime<now() ORDER BY bookedTime";
+		List<Booking> bookings = new ArrayList<Booking>();
+		try
+		{
+			Statement s = conn.createStatement();
+			s.executeQuery(query);
+			ResultSet rs = s.getResultSet();
+			Booking tB;
+			
+			while(rs.next())
+			{
+				tB = new Booking(Integer.parseInt(rs.getString("id")), Integer.parseInt(rs.getString("clubid")), rs.getString("name"), Integer.parseInt(rs.getString("trackid")),
+						Resources.DATE_FORMAT.parse(rs.getString("startTime")), Resources.DATE_FORMAT.parse(rs.getString("endTime")), Resources.DATE_FORMAT.parse(rs.getString("bookedTime")), rs.getString("comment"));
+				bookings.add(tB);
+			}
+			
+			return bookings;
+		}
+		catch (Exception e)
+		{
+			System.err.println("Error running database query");
+			return null;
+		}
+	}
 }

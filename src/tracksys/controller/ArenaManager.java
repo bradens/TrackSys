@@ -183,6 +183,13 @@ public class ArenaManager {
 		return bookings;
 	}
 	
+	public List<Booking> getHistoricBookings(int ID)
+	{
+		BookingsDB bdb = new BookingsDB();
+		List<Booking> bookings = bdb.getHistoricBookingsByClubID(ID);
+		return bookings;
+	}
+	
 	public void addBooking(Booking booking)
 	{
 		

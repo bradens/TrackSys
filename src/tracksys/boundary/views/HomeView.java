@@ -68,6 +68,10 @@ public class HomeView {
 		{
 			return this.getFutureBookings(req, resp);
 		}
+		else if (target.endsWith("getHistoricBookings"))
+		{
+			return this.getHistoricBookings(req, resp);
+		}
 		return false;
 	}
 	
@@ -104,6 +108,21 @@ public class HomeView {
 	public boolean getFutureBookings(HttpServletRequest req, HttpServletResponse resp)
 	{
 		List<Booking> notifications = manager.getFutureBookings(manager.getClubIDFromCookie(req));
+		Gson g = new Gson();
+		resp.setContentType("application/json");
+		String s = g.toJson(notifications);
+		ServletHandler.writeResponse(s, resp);
+		return true;
+	}
+	
+	/**
+	 * Returns a JSON encoded response of the future bookings.
+	 * @param req
+	 * @param resp
+	 */
+	public boolean getHistoricBookings(HttpServletRequest req, HttpServletResponse resp)
+	{
+		List<Booking> notifications = manager.getHistoricBookings(manager.getClubIDFromCookie(req));
 		Gson g = new Gson();
 		resp.setContentType("application/json");
 		String s = g.toJson(notifications);

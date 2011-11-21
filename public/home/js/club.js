@@ -19,8 +19,10 @@ var club = {
 			
 			// Get all the notifications
 			CommHandler.doPost(SERVER_LOC+PORT+"/home/getNotifications", null, this.writeNotifications);
-			// Get all the bookings
+			// Get all the future bookings
 			CommHandler.doPost(SERVER_LOC+PORT+"/home/getFutureBookings", null, this.writeFutureBookings);
+			// Get all the history bookings
+			CommHandler.doPost(SERVER_LOC+PORT+"/home/getHistoricBookings", null, this.writeHistoricBookings);
 			// get all transactions
 			CommHandler.doPost(SERVER_LOC+PORT+"/home/getTransactions", null, this.fillTransactionsTable);
 		},
@@ -75,9 +77,36 @@ var club = {
 				if (k.keyCode == '13')
 					register.submit();
 			});
-			
-			// get all transactions
-			this.getTransactions();
+		},
+		
+		writeHistoricBookings: function(data)
+		{
+			if (!data)
+			{
+				console.log("Failed to get future bookings");
+				return;
+			}
+			$('#historyBookings').append('<tr class="header">' + 
+											'<th>Track</th>' +
+											'<th>Start Time</th>' + 
+											'<th>End Time</th>' +
+											'<th>Comment</th>' +
+											'</tr>');
+			for (var i = 0;i < data.length;i++)
+			{
+				$('#historyBookings').append('<tr class="transactionTableRow"><td>' +
+						data[i].trackID + '</td><td>' + 
+						data[i].startTime + '</td><td>' + 
+						data[i].endTime + '</td><td>' + 
+						data[i].comment + '</td></tr>');
+			}
+			$(".loginForm input").focus(function() {
+				$(".errorPopup").fadeOut('fast');
+			});
+			$(".loginForm input").keyup(function(k) {
+				if (k.keyCode == '13')
+					register.submit();
+			});
 		},
 		
 		makeBooking : function()
