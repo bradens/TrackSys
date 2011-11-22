@@ -9,9 +9,11 @@ var register = {
 		var postal = $("#postalInputBox").val();
 		var email = $("#emailInputBox").val();
 		var phone = $("#phoneInputBox").val();
+		var waiver = $("#waiverSelect").val();
+		var billing = $("#billingSelect").val();
 		
 		CommHandler.doPost(SERVER_LOC+PORT+"/registration/submitregistration", { name: name, passwd: passwd, street: street, city: city, province: province, postal: postal,
-			email: email, phone: phone}, register.registerSuccess);
+			email: email, phone: phone, waiver: waiver, billing: billing}, register.registerSuccess);
 	},
 	registerSuccess : function(data)
 	{

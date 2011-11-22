@@ -7,12 +7,12 @@ public class Club {
 	private Address address;
 	private String email;
 	private String phone;
-	private boolean electronicBilling;
-	private boolean signedWaiver;
+	private int electronicBilling;
+	private int signedWaiver;
 	private int admin;
 	private int balance;
 		
-	public Club(int id, String name, String passwd, Address address, String email, String phone, boolean electronic, boolean signed, int admin, int balance)
+	public Club(int id, String name, String passwd, Address address, String email, String phone, int electronic, int signed, int admin, int balance)
 	{
 		this.id = id;
 		this.name = name;
@@ -26,7 +26,7 @@ public class Club {
 		this.balance = balance;
 	}
 	
-	public Club(int id, String name, String passwd, Address address, String email, String phone, boolean electronic, boolean signed, int admin)
+	public Club(int id, String name, String passwd, Address address, String email, String phone, int electronic, int signed, int admin)
 	{
 		this.id = id;
 		this.name = name;
@@ -40,7 +40,7 @@ public class Club {
 		this.balance = 0;
 	}
 	
-	public Club(String name, String passwd, Address address, String email, String phone, boolean electronic, boolean signed)
+	public Club(String name, String passwd, Address address, String email, String phone, int electronic, int signed)
 	{
 		this.name = name;
 		this.passwd = passwd;
@@ -58,8 +58,8 @@ public class Club {
 		this.name = "";
 		this.address = null;
 		this.email = "";
-		this.electronicBilling = false;
-		this.signedWaiver = false;
+		this.electronicBilling = 0;
+		this.signedWaiver = 0;
 		this.balance = 0;
 	}
 	
@@ -98,6 +98,16 @@ public class Club {
 		return admin;
 	}
 	
+	public int getElectronicBilling()
+	{
+		return this.electronicBilling;
+	}
+	
+	public int getWaiver()
+	{
+		return this.signedWaiver;
+	}
+	
 	public int getBalance()
 	{
 		return balance;
@@ -118,13 +128,13 @@ public class Club {
 		this.email = email;
 	}
 	
-	public boolean setElectronicBilling(boolean setting)
+	public int setElectronicBilling(int setting)
 	{
 		this.electronicBilling = setting;
 		return this.electronicBilling;
 	}
 	
-	public boolean setSignedWaiver(boolean setting)
+	public int setSignedWaiver(int setting)
 	{
 		this.signedWaiver = setting;
 		return this.signedWaiver;

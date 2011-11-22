@@ -45,15 +45,33 @@ public class RegistrationView {
 		String postal = req.getParameter("postal");
 		String email = req.getParameter("email");
 		String phone = req.getParameter("phone");
+		String waiver = req.getParameter("waiver");
+		String billing = req.getParameter("billing");
 		
-		if (name == null || passwd == null || street == null || city == null || province == null ||
-				postal == null || email == null || phone == null)
+		int boolWaiver;
+		int boolBilling;
+		
+		if(waiver.equalsIgnoreCase("I agree"))
+			boolWaiver = 1;
+		else
+			boolWaiver = 0;
+		
+		if(billing.equalsIgnoreCase("Electronic"))
+			boolBilling = 1;
+		else 
+			boolBilling = 0;
+		
+		if (name == "" || passwd == "" || street == "" || city == "" || province == "" ||
+				postal == "" || email == "" || phone == "" || boolWaiver == 0)
+		{
+			System.out.println(waiver);
+			System.out.println(boolWaiver);
 			return false;
-		
+		}
 		else
 		{
 			Address address = new Address(street, city, province, "", postal);
-			Club club = new Club(name, passwd, address, email, phone, false, false);
+			Club club = new Club(name, passwd, address, email, phone, boolBilling, boolWaiver);
 			manager.AddNewClub(club);
 			
 			//Set the cookie

@@ -43,6 +43,24 @@
 					
 					<span class="phoneLabel label">Phone Number: </span><input id="phoneInputBox" class="registerInput formInputBox" type="text" />
 					<span class="emailLabel label">Email: </span><input id="emailInputBox" class="registerInput formInputBox" type="text" />
+					
+					<div class="registrationHr"><hr /></div>
+					
+					<span class="waiverLabel label">View Waiver: </span><div class="viewWaiver"><a onclick="register.showWaiver();" class="submitBtn big button">View the waiver.</a></div><br />
+					<span class="waiverLabel label">Waiver: </span>
+					<div class="legalSelect">
+						<select id="waiverSelect">
+						<option>I agree</option>
+						<option>I Disagree</option>
+						</select>
+					</div>
+					<span class="billingLabel label">Billing: </span>
+					<div class="legalSelect">
+						<select id="billingSelect">
+						<option>Electronic</option>
+						<option>Paper</option>
+						</select>
+					</div>
 				</div>
 				<div class="columnFooter">
 					<a onclick="register.submit();" class="submitBtn big button">Submit</a>
