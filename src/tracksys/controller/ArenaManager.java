@@ -218,6 +218,13 @@ public class ArenaManager {
 		return bookings;
 	}
 	
+	public List<Booking> getDayBookings(Date dateStart, Date dateEnd)
+	{
+		BookingsDB bdb = new BookingsDB();
+		List<Booking> bookings = bdb.getDayBookings(dateStart, dateEnd);
+		return bookings;
+	}
+	
 	public void addBooking(Booking booking)
 	{
 		

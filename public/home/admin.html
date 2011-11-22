@@ -34,12 +34,14 @@
 						<textarea class="formInputBox notifInput" rows="10" cols="33"></textarea>
 						<a class="button big sendNotifBtn" onclick="admin.addNotification();">Send Notification</a>
 						<span class="notificationsTitle">Notifications:</span>
-					    <ul class="notificationsBox">
-					  		<li class="loadingNotifications" style="display:none;">
-					  			<div class="ajaxLoading">
-					  			</div>
-					  		</li>
-					    </ul>
+					    <div id="notificationsList">
+						    <ul class="notificationsBox">
+						  		<li class="loadingNotifications" style="display:none;">
+						  			<div class="ajaxLoading">
+						  			</div>
+						  		</li>
+						    </ul>
+					    </div>
 					</div>
 				</div>
 			</div>
@@ -51,6 +53,7 @@
 						<li><a href="#tabs-1">Recent Bookings</a></li>
 						<li><a href="#tabs-2">Clubs</a></li>
 						<li><a href="#tabs-3">Tracks</a></li>
+						<li><a href="#tabs-4">Daily View</a></li>
 					</ul>
 					<div id="tabs-1">
 						<table class="recentBookingTable">
@@ -93,6 +96,27 @@
 							</tr>
 						</table>
 						<div class="loadingTracks" style="display:none;">
+							<div class="ajaxLoading">
+				  			</div>
+						</div>
+					</div>
+					<div id="tabs-4">
+						<span class="dayLabel label">Day: </span>
+						<input id="datepicker"/>
+						<table class="bookingsDayTable">
+							<tr class="header">
+								<th>&nbsp;</th>
+								<th>Track 1</th>
+								<th>Track 2</th>
+								<th>Track 3</th>
+								<th>Track 4</th>
+								<th>Track 5</th>
+								<th>Track 6</th>
+								<th>Track 7</th>
+								<th>Track 8</th>
+							</tr>
+						</table>
+						<div class="loadingClubs" style="display:none;">
 							<div class="ajaxLoading">
 				  			</div>
 						</div>
