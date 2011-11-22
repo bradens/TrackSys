@@ -118,8 +118,9 @@ public class HomeView {
 				int hoursBooked = tempBook.getEndTime().getHours()-startHour;
 				for(int j = 0; j < hoursBooked; j++)
 				{
-					dayBookings[startHour-6][tempBook.getTrackID()-1] = tempBook.getClubID();
+					dayBookings[startHour+j-6][tempBook.getTrackID()-1] = tempBook.getClubID();
 				}
+				
 		    }
 			String s = g.toJson(dayBookings);
 			resp.setContentType("application/json");

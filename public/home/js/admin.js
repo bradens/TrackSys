@@ -35,8 +35,6 @@ var admin = {
 		$(".loadingTracks").show('fast');
 	},
 	
-	
-	
 	writeNotifications : function(data)
 	{
 		if (!data)
@@ -68,9 +66,7 @@ var admin = {
 	
 		for (var i = 6; i <= 22; i++)
 		{
-			
-			
-			var bookingsArray = new Array(8)
+			var bookingsArray = new Array(8);
 			for(var j = 0; j < 8; j++){
 				if(data[i-6][j] != 0)
 					bookingsArray[j] = data[i-6][j];
