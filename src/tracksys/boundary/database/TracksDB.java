@@ -25,6 +25,18 @@ public class TracksDB {
 		}
 	}
 	
+	public void closeConnection()
+	{
+		try
+		{
+			conn.close();
+		}
+		catch (Exception e)
+		{
+			System.out.println("Could not close tracks connection");
+		}
+	}
+	
 	public boolean editTrack(int trackID, boolean isMaintained)
 	{
 		String insert = "INSERT INTO tracksys.notifications VALUES(default, ?, ?, ?)";

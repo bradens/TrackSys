@@ -1,6 +1,7 @@
 package tracksys.boundary.views;
 
 import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
@@ -230,6 +231,7 @@ public class HomeView {
 		String start = req.getParameter("start");
 		String end = req.getParameter("end");
 		String comment = req.getParameter("comment");
+		String recurring = req.getParameter("recurring");
 		
 		try 
 		{
@@ -241,6 +243,29 @@ public class HomeView {
 			Random generator = new Random();
 			int track = generator.nextInt(8) + 1;
 			int clubid = manager.getClubIDFromCookie(req);
+			
+			if(recurring.equalsIgnoreCase("true"))
+			{
+				int i = 4;
+				Calendar c = Calendar.getInstance();
+				while(i > 0)
+				{
+					Booking booking = new Booking(clubid, "", track, startDate, endDate, stamp, comment);
+					manager.addBooking(booking);
+					
+					// Add to start date
+					c.setTime(startDate);
+					c.add(Calendar.DATE, 7);
+					startDate = c.getTime();
+					
+					// Add to end date
+					c.setTime(endDate);
+					c.add(Calendar.DATE, 7);
+					endDate = c.getTime();
+					
+					i--;
+				}
+			}
 			
 			Booking booking = new Booking(clubid, "", track, startDate, endDate, stamp, comment);
 			manager.addBooking(booking);

@@ -25,6 +25,18 @@ public class NotificationsDB {
 		}
 	}
 	
+	public void closeConnection()
+	{
+		try
+		{
+			conn.close();
+		}
+		catch (Exception e)
+		{
+			System.out.println("Could not close notifications connection");
+		}
+	}
+	
 	public boolean addNotification(String title, String message, String timestamp)
 	{
 		String insert = "INSERT INTO tracksys.notifications VALUES(default, ?, ?, ?)";
