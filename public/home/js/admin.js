@@ -21,6 +21,8 @@ var admin = {
 		$(".loadingBookings").show('fast');
 		CommHandler.doPost(SERVER_LOC+PORT+"/home/getAllClubs", null, this.writeClubsList);
 		$(".loadingClubs").show('fast');
+		CommHandler.doPost(SERVER_LOC+PORT+"/home/getAllTracks", null, this.fillTracksList);
+		$(".loadingTracks").show('fast');
 
 	},
 	
@@ -55,6 +57,22 @@ var admin = {
 			'<td>' + data[i].address['city'] + '</td>' + '<td>' + data[i].email + '</td>' +
 			'<td>' + data[i].phone + '</td>' + '<td>' + data[i].electronicBilling + '</td>' +
 			'<td>' + data[i].signedWaiver + '</td>' + '</tr>');
+		}
+	},
+	
+	fillTracksList : function(data)
+	{
+		if (!data)
+		{
+			console.log("Failed to get tracks");
+			return;
+		}
+		$(".loadingTracks").css('display', 'none');
+		for (var i = 0;i < data.length;i++)
+		{
+			$('.tracksTable tr:last').after('<tr class="tracksTableRow">' + 
+			'<td>' + data[i].trackID + '</td>' +
+			'<td>' + data[i].isBookedForMaintenance + '</td>' + '</tr>');
 		}
 	},
 	

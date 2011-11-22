@@ -14,6 +14,8 @@ import tracksys.boundary.database.BookingsDB;
 import tracksys.boundary.database.ClubDB;
 import tracksys.boundary.database.NotificationsDB;
 import tracksys.boundary.database.TransactionsDB;
+import tracksys.boundary.database.TracksDB;
+
 import tracksys.boundary.views.HomeView;
 import tracksys.boundary.views.LoginView;
 import tracksys.boundary.views.RegistrationView;
@@ -21,6 +23,7 @@ import tracksys.entity.Booking;
 import tracksys.entity.Club;
 import tracksys.entity.Notification;
 import tracksys.entity.Transaction;
+import tracksys.entity.Track;
 import tracksys.servletHandler.ServletHandler;
 
 public class ArenaManager {
@@ -172,6 +175,17 @@ public class ArenaManager {
 		List<Transaction> transactions = tdb.getTransactions(clubID);
 		return transactions;
 	}
+	
+	/**
+	 * Tracks methods
+	 */
+	public List<Track> getTracks()
+	{
+		TracksDB trackdb = new TracksDB();
+		List<Track> tracks = trackdb.getTracks();
+		return tracks;
+	}
+	
 	/**
 	 * Bookings methods
 	 */
