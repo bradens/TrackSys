@@ -83,6 +83,13 @@ public class HomeView {
 		{
 			return this.getTracks(req, resp);
 		}
+		else if (target.endsWith("getCurrentClubProfile"))
+		{
+			if (manager.isClub(req))
+				return this.getCurrentClubProfile(req, resp);
+			else
+				ServletHandler.writeErr("this is an admin", req, resp);
+		}
 		return false;
 	}
 	
@@ -123,6 +130,21 @@ public class HomeView {
 		Gson g = new Gson();
 		resp.setContentType("application/json");
 		String s = g.toJson(tracks);
+		ServletHandler.writeResponse(s, resp);
+		return true;
+	}
+	
+	/**
+	 * Returns a JSON encoded response of the current club profile.
+	 * @param req
+	 * @param resp
+	 */
+	public boolean getCurrentClubProfile(HttpServletRequest req, HttpServletResponse resp)
+	{
+		Club currentClub = manager.getCurrentLoginClub(req);
+		Gson g = new Gson();
+		resp.setContentType("application/json");
+		String s = g.toJson(currentClub);
 		ServletHandler.writeResponse(s, resp);
 		return true;
 	}

@@ -148,6 +148,14 @@ public class ArenaManager {
 		ClubDB db = new ClubDB();
 		return db.getAllClubs();
 	}
+	
+	public Club getCurrentLoginClub(HttpServletRequest req)
+	{
+		int clubID = getClubIDFromCookie(req);
+		Club currentClub = getClubID(clubID);
+		
+		return currentClub;
+	}
 
 	/**
 	 * Notification methods
