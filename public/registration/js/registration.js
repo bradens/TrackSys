@@ -25,11 +25,6 @@ var register = {
 		{
 			$(".errorPopup").fadeIn('fast');
 		}
-	},
-	
-	cancel : function()
-	{
-		window.location.href = "/login/";
 	}
 };
 
