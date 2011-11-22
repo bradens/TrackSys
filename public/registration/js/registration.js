@@ -15,6 +15,8 @@ var register = {
 		CommHandler.doPost(SERVER_LOC+PORT+"/registration/submitregistration", { name: name, passwd: passwd, street: street, city: city, province: province, postal: postal,
 			email: email, phone: phone, waiver: waiver, billing: billing}, register.registerSuccess);
 	},
+	
+	
 	registerSuccess : function(data)
 	{
 		if (data == "true")
