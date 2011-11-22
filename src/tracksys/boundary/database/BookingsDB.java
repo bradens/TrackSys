@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import tracksys.Resources;
@@ -66,6 +67,30 @@ public class BookingsDB {
 	{
 		List<Booking> bookings = new ArrayList<Booking>();
 		String query = "SELECT * FROM tracksys.bookings JOIN tracksys.club on bookings.clubid=club.id ORDER BY bookedTime DESC LIMIT 50";
+		try {
+			Booking tB;
+			Statement s = conn.createStatement();
+			s.executeQuery(query);
+			ResultSet rs = s.getResultSet();
+			while(rs.next())
+			{
+				tB = new Booking(Integer.parseInt(rs.getString("id")), Integer.parseInt(rs.getString("clubid")), rs.getString("name"), Integer.parseInt(rs.getString("trackid")),
+						Resources.DATE_FORMAT.parse(rs.getString("startTime")), Resources.DATE_FORMAT.parse(rs.getString("endTime")), Resources.DATE_FORMAT.parse(rs.getString("bookedTime")), rs.getString("comment"));
+				bookings.add(tB);
+			}
+			return bookings;
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public List<Booking> getDayBookings(Date dateStart, Date dateEnd)
+	{
+		List<Booking> bookings = new ArrayList<Booking>();
+		String query = "SELECT * FROM tracksys.bookings JOIN tracksys.club on bookings.clubid=club.id WHERE startTime >= '" + Resources.DATE_FORMAT.format(dateStart) + "' and startTime < '" + Resources.DATE_FORMAT.format(dateEnd) + "'";
 		try {
 			Booking tB;
 			Statement s = conn.createStatement();

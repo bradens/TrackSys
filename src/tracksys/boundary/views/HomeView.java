@@ -73,6 +73,10 @@ public class HomeView {
 		{
 			return this.getHistoricBookings(req, resp);
 		}
+		else if (target.endsWith("getDayBookings"))
+		{
+			return this.getDayBookings(req, resp);
+		}
 		else if (target.endsWith("getAllClubs"))
 		{
 			return this.getAllClubs(req, resp);
@@ -90,6 +94,36 @@ public class HomeView {
 		return true;
 	}
 	
+	public boolean getDayBookings(HttpServletRequest req, HttpServletResponse resp)
+	{
+		String day = req.getParameter("date"); 
+		try
+		{
+			Date dateStart = Resources.DATE_FORMAT.parse(day + " 00:00:00");
+			Date dateEnd = Resources.DATE_FORMAT.parse(day + " 23:59:59");
+			List<Booking> bookings = manager.getDayBookings(dateStart,dateEnd);
+			Gson g = new Gson();
+			int[][] dayBookings = new int[17][8];
+			for(int i = 0, n = bookings.size(); i < n; i++) {
+				Booking tempBook = bookings.get(i);
+				int startHour = tempBook.getStartTime().getHours();
+				int hoursBooked = tempBook.getEndTime().getHours()-startHour;
+				for(int j = 0; j < hoursBooked; j++)
+				{
+					dayBookings[startHour-6][tempBook.getTrackID()-1] = tempBook.getClubID();
+				}
+		    }
+			String s = g.toJson(dayBookings);
+			resp.setContentType("application/json");
+			ServletHandler.writeResponse(s, resp);
+		}
+		catch (Exception e)
+		{
+			System.out.println("Error creating booking date");
+			ServletHandler.writeResponse("false", resp);
+		}	
+		return true;
+	}
 	
 	/**
 	 * Returns a JSON encoded response of the first 100 notifications.

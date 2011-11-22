@@ -11,18 +11,30 @@ var admin = {
 			return false;
 		}).next().hide();
 		
+		
+		$('#datepicker').datepicker({ dateFormat: 'yy-mm-dd', currentText: 'Today' });
+		$('#datepicker').datepicker().change(function(){
+			admin.rewriteDayBookings();
+		});
 		// Right pane init
 		$("#rightTabs").tabs();
-		
-		// Get all the notifications
-		CommHandler.doPost(SERVER_LOC+PORT+"/home/getNotifications", null, this.writeNotifications);
+		// Get all notifications
+		CommHandler.doPost(SERVER_LOC+PORT+"/home/getNotifications", null, admin.writeNotifications);
 		$(".loadingNotifications").show('fast');
 		CommHandler.doPost(SERVER_LOC+PORT+"/home/getRecentBookings", null, this.fillRecentBookings);
 		$(".loadingBookings").show('fast');
 		CommHandler.doPost(SERVER_LOC+PORT+"/home/getAllClubs", null, this.writeClubsList);
 		$(".loadingClubs").show('fast');
+		// Get selected days bookings
+		var currentTime = new Date();
+		var month = currentTime.getMonth() + 1;
+		var day = currentTime.getDate();
+		var year = currentTime.getFullYear();	
+		CommHandler.doPost(SERVER_LOC+PORT+"/home/getDayBookings", {date: year +'-'+month+'-'+day}, this.writeDayBookings);
 
 	},
+	
+	
 	
 	writeNotifications : function(data)
 	{
@@ -37,6 +49,37 @@ var admin = {
 			$('.notificationsBox').append('<li><div class="notification">' +
 					'<span class="date">' + data[i].timestamp + '</span><span class="title">' + data[i].title + '</span>' + 
 					'<span class="message">' + data[i].message + '</span></div></li>');
+		}
+	},
+	
+	rewriteDayBookings : function()
+	{
+		$('.bookingsDayTableRow').remove()
+		CommHandler.doPost(SERVER_LOC+PORT+"/home/getDayBookings", {date: $('#datepicker').val()}, this.writeDayBookings);
+	},
+	
+	writeDayBookings : function(data)
+	{
+		if(!data)
+		{
+			return;
+		}
+	
+		for (var i = 6; i <= 22; i++)
+		{
+			
+			
+			var bookingsArray = new Array(8)
+			for(var j = 0; j < 8; j++){
+				if(data[i-6][j] != 0)
+					bookingsArray[j] = data[i-6][j];
+				else
+					bookingsArray[j] = "";
+			}
+			$('.bookingsDayTable tr:last').after('<tr class="bookingsDayTableRow">' + 
+			'<td>' + i + ':00</td><td>' + bookingsArray[0] + '</td><td>' + bookingsArray[1] + '</td><td>'+ bookingsArray[2] + '</td><td>'
+			+ bookingsArray[3] + '</td><td>' + bookingsArray[4] + '</td><td>' + bookingsArray[5] + '</td><td>' + bookingsArray[6] + '</td><td>'
+			+ bookingsArray[7] + '</td></tr>');
 		}
 	},
 
@@ -86,6 +129,9 @@ var admin = {
 	
 	_notificationAdded: function(data)
 	{
+		$(".loadingNotifications").show('fast');
+		$(".notification").remove();
+		CommHandler.doPost(SERVER_LOC+PORT+"/home/getNotifications", null, admin.writeNotifications);
 		console.log("Successfully added notification.");
 	}
 }
