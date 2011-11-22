@@ -129,24 +129,31 @@ public class ArenaManager {
 	{
 		ClubDB db = new ClubDB();
 		db.insertClub(club);
+		db.closeConnection();
 	}
 	
 	public Club getClubID(int ID)
 	{
 		ClubDB db = new ClubDB();
-		return db.getClubFromID(ID);
+		Club club = db.getClubFromID(ID);
+		db.closeConnection();
+		return club;
 	}
 	
 	public Club getClubName(String name)
 	{
 		ClubDB db = new ClubDB();
-		return db.getClubFromName(name);
+		Club club = db.getClubFromName(name);
+		db.closeConnection();
+		return club;
 	}
 	
 	public List<Club> getAllClubs()
 	{
 		ClubDB db = new ClubDB();
-		return db.getAllClubs();
+		List<Club> list = db.getAllClubs();
+		db.closeConnection();
+		return list;
 	}
 	
 	public Club getCurrentLoginClub(HttpServletRequest req)
@@ -164,6 +171,7 @@ public class ArenaManager {
 	{
 		NotificationsDB ndb = new NotificationsDB();
 		List<Notification> notifications = ndb.getNotifications();
+		ndb.closeConnection();
 		return notifications;
 	}
 	
@@ -172,6 +180,7 @@ public class ArenaManager {
 		NotificationsDB ndb = new NotificationsDB();
 		Date date = new Date();
 		ndb.addNotification(title, message, Resources.DATE_FORMAT.format(date));
+		ndb.closeConnection();
 	}
 	
 	/**
@@ -181,6 +190,7 @@ public class ArenaManager {
 	{
 		TransactionsDB tdb = new TransactionsDB();
 		List<Transaction> transactions = tdb.getTransactions(clubID);
+		tdb.closeConnection();
 		return transactions;
 	}
 	
@@ -191,6 +201,7 @@ public class ArenaManager {
 	{
 		TracksDB trackdb = new TracksDB();
 		List<Track> tracks = trackdb.getTracks();
+		trackdb.closeConnection();
 		return tracks;
 	}
 	
@@ -201,6 +212,7 @@ public class ArenaManager {
 	{
 		BookingsDB bdb = new BookingsDB();
 		List<Booking> bookings = bdb.getRecentBookings();
+		bdb.closeConnection();
 		return bookings;
 	}
 	
@@ -208,6 +220,7 @@ public class ArenaManager {
 	{
 		BookingsDB bdb = new BookingsDB();
 		List<Booking> bookings = bdb.getFutureBookingsByClubID(ID);
+		bdb.closeConnection();
 		return bookings;
 	}
 	
@@ -215,6 +228,7 @@ public class ArenaManager {
 	{
 		BookingsDB bdb = new BookingsDB();
 		List<Booking> bookings = bdb.getHistoricBookingsByClubID(ID);
+		bdb.closeConnection();
 		return bookings;
 	}
 	
@@ -232,6 +246,7 @@ public class ArenaManager {
 		try 
 		{
 			db.insertBooking(booking);
+			db.closeConnection();
 		}
 		catch (Exception e)
 		{

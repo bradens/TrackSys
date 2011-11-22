@@ -266,9 +266,12 @@ public class HomeView {
 					i--;
 				}
 			}
+			else
+			{
+				Booking booking = new Booking(clubid, "", track, startDate, endDate, stamp, comment);
+				manager.addBooking(booking);
+			}
 			
-			Booking booking = new Booking(clubid, "", track, startDate, endDate, stamp, comment);
-			manager.addBooking(booking);
 			ServletHandler.writeResponse("true", resp);
 		}
 		catch (Exception e)
