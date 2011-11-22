@@ -20,6 +20,9 @@ var club = {
 			// Get all the notifications
 			CommHandler.doPost(SERVER_LOC+PORT+"/home/getNotifications", null, this.writeNotifications);
 			$(".loadingNotifications").show('fast');
+			// Get the current club profile
+			CommHandler.doPost(SERVER_LOC+PORT+"/home/getCurrentClubProfile", null, this.writeClubProfile);
+			$(".loadingClubProfile").show('fast');
 			// Get all the future bookings
 			CommHandler.doPost(SERVER_LOC+PORT+"/home/getFutureBookings", null, this.writeFutureBookings);
 			$(".loadingBookingFuture").show('fast');
@@ -29,6 +32,24 @@ var club = {
 			// get all transactions
 			CommHandler.doPost(SERVER_LOC+PORT+"/home/getTransactions", null, this.fillTransactionsTable);
 			$(".loadingTransactions").show('fast');
+		},
+		
+		writeClubProfile: function(data)
+		{
+			if (!data)
+			{
+				console.log("Failed to get current club profile");
+				return;
+			}
+			$(".loadingClubProfile").hide('fast');
+			$('.profileInformation').append(
+				'<p>' + 'Club: '+ data.name + '</p>' +
+				'<p>' + 'Address: ' + data.address.street +'</p>' +
+				'<p>' + 'City: ' + data.address.city +', ' + data.address.province +'</p>' +
+				'<p>' + 'Postal Code: ' + data.address.postal + '</p>' +
+				'<p>' + 'Phone: ' + data.phone + '</p>' +
+				'<p>' + 'Email: ' + data.email + '</p>' +
+				'<p>' + 'Balance: ' + data.balance +'$'+ '</p>' );
 		},
 		
 		writeNotifications: function(data)

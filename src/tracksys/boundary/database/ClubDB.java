@@ -35,7 +35,8 @@ public class ClubDB {
 		query += "province=\'" + club.getAddress().getProvince() + "\' ";
 		query += "postal=\'" + club.getAddress().getPostal() + "\' ";
 		query += "email=\'" + club.getEmail() + "\' ";
-		query += "phone=\'" + club.getPhoneNumber() + "\'";
+		query += "phone=\'" + club.getPhoneNumber() + "\' ";
+		query += "balance=\'" + club.getBalance() + "\'";
 		
 		return query;
 	}
@@ -59,7 +60,7 @@ public class ClubDB {
 	{
 		String query = "INSERT INTO " + table + " (";
 		
-		query += "name, passwd, street, city, province, postal, email, phone) VALUES (";
+		query += "name, passwd, street, city, province, postal, email, phone, balance) VALUES (";
 		
 		query += "\'" + club.getName() + "\', ";
 		query += "\'" + club.getPassword() + "\', ";
@@ -68,7 +69,8 @@ public class ClubDB {
 		query += "\'" + club.getAddress().getProvince() + "\', ";
 		query += "\'" + club.getAddress().getPostal() + "\', ";
 		query += "\'" + club.getEmail() + "\', ";
-		query += "\'" + club.getPhoneNumber() + "\')";
+		query += "\'" + club.getPhoneNumber() + "\', ";
+		query += "\'" + club.getBalance() + "\')";
 		
 		return query;
 	}
@@ -102,7 +104,7 @@ public class ClubDB {
 			while(rs.next())
 			{
 				Address tempAddress = new Address(rs.getString("street"), rs.getString("city"), rs.getString("province"), "", rs.getString("postal"));
-				tempClub = new Club(rs.getInt("id"), rs.getString("name"), rs.getString("passwd"), tempAddress, rs.getString("email"), rs.getString("phone"),false,false, rs.getInt("admin"));
+				tempClub = new Club(rs.getInt("id"), rs.getString("name"), rs.getString("passwd"), tempAddress, rs.getString("email"), rs.getString("phone"), rs.getBoolean("electronicbilling"),rs.getBoolean("waiver"), rs.getInt("admin"), rs.getInt("balance"));
 				clubs.add(tempClub);
 			}
 			return clubs;
@@ -128,7 +130,7 @@ public class ClubDB {
 				return null;
 			
 			Address address = new Address(rs.getString("street"), rs.getString("city"), rs.getString("province"), "", rs.getString("postal"));
-			Club club = new Club(rs.getInt("id"), rs.getString("name"), rs.getString("passwd"), address, rs.getString("name"), rs.getString("name"), false, false, rs.getInt("admin"));
+			Club club = new Club(rs.getInt("id"), rs.getString("name"), rs.getString("passwd"), address, rs.getString("email"), rs.getString("phone"), rs.getBoolean("electronicbilling"),rs.getBoolean("waiver"), rs.getInt("admin"), rs.getInt("balance"));
 			return club;
 			
 		}
@@ -153,7 +155,7 @@ public class ClubDB {
 				return null;
 			
 			Address address = new Address(rs.getString("street"), rs.getString("city"), rs.getString("province"), "", rs.getString("postal"));
-			Club club = new Club(rs.getInt("id"), rs.getString("name"), rs.getString("passwd"), address, rs.getString("name"), rs.getString("name"), false, false, rs.getInt("admin"));
+			Club club = new Club(rs.getInt("id"), rs.getString("name"), rs.getString("passwd"), address, rs.getString("email"), rs.getString("phone"), rs.getBoolean("electronicbilling"),rs.getBoolean("waiver"), rs.getInt("admin"), rs.getInt("balance"));
 			return club;
 			
 		}

@@ -124,3 +124,9 @@ div.bookingHr {
 .errorTitle {
 	font-size: 16px;
 }
+
+span.profileInformation {
+	font-family: georgia;
+	font-size: 16px;
+	color: #696969;
+}

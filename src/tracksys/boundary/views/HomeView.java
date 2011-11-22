@@ -13,6 +13,8 @@ import tracksys.entity.Booking;
 import tracksys.entity.Club;
 import tracksys.entity.Notification;
 import tracksys.entity.Transaction;
+import tracksys.entity.Track;
+
 import tracksys.servletHandler.ServletHandler;
 
 import com.google.gson.Gson;
@@ -56,10 +58,7 @@ public class HomeView {
 		}
 		else if (target.endsWith("getRecentBookings"))
 		{
-			if (manager.isAdmin(req))
-				return this.getRecentBookings(req, resp);
-			else
-				ServletHandler.writeErr("Not an admin", req, resp);
+			return this.getRecentBookings(req, resp);
 		}
 		else if (target.endsWith("submitBooking"))
 		{
@@ -80,6 +79,14 @@ public class HomeView {
 		else if (target.endsWith("getAllClubs"))
 		{
 			return this.getAllClubs(req, resp);
+		}
+		else if (target.endsWith("getAllTracks"))
+		{
+			return this.getTracks(req, resp);
+		}
+		else if (target.endsWith("getCurrentClubProfile"))
+		{
+			return this.getCurrentClubProfile(req, resp);
 		}
 		return false;
 	}
@@ -136,6 +143,36 @@ public class HomeView {
 		Gson g = new Gson();
 		resp.setContentType("application/json");
 		String s = g.toJson(notifications);
+		ServletHandler.writeResponse(s, resp);
+		return true;
+	}
+	
+	/**
+	 * Returns a JSON encoded response of the 8 tracks.
+	 * @param req
+	 * @param resp
+	 */
+	public boolean getTracks(HttpServletRequest req, HttpServletResponse resp)
+	{
+		List<Track> tracks = manager.getTracks();
+		Gson g = new Gson();
+		resp.setContentType("application/json");
+		String s = g.toJson(tracks);
+		ServletHandler.writeResponse(s, resp);
+		return true;
+	}
+	
+	/**
+	 * Returns a JSON encoded response of the current club profile.
+	 * @param req
+	 * @param resp
+	 */
+	public boolean getCurrentClubProfile(HttpServletRequest req, HttpServletResponse resp)
+	{
+		Club currentClub = manager.getCurrentLoginClub(req);
+		Gson g = new Gson();
+		resp.setContentType("application/json");
+		String s = g.toJson(currentClub);
 		ServletHandler.writeResponse(s, resp);
 		return true;
 	}
