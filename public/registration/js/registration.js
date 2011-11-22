@@ -27,6 +27,12 @@ var register = {
 };
 
 function init() {
+	$("#dialog").dialog({
+		autoOpen: false,
+		height: 500,
+		width: 400
+	});
+	
 	$(".loginForm input").focus(function() {
 		$(".errorPopup").fadeOut('fast');
 	});
@@ -34,4 +40,10 @@ function init() {
 		if (k.keyCode == '13')
 			register.submit();
 	});
+	
+	$("#view-waiver")
+		.button()
+		.click(function() {
+			$( "#dialog" ).dialog( "open" );
+		});
 }
