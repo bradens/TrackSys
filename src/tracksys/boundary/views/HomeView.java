@@ -118,8 +118,9 @@ public class HomeView {
 				int hoursBooked = tempBook.getEndTime().getHours()-startHour;
 				for(int j = 0; j < hoursBooked; j++)
 				{
-					dayBookings[startHour-6][tempBook.getTrackID()-1] = tempBook.getClubID();
+					dayBookings[startHour+j-6][tempBook.getTrackID()-1] = tempBook.getClubID();
 				}
+				
 		    }
 			String s = g.toJson(dayBookings);
 			resp.setContentType("application/json");
@@ -244,6 +245,8 @@ public class HomeView {
 			int track = generator.nextInt(8) + 1;
 			int clubid = manager.getClubIDFromCookie(req);
 			
+			boolean recure = true;
+			
 			if(recurring.equalsIgnoreCase("true"))
 			{
 				int i = 4;
@@ -251,7 +254,10 @@ public class HomeView {
 				while(i > 0)
 				{
 					Booking booking = new Booking(clubid, "", track, startDate, endDate, stamp, comment);
-					manager.addBooking(booking);
+					if(manager.addBooking(booking))
+						recure = recure;
+					else
+						recure = false;
 					
 					// Add to start date
 					c.setTime(startDate);
@@ -265,14 +271,20 @@ public class HomeView {
 					
 					i--;
 				}
+				
+				if(recure)
+					ServletHandler.writeResponse("true", resp);
+				else
+					ServletHandler.writeResponse("false", resp);
 			}
 			else
 			{
 				Booking booking = new Booking(clubid, "", track, startDate, endDate, stamp, comment);
-				manager.addBooking(booking);
+				if(manager.addBooking(booking))
+					ServletHandler.writeResponse("true", resp);
+				else
+					ServletHandler.writeResponse("false", resp);
 			}
-			
-			ServletHandler.writeResponse("true", resp);
 		}
 		catch (Exception e)
 		{

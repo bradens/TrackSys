@@ -35,8 +35,6 @@ var admin = {
 		$(".loadingTracks").show('fast');
 	},
 	
-	
-	
 	writeNotifications : function(data)
 	{
 		if (!data)
@@ -68,9 +66,7 @@ var admin = {
 	
 		for (var i = 6; i <= 22; i++)
 		{
-			
-			
-			var bookingsArray = new Array(8)
+			var bookingsArray = new Array(8);
 			for(var j = 0; j < 8; j++){
 				if(data[i-6][j] != 0)
 					bookingsArray[j] = data[i-6][j];
@@ -92,14 +88,22 @@ var admin = {
 			return;
 		}
 		$(".loadingClubs").css('display', 'none');
+		var elecBilling = "no";
+		var waiver = "no";
 		for (var i = 0;i < data.length;i++)
 		{
+			if(data[i].signedWaiver == 1)
+				waiver = "yes";
+			if(data[i].electronicBilling == 1)
+				elecBilling = "yes";
 			$('.clubsTable tr:last').after('<tr class="clubsTableRow">' + 
 			'<td>' + data[i].id + '</td>' + '<td>' + data[i].name + '</td>' + 
 			'<td>' + data[i].address['city'] + '</td>' + '<td>' + data[i].email + '</td>' +
-			'<td>' + data[i].phone + '</td>' + '<td>' + data[i].electronicBilling + '</td>' +
-			'<td>' + data[i].signedWaiver + '</td>' +
+			'<td>' + data[i].phone + '</td>' + '<td>' + elecBilling + '</td>' +
+			'<td>' + waiver + '</td>' +
 			'<td>' + data[i].balance + '</td>' + '</tr>');
+			waiver = "no";
+			elecBilling = "no";
 		}
 	},
 	
