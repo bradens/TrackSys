@@ -1,17 +1,22 @@
 <html>
 	<head>
-		<script type='text/javascript' src='../js/lib/jquery.js'></script>
+		<script type="text/javascript" src="../jqueryui/js/jquery-1.6.2.min.js"></script>
 		<script type="text/javascript" src="../js/lib/jquery.xdomainajax.js"></script>
+		<script type="text/javascript" src="../jqueryui/js/jquery-ui.min.js"></script>
 		<script type='text/javascript' src='../js/core.js'></script>
 		<script type='text/javascript' src='js/registration.js'></script>
 		<style type='text/css'>
 			@import url("../css/reset.css");
 			@import url("../css/css3buttons.css");
+			@import url("../jqueryui/css/TrackSys/jquery-ui.css");
 			@import url("../css/core.css");
 			@import url("css/registration.css");
 		</style>		
 	</head>
-	<body>
+	<body onload="init();">
+	<div id="dialog" title="Legal Waiver">
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	</div>
 	<div class="underlay">
 		<div class="BannerWrap">
 			<div class="Banner">
@@ -46,7 +51,7 @@
 					
 					<div class="registrationHr"><hr /></div>
 					
-					<span class="waiverLabel label">View Waiver: </span><div class="viewWaiver"><a onclick="register.showWaiver();" class="submitBtn big button">View the waiver.</a></div><br />
+					<span class="waiverLabel label">View Waiver: </span><div class="viewWaiver"><a id="view-waiver" class="button">View the waiver.</a></div><br />
 					<span class="waiverLabel label">Waiver: </span>
 					<div class="legalSelect">
 						<select id="waiverSelect">
@@ -64,6 +69,7 @@
 				</div>
 				<div class="columnFooter">
 					<a onclick="register.submit();" class="submitBtn big button">Submit</a>
+					<a href="/login/" class="button big" id="register">Cancel</a>
 				</div>
 				<div class="columnFooter">
 					<a onclick="register.cancel();" class="cancelBtn big button">Cancel</a>

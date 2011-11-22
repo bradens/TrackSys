@@ -26,6 +26,18 @@ public class BookingsDB {
 		}
 	}
 	
+	public void closeConnection()
+	{
+		try
+		{
+			conn.close();
+		}
+		catch (Exception e)
+		{
+			System.out.println("Could not close bookings connection");
+		}
+	}
+	
 	/* The insert functionality */
 	private String BuildInsert(Booking booking)
 	{

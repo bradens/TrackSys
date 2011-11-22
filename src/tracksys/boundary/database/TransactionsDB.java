@@ -24,6 +24,19 @@ public class TransactionsDB {
 			e.printStackTrace();
 		}
 	}
+	
+	public void closeConnection()
+	{
+		try
+		{
+			conn.close();
+		}
+		catch (Exception e)
+		{
+			System.out.println("Could not close transactions connection");
+		}
+	}
+	
 	/**
 	 * Get all past transactions.
 	 * @return

@@ -49,7 +49,7 @@ var club = {
 				'<p>' + 'Postal Code: ' + data.address.postal + '</p>' +
 				'<p>' + 'Phone: ' + data.phone + '</p>' +
 				'<p>' + 'Email: ' + data.email + '</p>' +
-				'<p>' + 'Balance: ' + data.balance +'$'+ '</p>' );
+				'<p>' + 'Balance: $' + data.balance + '</p>' );
 		},
 		
 		writeNotifications: function(data)
@@ -122,8 +122,9 @@ var club = {
 			var start = $("#startTimeSelect").val();
 			var end = $("#endTimeSelect").val();
 			var comment = $("#commentInputBox").val();
+			var recurring = document.reccuring.recure.checked;
 			
-			CommHandler.doPost(SERVER_LOC+PORT+"/home/submitBooking", { date: date, start: start, end: end, comment: comment}, club.bookingSuccess);
+			CommHandler.doPost(SERVER_LOC+PORT+"/home/submitBooking", { date: date, start: start, end: end, comment: comment, recurring: recurring}, club.bookingSuccess);
 		},
 		bookingSuccess : function(data)
 		{

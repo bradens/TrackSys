@@ -23,6 +23,18 @@ public class ClubDB {
 		}
 	}
 	
+	public void closeConnection()
+	{
+		try
+		{
+			conn.close();
+		}
+		catch (Exception e)
+		{
+			System.out.println("Could not close club connection");
+		}
+	}
+	
 	/* The update functionality */
 	private String BuildUpdate(Club club)
 	{
