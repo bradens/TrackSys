@@ -58,10 +58,7 @@ public class HomeView {
 		}
 		else if (target.endsWith("getRecentBookings"))
 		{
-			if (manager.isAdmin(req))
-				return this.getRecentBookings(req, resp);
-			else
-				ServletHandler.writeErr("Not an admin", req, resp);
+			return this.getRecentBookings(req, resp);
 		}
 		else if (target.endsWith("submitBooking"))
 		{
@@ -85,10 +82,7 @@ public class HomeView {
 		}
 		else if (target.endsWith("getCurrentClubProfile"))
 		{
-			if (manager.isClub(req))
-				return this.getCurrentClubProfile(req, resp);
-			else
-				ServletHandler.writeErr("this is an admin", req, resp);
+			return this.getCurrentClubProfile(req, resp);
 		}
 		return false;
 	}
