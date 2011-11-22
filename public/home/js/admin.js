@@ -56,7 +56,8 @@ var admin = {
 			'<td>' + data[i].id + '</td>' + '<td>' + data[i].name + '</td>' + 
 			'<td>' + data[i].address['city'] + '</td>' + '<td>' + data[i].email + '</td>' +
 			'<td>' + data[i].phone + '</td>' + '<td>' + data[i].electronicBilling + '</td>' +
-			'<td>' + data[i].signedWaiver + '</td>' + '</tr>');
+			'<td>' + data[i].signedWaiver + '</td>' +
+			'<td>' + data[i].balance + '</td>' + '</tr>');
 		}
 	},
 	

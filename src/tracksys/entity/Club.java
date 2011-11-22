@@ -10,6 +10,21 @@ public class Club {
 	private boolean electronicBilling;
 	private boolean signedWaiver;
 	private int admin;
+	private int balance;
+		
+	public Club(int id, String name, String passwd, Address address, String email, String phone, boolean electronic, boolean signed, int admin, int balance)
+	{
+		this.id = id;
+		this.name = name;
+		this.passwd = passwd;
+		this.address = address;
+		this.email = email;
+		this.phone = phone;
+		this.electronicBilling = electronic;
+		this.signedWaiver = signed;
+		this.admin = admin;
+		this.balance = balance;
+	}
 	
 	public Club(int id, String name, String passwd, Address address, String email, String phone, boolean electronic, boolean signed, int admin)
 	{
@@ -22,6 +37,7 @@ public class Club {
 		this.electronicBilling = electronic;
 		this.signedWaiver = signed;
 		this.admin = admin;
+		this.balance = 0;
 	}
 	
 	public Club(String name, String passwd, Address address, String email, String phone, boolean electronic, boolean signed)
@@ -33,6 +49,7 @@ public class Club {
 		this.phone = phone;
 		this.electronicBilling = electronic;
 		this.signedWaiver = signed;
+		this.balance = 0;
 	}
 	
 	public Club(int id)
@@ -43,6 +60,7 @@ public class Club {
 		this.email = "";
 		this.electronicBilling = false;
 		this.signedWaiver = false;
+		this.balance = 0;
 	}
 	
 	public int getID()
@@ -80,6 +98,11 @@ public class Club {
 		return admin;
 	}
 	
+	public int getBalance()
+	{
+		return balance;
+	}
+	
 	public void setName(String name)
 	{
 		this.name = name;
@@ -112,6 +135,18 @@ public class Club {
 		this.admin = a;
 	}
 	
+	public void setBalance(int balance)
+	{
+		this.balance = balance;
+	}
 	
+	public void increaseBalanceBy(int balance)
+	{
+		this.balance += balance;
+	}
 	
+	public void decreaseBalanceBy(int balance)
+	{
+		this.balance -= balance;
+	}
 }
