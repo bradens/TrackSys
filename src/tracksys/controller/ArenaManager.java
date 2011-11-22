@@ -239,18 +239,51 @@ public class ArenaManager {
 		return bookings;
 	}
 	
-	public void addBooking(Booking booking)
+	public boolean addBooking(Booking booking)
 	{
 		
 		BookingsDB db = new BookingsDB();
 		try 
 		{
-			db.insertBooking(booking);
-			db.closeConnection();
+			if(bookingIsValid(db, booking))
+			{
+				db.insertBooking(booking);
+				db.closeConnection();
+				return true;
+			}
+			else
+			{
+				db.closeConnection();
+				return false;
+			}
 		}
 		catch (Exception e)
 		{
 			System.out.println("Error inserting new booking");
+			return false;
+		}
+	}
+	
+	private boolean bookingIsValid(BookingsDB db, Booking booking)
+	{
+		List<Booking> conflicts = db.getFutureBookingConflicts(booking.getStartTime(), booking.getEndTime(), booking.getTrackID());
+		
+		if(conflicts.isEmpty())
+			return true;
+		else
+		{
+			for(int i=0; i < 8; i++)
+			{
+				booking.setTrackID(booking.getTrackID()+1);
+				if(booking.getTrackID() > 8)
+					booking.setTrackID(1);
+				
+				conflicts = db.getFutureBookingConflicts(booking.getStartTime(), booking.getEndTime(), booking.getTrackID());
+				if(conflicts.isEmpty())
+					return true;
+			}
+			
+			return false;
 		}
 	}
 }

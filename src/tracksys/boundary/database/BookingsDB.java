@@ -206,4 +206,35 @@ public class BookingsDB {
 			return null;
 		}
 	}
+	
+	/* Retrieve a list of future bookings that could conflict with the given date and track */
+	public List<Booking> getFutureBookingConflicts(Date start, Date end, int track)
+	{
+		String query = "SELECT * FROM tracksys.bookings JOIN tracksys.club on bookings.clubid=club.id WHERE trackID=\'" + track + "\' AND (startTime>=\'" + Resources.DATE_FORMAT.format(start) +
+					"\' AND startTime<\'" + Resources.DATE_FORMAT.format(end) + "\') AND (endTime>\'" + Resources.DATE_FORMAT.format(start) +
+					"\' AND endTime<=\'" + Resources.DATE_FORMAT.format(end) + "\')";
+		List<Booking> bookings = new ArrayList<Booking>();
+		
+		try
+		{
+			Statement s = conn.createStatement();
+			s.executeQuery(query);
+			ResultSet rs = s.getResultSet();
+			Booking tB;
+			
+			while(rs.next())
+			{
+				tB = new Booking(Integer.parseInt(rs.getString("id")), Integer.parseInt(rs.getString("clubid")), rs.getString("name"), Integer.parseInt(rs.getString("trackid")),
+						Resources.DATE_FORMAT.parse(rs.getString("startTime")), Resources.DATE_FORMAT.parse(rs.getString("endTime")), Resources.DATE_FORMAT.parse(rs.getString("bookedTime")), rs.getString("comment"));
+				bookings.add(tB);
+			}
+			
+			return bookings;
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

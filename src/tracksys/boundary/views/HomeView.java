@@ -269,10 +269,11 @@ public class HomeView {
 			else
 			{
 				Booking booking = new Booking(clubid, "", track, startDate, endDate, stamp, comment);
-				manager.addBooking(booking);
+				if(manager.addBooking(booking))
+					ServletHandler.writeResponse("true", resp);
+				else
+					ServletHandler.writeResponse("false", resp);
 			}
-			
-			ServletHandler.writeResponse("true", resp);
 		}
 		catch (Exception e)
 		{
