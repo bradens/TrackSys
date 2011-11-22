@@ -22,6 +22,7 @@ var club = {
 			$(".loadingNotifications").show('fast');
 			// Get the current club profile
 			CommHandler.doPost(SERVER_LOC+PORT+"/home/getCurrentClubProfile", null, this.writeClubProfile);
+			CommHandler.doPost(SERVER_LOC+PORT+"/home/getCurrentClubProfile", null, this.writeClubBalancePaymentTab);
 			$(".loadingClubProfile").show('fast');
 			// Get all the future bookings
 			CommHandler.doPost(SERVER_LOC+PORT+"/home/getFutureBookings", null, this.writeFutureBookings);
@@ -50,6 +51,21 @@ var club = {
 				'<p>' + 'Phone: ' + data.phone + '</p>' +
 				'<p>' + 'Email: ' + data.email + '</p>' +
 				'<p>' + 'Balance: $' + data.balance + '</p>' );
+		},
+		
+		writeClubBalancePaymentTab: function(data)
+		{
+			if (!data)
+			{
+				console.log("Failed to get current club profile");
+				return;
+			}
+			$('.paymentValue').append(data.balance +'.00' );
+		},
+				
+		paynow: function(data)
+		{
+			window.location.href = "https://www.paypal.com/";
 		},
 		
 		writeNotifications: function(data)
