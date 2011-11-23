@@ -53,6 +53,10 @@ public class HomeView {
 			else
 				ServletHandler.writeErr("Not an admin", req, resp);
 		}
+		else if (target.endsWith("removeNotification"))
+		{
+			return this.removeNotification(req,resp);
+		}
 		else if (target.endsWith("getTransactions"))
 		{
 			return this.getTransactions(req, resp);
@@ -218,6 +222,17 @@ public class HomeView {
 	{
 		manager.addNotification(req.getParameter(Resources.NOTIFICATION_TITLE_PARAM), 
 				req.getParameter(Resources.NOTIFICATION_MESSAGE_PARAM));
+		return true;
+	}
+	
+	/**
+	 * Removes a notification
+	 * @param req
+	 * @param resp
+	 */
+	public boolean removeNotification(HttpServletRequest req, HttpServletResponse resp)
+	{
+		manager.removeNotification(Integer.parseInt(req.getParameter("id")));
 		return true;
 	}
 	

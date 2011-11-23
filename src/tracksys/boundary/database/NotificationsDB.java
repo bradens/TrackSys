@@ -85,4 +85,19 @@ public class NotificationsDB {
 			return null;
 		}
 	}
+	
+	public boolean removeNotification(int notID)
+	{
+		System.out.println(notID);
+		/*String query = "";
+		try{
+			Statement s = conn.createStatement();
+			s.executeQuery(query);
+			return true;
+		}
+		catch (SQLException e){
+			e.printStackTrace();
+		}*/
+		return false;
+	}
 }
