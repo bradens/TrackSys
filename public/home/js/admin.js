@@ -122,7 +122,6 @@ var admin = {
 	cancelSuccess : function(data)
 	{
 		$( "#cancel-dialog").dialog("close");
-		$("#futureBookings tr").remove();
 		$(".recentBookingTable tr").remove();
 		CommHandler.doPost(SERVER_LOC+PORT+"/home/getRecentBookings", null, admin.fillRecentBookings);
 		$(".loadingBookings").show('fast');
@@ -142,7 +141,10 @@ var admin = {
 	},
 	flipSuccess : function(data)
 	{
-		window.location.href = "/home/admin.html";
+		$( "#maint-dialog").dialog("close");
+		$('.tracksTable tr').remove();
+		CommHandler.doPost(SERVER_LOC+PORT+"/home/getAllTracks", null, admin.fillTracksList);
+		$(".loadingTracks").show('fast');
 	},
 	openMaintDialog: function(data)
 	{
@@ -186,6 +188,10 @@ var admin = {
 			return;
 		}
 		$(".loadingTracks").css('display', 'none');
+		$('.tracksTable').append('<tr class="header">' +
+								'<th>Track ID</th>' +
+								'<th>Maintenance status</th>' +
+								'</tr>')
 		for (var i = 0;i < data.length;i++)
 		{
 			$('.tracksTable tr:last').after('<tr class="tracksTableRow" onclick="admin.openMaintDialog(' +
