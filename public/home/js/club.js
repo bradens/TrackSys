@@ -10,6 +10,9 @@ var club = {
 			// Initialize the cancellation dialog
 			$("#cancel-dialog").dialog({
 				autoOpen: false,
+				show: 'fade',
+				hide: 'fade',
+				modal: true,
 				height: 200,
 				width: 300,
 				buttons: {

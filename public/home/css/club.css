@@ -71,6 +71,10 @@ span.paymentText2 {
 	color: #999;
 }
 
+.makeBooking {
+	padding:10px;
+}
+
 /* Booking form stuff */
 .bookingForm {
 	margin: 20px 20px 20px 0px;

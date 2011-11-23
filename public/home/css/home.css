@@ -3,6 +3,10 @@
 	white-space:nowrap;
 }
 
+.administrativeWrap {
+	padding:10px;
+}
+
 div.BannerWrap {
 	font-size: 35px;
 	font-weight: 100;
@@ -44,7 +48,7 @@ div.leftColumn {
 div.rightColumnWrap {
 	border:none;
 	width: 73%;
-	height:90%;
+	height:90.5%;
 	min-width:540px;
 }
 
@@ -100,6 +104,10 @@ div.leftAccordion {
 
 .ui-tabs {
 	overflow:auto;
+}
+
+.ui-tabs .ui-tabs-panel {
+	padding :0;
 }
 
 #tabs.ui-tabs.ui-widget {
