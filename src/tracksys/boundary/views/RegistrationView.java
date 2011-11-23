@@ -61,11 +61,12 @@ public class RegistrationView {
 		else 
 			boolBilling = 0;
 		
-		if (name == "" || passwd == "" || street == "" || city == "" || province == "" ||
-				postal == "" || email == "" || phone == "" || boolWaiver == 0)
+		if (name.equalsIgnoreCase("") || passwd.equalsIgnoreCase("") || street.equalsIgnoreCase("") || city.equalsIgnoreCase("") || province.equalsIgnoreCase("") ||
+				postal.equalsIgnoreCase("") || email.equalsIgnoreCase("") || phone.equalsIgnoreCase("") || boolWaiver == 0)
 		{
 			System.out.println(waiver);
 			System.out.println(boolWaiver);
+			ServletHandler.writeResponse("false", resp);
 			return false;
 		}
 		else
