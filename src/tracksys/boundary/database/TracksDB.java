@@ -39,20 +39,43 @@ public class TracksDB {
 	
 	public boolean editTrack(int trackID, boolean isMaintained)
 	{
-		String insert = "INSERT INTO tracksys.notifications VALUES(default, ?, ?, ?)";
-		PreparedStatement ps = null;
-		try{
-			/*ps = conn.prepareStatement(insert);
-			ps.setString(1, title);
-			ps.setString(2, message);
-			ps.setString(3, timestamp);
-			ps.executeUpdate();*/
-			return true;
+		int i = 1;
+		if(isMaintained)
+			i = 0;
+		String query = "UPDATE tracksys.tracks SET isMaintenance=\'" + i + "\'" + 
+			" WHERE trackid=\'" + trackID + "\'";
+		try
+		{
+			Statement s = conn.createStatement();
+			s.executeUpdate(query);
 		}
-		catch (Exception e){
+		catch (Exception e)
+		{
 			e.printStackTrace();
 		}
-		return false;
+		return true;
+	}
+	
+	public boolean getTrackMaintenance(int trackID)
+	{
+		String query = "SELECT * FROM tracksys.tracks WHERE trackid=\'" + trackID + "\'";
+		try
+		{
+			Statement s = conn.createStatement();
+			s.executeQuery(query);
+			ResultSet rs = s.getResultSet();
+			rs.next();
+			int maint = Integer.parseInt(rs.getString("isMaintenance"));
+			if(maint > 0)
+				return true;
+			else
+				return false;
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		return true;
 	}
 	
 	/**
