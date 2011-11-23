@@ -38,17 +38,18 @@ public class ClubDB {
 	/* The update functionality */
 	private String BuildUpdate(Club club)
 	{
-		String query = "UPDATE " + table + " WHERE id=\'" + club.getID() + "\' SET ";
+		String query = "UPDATE " + table +  " SET ";
 		
-		query += "name=\'" + club.getName() + "\' ";
-		query += "passwd=\'" + club.getPassword() + "\' ";
-		query += "street=\'" + club.getAddress().getStreet() + "\' ";
-		query += "city=\'" + club.getAddress().getCity() + "\' ";
-		query += "province=\'" + club.getAddress().getProvince() + "\' ";
-		query += "postal=\'" + club.getAddress().getPostal() + "\' ";
-		query += "email=\'" + club.getEmail() + "\' ";
-		query += "phone=\'" + club.getPhoneNumber() + "\' ";
-		query += "balance=\'" + club.getBalance() + "\'";
+		query += "name=\'" + club.getName() + "\', ";
+		query += "passwd=\'" + club.getPassword() + "\', ";
+		query += "street=\'" + club.getAddress().getStreet() + "\', ";
+		query += "city=\'" + club.getAddress().getCity() + "\', ";
+		query += "province=\'" + club.getAddress().getProvince() + "\', ";
+		query += "postal=\'" + club.getAddress().getPostal() + "\', ";
+		query += "email=\'" + club.getEmail() + "\', ";
+		query += "phone=\'" + club.getPhoneNumber() + "\', ";
+		query += "balance=\'" + club.getBalance() + "\' ";
+		query += " WHERE id=\'" + club.getID() + "\'";
 		
 		return query;
 	}
@@ -63,7 +64,25 @@ public class ClubDB {
 		}
 		catch (Exception e)
 		{
-			System.err.println("Error running database query");
+			System.err.println("Error running updateClub query:");
+			System.err.println(query);
+		}	
+	}
+	
+	public void updateClubBalance(Club club)
+	{
+		String query = "UPDATE " + table +  " SET ";
+		query += "balance=\'" + club.getBalance() + "\'";
+		query += " WHERE id=\'" + club.getID() + "\'";
+		
+		try
+		{
+			Statement s = conn.createStatement();
+			s.executeUpdate(query);
+		}
+		catch (Exception e)
+		{
+			System.err.println("Error running updateClubBalance query");
 		}	
 	}
 	
@@ -118,7 +137,7 @@ public class ClubDB {
 			while(rs.next())
 			{
 				Address tempAddress = new Address(rs.getString("street"), rs.getString("city"), rs.getString("province"), "", rs.getString("postal"));
-				tempClub = new Club(rs.getInt("id"), rs.getString("name"), rs.getString("passwd"), tempAddress, rs.getString("email"), rs.getString("phone"), rs.getInt("electronicbilling"),rs.getInt("waiver"), rs.getInt("admin"), rs.getInt("balance"));
+				tempClub = new Club(rs.getInt("id"), rs.getString("name"), rs.getString("passwd"), tempAddress, rs.getString("email"), rs.getString("phone"), rs.getInt("electronicbilling"),rs.getInt("waiver"), rs.getInt("admin"), rs.getFloat("balance"));
 				clubs.add(tempClub);
 			}
 			return clubs;
@@ -144,13 +163,13 @@ public class ClubDB {
 				return null;
 			
 			Address address = new Address(rs.getString("street"), rs.getString("city"), rs.getString("province"), "", rs.getString("postal"));
-			Club club = new Club(rs.getInt("id"), rs.getString("name"), rs.getString("passwd"), address, rs.getString("email"), rs.getString("phone"), rs.getInt("electronicbilling"),rs.getInt("waiver"), rs.getInt("admin"), rs.getInt("balance"));
+			Club club = new Club(rs.getInt("id"), rs.getString("name"), rs.getString("passwd"), address, rs.getString("email"), rs.getString("phone"), rs.getInt("electronicbilling"),rs.getInt("waiver"), rs.getInt("admin"), rs.getFloat("balance"));
 			return club;
 			
 		}
 		catch (Exception e)
 		{
-			System.err.println("Error running database query");
+			System.err.println("Error running getClubFromID query");
 			return null;
 		}
 	}
@@ -169,7 +188,7 @@ public class ClubDB {
 				return null;
 			
 			Address address = new Address(rs.getString("street"), rs.getString("city"), rs.getString("province"), "", rs.getString("postal"));
-			Club club = new Club(rs.getInt("id"), rs.getString("name"), rs.getString("passwd"), address, rs.getString("email"), rs.getString("phone"), rs.getInt("electronicbilling"),rs.getInt("waiver"), rs.getInt("admin"), rs.getInt("balance"));
+			Club club = new Club(rs.getInt("id"), rs.getString("name"), rs.getString("passwd"), address, rs.getString("email"), rs.getString("phone"), rs.getInt("electronicbilling"),rs.getInt("waiver"), rs.getInt("admin"), rs.getFloat("balance"));
 			return club;
 			
 		}

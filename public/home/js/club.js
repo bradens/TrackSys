@@ -80,7 +80,25 @@ var club = {
 				
 		paynow: function(data)
 		{
-			window.location.href = "https://www.paypal.com/";
+			var amount  = $("#payInputBox").val();
+			var comment = $("#payCommentInputBox").val();
+						
+			CommHandler.doPost(SERVER_LOC+PORT+"/home/submitPayment", { amount: amount, comment: comment}, club.paymentSuccess);
+		},
+		
+		paymentSuccess : function(data)
+		{
+			if (data == "true")
+			{
+				window.location.href = "/home/club.html";
+				// Todo: just load all transactions back, not the whole page
+				//CommHandler.doPost(SERVER_LOC+PORT+"/home/getTransactions", null, this.fillTransactionsTable);
+				//$(".loadingTransactions").show('fast');
+			}
+			else
+			{
+				$(".paymenterror").fadeIn('fast');
+			}
 		},
 		
 		writeNotifications: function(data)
@@ -158,6 +176,7 @@ var club = {
 			
 			CommHandler.doPost(SERVER_LOC+PORT+"/home/submitBooking", { date: date, start: start, end: end, comment: comment, recurring: recurring}, club.bookingSuccess);
 		},
+		
 		bookingSuccess : function(data)
 		{
 			if (data == "true")

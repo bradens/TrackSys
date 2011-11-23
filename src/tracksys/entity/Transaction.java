@@ -17,6 +17,14 @@ public class Transaction {
 		this.comment = comment;
 	}
 	
+	public Transaction(int clubID, float payment, Date time, String comment)
+	{
+		this.clubID = clubID;
+		this.paymentFee = payment;
+		this.paymentTime = time;
+		this.comment = comment;
+	}
+	
 	public Transaction(int id)
 	{
 		this.id = id;

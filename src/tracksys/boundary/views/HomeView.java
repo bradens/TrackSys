@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
+import java.lang.Float;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -98,7 +99,39 @@ public class HomeView {
 		{
 			return this.getCurrentClubProfile(req, resp);
 		}
+		else if (target.endsWith("submitPayment"))
+		{
+			return this.addPayment(req, resp);
+		}
 		return false;
+	}
+	
+	//////////////////////////////////////////////////////////////////////////////
+	// Add new transaction
+	public boolean addPayment(HttpServletRequest req, HttpServletResponse resp)
+	{
+		Date payDate    = new Date();
+		String comment = req.getParameter("comment");
+		String amount  = req.getParameter("amount");
+		
+		try 
+		{
+			// get information
+			int clubID = manager.getClubIDFromCookie(req);
+			Float payamount = new Float(amount);
+			
+			Transaction payment = new Transaction(clubID,payamount.floatValue(),payDate,comment);
+			manager.addTransactions(payment);
+			ServletHandler.writeResponse("true", resp);
+		}
+		catch (Exception e)
+		{
+			System.out.println("Error adding payment");
+			ServletHandler.writeResponse("false", resp);
+			return false;
+		}
+		
+		return true;
 	}
 	
 	public boolean getRecentBookings(HttpServletRequest req, HttpServletResponse resp)
