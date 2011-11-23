@@ -15,6 +15,11 @@
 		</style>
 	</head>
 	<body onload="club.init();">
+	<div id="cancel-dialog" title="Booking Cancellation" value="">
+		<p>
+			Are you sure you want to cancel this booking?
+		</p>
+	</div>
 	<div class="underlay">
 		<div class="BannerWrap">
 			<span id="bannerText">club</span>
@@ -23,21 +28,21 @@
 		<div class="column leftColumnWrap">
 			<div class="leftColumn">
 				<div id="leftAccordion">
-				    <h3><a href="#">Profile</a></h3>
-				    <div>
-					    <span class="profileInformation"></span>
-					    <div class="loadingClubProfile" style="display:none;">
-							<div class="ajaxLoading"></div>
-						</div>
-					    <hr/>
-					    <span class="notificationsTitle">Notifications:</span>
-					    <ul class="notificationsBox">
-					    	<li class="loadingNotifications" style="display:none;">
-					  			<div class="ajaxLoading">
-					  			</div>
-					  		</li>
-					    </ul>
-				    </div>
+				    <span class="profileTitle">Profile</span>
+				    <table class="profileTbl">
+				    </table>
+				    <div class="loadingClubProfile" style="display:none;">
+						<div class="ajaxLoading"></div>
+					</div>
+					<a class="button editBtn" onclick="club.editClub();">Edit</a>
+					<hr>
+				    <span class="notificationsTitle">Notifications:</span>
+				    <ul class="notificationsBox">
+				    	<li class="loadingNotifications" style="display:none;">
+				  			<div class="ajaxLoading">
+				  			</div>
+				  		</li>
+				    </ul>
 				</div>
 			</div>
 		</div>
@@ -59,69 +64,71 @@
 						</div>
 					</div>
 					<div id="tabs-2">
-						<p>
-							Please fill in the information below to request a booking.
-						</p>
-						<div class="errorPopup">
-							<span class="errorTitle">Error.</span><br/>
-							<span class="errorDesc">The booking you requested was not available, or your input was invalid. If you requested a recurring booking, some booking may have gone through and others may have been denied. Refresh the Future Bookings tab for details.</span>
-						</div>
-						<div class="bookingForm">
-							<span class="dayLabel label">Day: </span>
-							<input id="datepicker" />
-							
-							<span class="startLabel label">Start Time: </span>
-							<div class="bookingSelect">
-							<select id="startTimeSelect">
-							<option>06:00</option>
-							<option>07:00</option>
-							<option>08:00</option>
-							<option>09:00</option>
-							<option>10:00</option>
-							<option>11:00</option>
-							<option>12:00</option>
-							<option>13:00</option>
-							<option>14:00</option>
-							<option>15:00</option>
-							<option>16:00</option>
-							<option>17:00</option>
-							<option>18:00</option>
-							<option>19:00</option>
-							<option>20:00</option>
-							<option>21:00</option>
-							</select>
+						<div class="makeBooking">
+							<p>
+								Please fill in the information below to request a booking.
+							</p>
+							<div class="errorPopup">
+								<span class="errorTitle">Error.</span><br/>
+								<span class="errorDesc">The booking you requested was not available, or your input was invalid. If you requested a recurring booking, some booking may have gone through and others may have been denied. Refresh the Future Bookings tab for details.</span>
+							</div>
+							<div class="bookingForm">
+								<span class="dayLabel label">Day: </span>
+								<input id="datepicker" />
+								
+								<span class="startLabel label">Start Time: </span>
+								<div class="bookingSelect">
+								<select id="startTimeSelect">
+								<option>06:00</option>
+								<option>07:00</option>
+								<option>08:00</option>
+								<option>09:00</option>
+								<option>10:00</option>
+								<option>11:00</option>
+								<option>12:00</option>
+								<option>13:00</option>
+								<option>14:00</option>
+								<option>15:00</option>
+								<option>16:00</option>
+								<option>17:00</option>
+								<option>18:00</option>
+								<option>19:00</option>
+								<option>20:00</option>
+								<option>21:00</option>
+								</select>
+								</div>
+								
+								<span class="endLabel label">End Time: </span>
+								<div class="bookingSelect">
+								<select id="endTimeSelect">
+								<option>07:00</option>
+								<option>08:00</option>
+								<option>09:00</option>
+								<option>10:00</option>
+								<option>10:00</option>
+								<option>11:00</option>
+								<option>12:00</option>
+								<option>13:00</option>
+								<option>14:00</option>
+								<option>15:00</option>
+								<option>16:00</option>
+								<option>17:00</option>
+								<option>18:00</option>
+								<option>19:00</option>
+								<option>20:00</option>
+								<option>21:00</option>
+								<option>22:00</option>
+								</select>
+								</div>
+								
+								<span class="commentLabel label">Comment: </span><input id="commentInputBox" class="bookingInput formInputBox" type="text" />
+								
+								<span class="recurringLabel label">Recurring: </span><form name="reccuring"><input id="recurringInputBox" class="bookingInput formInputBox" name="recure" type="checkbox" /></form>
 							</div>
 							
-							<span class="endLabel label">End Time: </span>
-							<div class="bookingSelect">
-							<select id="endTimeSelect">
-							<option>07:00</option>
-							<option>08:00</option>
-							<option>09:00</option>
-							<option>10:00</option>
-							<option>10:00</option>
-							<option>11:00</option>
-							<option>12:00</option>
-							<option>13:00</option>
-							<option>14:00</option>
-							<option>15:00</option>
-							<option>16:00</option>
-							<option>17:00</option>
-							<option>18:00</option>
-							<option>19:00</option>
-							<option>20:00</option>
-							<option>21:00</option>
-							<option>22:00</option>
-							</select>
+							<div class="columnFooter">
+								<a onclick="club.makeBooking();" class="submitBtn big button">Submit</a>
 							</div>
-							
-							<span class="commentLabel label">Comment: </span><input id="commentInputBox" class="bookingInput formInputBox" type="text" />
-							
-							<span class="recurringLabel label">Recurring: </span><form name="reccuring"><input id="recurringInputBox" class="bookingInput formInputBox" name="recure" type="checkbox" /></form>
-						</div>
-						
-						<div class="columnFooter">
-							<a onclick="club.makeBooking();" class="submitBtn big button">Submit</a>
 						</div>
 					</div>
 					<div id="tabs-3">
@@ -139,12 +146,21 @@
 									<div class="paymentBalanceHeader">
 										<span class="paymentText1">Current</span>
 										<span class="paymentText2">Balance</span>
-										<span class="paymentValue"></span>
-										<a href="http://www.paypal.com" target="_blank" class="big button">Pay Now</a>
+										<span class="paymentValue">$</span>
 									</div>	
-									
+									<div class="paymenterror errorPopup">
+										<span class="errorTitle">Error.</span><br/>
+										<span class="errorDesc">The payment you requested was invalid, please make sure your payment amount are in numeric format.</span>
+									</div>
+									<div class="paymentForm">
+										<span class="paymentLabel label">Payment amount: </span><input id="payInputBox" class="payAmountInput formInputBox" type="int" />
+										<span class="paymentLabel label">Comment: </span><input id="payCommentInputBox" class="payCommentInput formInputBox" type="text" />
+										<a onclick="club.paynow();" class="big button">Pay Now</a>
+									</div>
 								</div>
 							</div>
+							</p>
+							<p>
 							<div class="paymentRow paymentTopRowWrap">
 								<div class="paymentTopRow">
 									<div class="paymentHeader">
@@ -165,7 +181,6 @@
 									</div>
 								</div>
 							</div>
-
 						</p>
 					</div>
 				</div>

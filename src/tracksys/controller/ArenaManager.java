@@ -200,6 +200,20 @@ public class ArenaManager {
 		return transactions;
 	}
 	
+	public void addTransactions(Transaction newTrans)
+	{
+		// Create transaction
+		TransactionsDB tdb = new TransactionsDB();
+		tdb.insertTransactions(newTrans);	
+		tdb.closeConnection();
+		
+		// Update club balance
+		ClubDB cdb = new ClubDB();
+		Club club = cdb.getClubFromID(newTrans.getClubID());
+		club.creditBalanceBy(newTrans.getPaymentFee());
+		cdb.updateClub(club);
+		cdb.closeConnection();
+	}
 	/**
 	 * Tracks methods
 	 */

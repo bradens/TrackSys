@@ -73,7 +73,6 @@ public class NotificationsDB {
 			ResultSet rs = s.getResultSet();
 			while(rs.next())
 			{
-				
 				tempNot = new Notification(Resources.DATE_FORMAT.parse(rs.getString("date")), rs.getString("title"), rs.getString("message"));
 				notifications.add(tempNot);
 			}

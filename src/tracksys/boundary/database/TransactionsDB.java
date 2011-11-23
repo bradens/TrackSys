@@ -2,7 +2,9 @@ package tracksys.boundary.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +66,30 @@ public class TransactionsDB {
 		{
 			e.printStackTrace();
 			return null;
+		}
+	}
+	
+	/////////////////////////////////////////////////////
+	// Add new transaction
+	public void insertTransactions(Transaction trans)
+	{
+		
+		String query = "INSERT INTO tracksys.transactions " + "(";
+		
+		query += "clubid, paymentfee, paymenttime, comment ) VALUES (";
+		
+		query += "\'" + trans.getClubID() + "\', ";
+		query += "\'" + trans.getPaymentFee() + "\', ";
+		query += "\'" + Resources.DATE_FORMAT.format(trans.getPaymentTime()) + "\', ";
+		query += "\'" + trans.getComment() + "\')";
+		try
+		{
+			Statement s = conn.createStatement();
+			s.executeUpdate(query);
+		}
+		catch (Exception e)
+		{
+			System.err.println("Error running insertTransactions query");
 		}
 	}
 }

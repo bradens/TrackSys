@@ -14,9 +14,9 @@
 	box-shadow: 0px 1px 4px 4px rgba(200,200,255, .7);
 }
 div.paymentTopRowWrap {
-	width: 100%;
-	height: 80%;
-	min-width: 80%;
+	width: 99%;
+	height: 50%;
+	min-width: 50%;
 }
 div.paymentTopRow {
 	float: left;
@@ -24,9 +24,9 @@ div.paymentTopRow {
 	height: 100%;
 }
 div.paymentBottomRowWrap {
-	width: 100%;
-	height: 15%;
-	min-width: 15%;
+	width: 99%;
+	height: 45%;
+	min-width: 45%;
 	margin-top: 20px;
 }
 div.paymentBottomRow {
@@ -59,16 +59,40 @@ div.paymentBalanceHeader {
 	margin-bottom:10px;
 }
 
-div.paymentBalanceHeader a.big button{
-	margin-right:2px;
+.paymentForm span.paymentLabel {
+	margin-top:2px;
 	width: 120px;
 }
+
+.paymentForm input {
+	font-weight: inherit;
+	font-style: inherit;
+	font-family: inherit;
+	display: block;
+	margin: 0px 2px 10px 10px;
+	white-space: nowrap;
+	overflow: hidden;
+	width: 30%;
+	-webkit-box-shadow: 0px 0px 3px 2px rgba(0,0,150,.15);
+	padding: 4px;
+	-webkit-border-radius: 3px;
+	border: #999 thin solid;
+	font-size: 14px;
+	background-color: rgba(195,195,255, .3);
+	-webkit-transition: background-color .25s ease-in;
+	line-height: 1.5;
+}
+
 
 span.paymentText1 {
 	color: #666;
 }
 span.paymentText2 {
 	color: #999;
+}
+
+.makeBooking {
+	padding:10px;
 }
 
 /* Booking form stuff */
@@ -146,8 +170,24 @@ div.bookingHr {
 	font-size: 16px;
 }
 
+#leftAccordion {
+	padding-top:10px;
+}
+
+table.profileTbl {
+	margin-top:10px;
+}
+
 span.profileInformation {
-	font-family: georgia;
-	font-size: 16px;
-	color: #696969;
+	font-size:14px;
+	margin-bottom:10px;
+}
+
+span.profileTitle {
+	padding-left:10px;
+	font-size:16px;
+}
+
+.editBtn {
+	margin : 10px 0 10px 10px;
 }

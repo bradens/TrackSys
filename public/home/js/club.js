@@ -1,21 +1,29 @@
 var club = {
 		init : function()
-		{
-			// Left column initialization
-			$("#leftAccordion").accordion({
-				fillSpace: true
-			});
-			
-			$('.accordion .head').click(function() {
-				$(this).next().toggle('slow');
-				return false;
-			}).next().hide();
-			
+		{	
 			// Right column initialization
 			$("#tabs").tabs();
 			
 			// Initialize all date pickers here
 			$('#datepicker').datepicker({ dateFormat: 'yy-mm-dd' });
+			
+			// Initialize the cancellation dialog
+			$("#cancel-dialog").dialog({
+				autoOpen: false,
+				show: 'fade',
+				hide: 'fade',
+				modal: true,
+				height: 150,
+				width: 300,
+				buttons: {
+					"Yes": function() {
+						club.cancelBooking();
+					},
+					"No": function() {
+						$( this ).dialog( "close" );
+					}
+				}
+			});
 			
 			// Get all the notifications
 			CommHandler.doPost(SERVER_LOC+PORT+"/home/getNotifications", null, this.writeNotifications);
@@ -43,14 +51,25 @@ var club = {
 				return;
 			}
 			$(".loadingClubProfile").hide('fast');
-			$('.profileInformation').append(
-				'<p>' + 'Club: '+ data.name + '</p>' +
-				'<p>' + 'Address: ' + data.address.street +'</p>' +
-				'<p>' + 'City: ' + data.address.city +', ' + data.address.province +'</p>' +
-				'<p>' + 'Postal Code: ' + data.address.postal + '</p>' +
-				'<p>' + 'Phone: ' + data.phone + '</p>' +
-				'<p>' + 'Email: ' + data.email + '</p>' +
-				'<p>' + 'Balance: $' + data.balance + '</p>' );
+			$(".profileTbl").append(
+				'<tr class="profileRow"><td><span class="lbl">Club:</span></td><td><span class=lblVal>' + data.name + '</span></td></tr>' +
+				'<tr class="profileRow"><td><span class="lbl">Address:</span></td><td><span class=lblVal>' + data.address.street + '</span></td></tr>' +
+				'<tr class="profileRow"><td><span class="lbl">City:</span></td><td><span class=lblVal>' + data.address.city + '</span></td></tr>' +
+				'<tr class="profileRow"><td><span class="lbl">Postal Code:</span></td><td><span class=lblVal>' + data.address.postal + '</span></td></tr>' +
+				'<tr class="profileRow"><td><span class="lbl">Phone:</span></td><td><span class=lblVal>' + data.phone + '</span></td></tr>' +
+				'<tr class="profileRow"><td><span class="lbl">Email:</span></td><td><span class=lblVal>' + data.email + '</span></td></tr>' +
+				'<tr class="profileRow"><td><span class="lbl">Balance:</span></td><td><span class=lblVal>' + data.balance + '</span></td></tr>'
+			);
+	
+			
+//			$('.profileInformation').append(
+//				'<span class="lbl">' + 'Club: </span><span class="lblVal">'+ data.name + '</span><br/>' +
+//				'<span class="lbl">' + 'Address: </span><span class="lblVal">' + data.address.street +'</span><br/>' +
+//				'<span class="lbl">' + 'City: </span><span class="lblVal">' + data.address.city +', ' + data.address.province +'</span><br/>' +
+//				'<span class="lbl">' + 'Postal Code: </span><span class="lblVal">' + data.address.postal + '</span><br/>' +
+//				'<span class="lbl">' + 'Phone: </span><span class="lblVal">' + data.phone + '</span><br/>' +
+//				'<span class="lbl">' + 'Email: </span><span class="lblVal">' + data.email + '</span><br/>' +
+//				'<span class="lbl">' + 'Balance: </span><span class="lblVal">$' + data.balance + '</span><br/>' );
 		},
 		
 		writeClubBalancePaymentTab: function(data)
@@ -65,7 +84,25 @@ var club = {
 				
 		paynow: function(data)
 		{
-			window.location.href = "https://www.paypal.com/";
+			var amount  = $("#payInputBox").val();
+			var comment = $("#payCommentInputBox").val();
+						
+			CommHandler.doPost(SERVER_LOC+PORT+"/home/submitPayment", { amount: amount, comment: comment}, club.paymentSuccess);
+		},
+		
+		paymentSuccess : function(data)
+		{
+			if (data == "true")
+			{
+				window.location.href = "/home/club.html";
+				// Todo: just load all transactions back, not the whole page
+				//CommHandler.doPost(SERVER_LOC+PORT+"/home/getTransactions", null, this.fillTransactionsTable);
+				//$(".loadingTransactions").show('fast');
+			}
+			else
+			{
+				$(".paymenterror").fadeIn('fast');
+			}
 		},
 		
 		writeNotifications: function(data)
@@ -91,6 +128,7 @@ var club = {
 				console.log("Failed to get future bookings");
 				return;
 			}
+			console.log("Creating future table");
 			$(".loadingBookingFuture").css('display', 'none');
 			$('#futureBookings').append('<tr class="header">' + 
 											'<th>Track</th>' +
@@ -100,7 +138,8 @@ var club = {
 											'</tr>');
 			for (var i = 0;i < data.length;i++)
 			{
-				$('#futureBookings').append('<tr class="transactionTableRow"><td>' +
+				$('#futureBookings').append('<tr class="transactionTableRow" onclick=\"club.openCancelDialog(' + 
+						data[i].id + ');\""><td>' +
 						data[i].trackID + '</td><td>' + 
 						data[i].startTime + '</td><td>' + 
 						data[i].endTime + '</td><td>' + 
@@ -142,6 +181,7 @@ var club = {
 			
 			CommHandler.doPost(SERVER_LOC+PORT+"/home/submitBooking", { date: date, start: start, end: end, comment: comment, recurring: recurring}, club.bookingSuccess);
 		},
+		
 		bookingSuccess : function(data)
 		{
 			if (data == "true")
@@ -150,6 +190,19 @@ var club = {
 			{
 				$(".errorPopup").fadeIn('fast');
 			}
+		},
+		cancelBooking : function()
+		{
+			var id = $("#cancel-dialog").val();
+			
+			CommHandler.doPost(SERVER_LOC+PORT+"/home/cancelBooking", { id: id}, club.cancelSuccess);
+		},
+		cancelSuccess : function(data)
+		{
+			$( "#cancel-dialog").dialog("close");
+			$("#futureBookings tr").remove();
+			CommHandler.doPost(SERVER_LOC+PORT+"/home/getFutureBookings", null, club.writeFutureBookings);
+			$(".loadingBookingFuture").show('fast');
 		},
 		fillTransactionsTable : function(data)
 		{
@@ -165,7 +218,14 @@ var club = {
 					'<td>' + data[i].id + '</td>' + '<td>' + data[i].paymentFee + '</td>' + 
 					'<td>' + data[i].paymentTime + '</td>' + '<td>' + data[i].comment + '</tr>');
 			}
-		}
+		},
+		openCancelDialog: function(data)
+		{
+			console.log(data);
+			$("#cancel-dialog").val(data);
+			console.log($("#cancel-dialog").val());
+			$("#cancel-dialog").dialog( "open" );
+		},
 }
 
 function init() {

@@ -4,11 +4,14 @@ import java.util.Date;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
+import java.lang.Float;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import tracksys.Resources;
+import tracksys.boundary.database.BookingsDB;
+import tracksys.boundary.database.TracksDB;
 import tracksys.controller.ArenaManager;
 import tracksys.entity.Booking;
 import tracksys.entity.Club;
@@ -69,6 +72,10 @@ public class HomeView {
 		{
 			return this.addBooking(req, resp);
 		}
+		else if (target.endsWith("cancelBooking"))
+		{
+			return this.cancelBooking(req, resp);
+		}
 		else if (target.endsWith("getFutureBookings"))
 		{
 			return this.getFutureBookings(req, resp);
@@ -89,11 +96,47 @@ public class HomeView {
 		{
 			return this.getTracks(req, resp);
 		}
+		else if (target.endsWith("flipMaint"))
+		{
+			return this.flipMaint(req, resp);
+		}
 		else if (target.endsWith("getCurrentClubProfile"))
 		{
 			return this.getCurrentClubProfile(req, resp);
 		}
+		else if (target.endsWith("submitPayment"))
+		{
+			return this.addPayment(req, resp);
+		}
 		return false;
+	}
+	
+	//////////////////////////////////////////////////////////////////////////////
+	// Add new transaction
+	public boolean addPayment(HttpServletRequest req, HttpServletResponse resp)
+	{
+		Date payDate    = new Date();
+		String comment = req.getParameter("comment");
+		String amount  = req.getParameter("amount");
+		
+		try 
+		{
+			// get information
+			int clubID = manager.getClubIDFromCookie(req);
+			Float payamount = new Float(amount);
+			
+			Transaction payment = new Transaction(clubID,payamount.floatValue(),payDate,comment);
+			manager.addTransactions(payment);
+			ServletHandler.writeResponse("true", resp);
+		}
+		catch (Exception e)
+		{
+			System.out.println("Error adding payment");
+			ServletHandler.writeResponse("false", resp);
+			return false;
+		}
+		
+		return true;
 	}
 	
 	public boolean getRecentBookings(HttpServletRequest req, HttpServletResponse resp)
@@ -307,6 +350,37 @@ public class HomeView {
 			ServletHandler.writeResponse("false", resp);
 		}
 		
+		return true;
+	}
+	
+	/**
+	 * Cancels a booking.
+	 * @param req
+	 * @param resp
+	 */
+	public boolean cancelBooking(HttpServletRequest req, HttpServletResponse resp)
+	{
+		String ID = req.getParameter("id");
+		
+		BookingsDB db = new BookingsDB();
+		db.cancelBooking(Integer.parseInt(ID));
+		db.closeConnection();
+		return true;
+	}
+	
+	/**
+	 * Flips a track maintenance setting.
+	 * @param req
+	 * @param resp
+	 */
+	public boolean flipMaint(HttpServletRequest req, HttpServletResponse resp)
+	{
+		String ID = req.getParameter("id");
+		
+		TracksDB db = new TracksDB();
+		boolean flip = db.getTrackMaintenance(Integer.parseInt(ID));
+		db.editTrack(Integer.parseInt(ID), flip);
+		db.closeConnection();
 		return true;
 	}
 	

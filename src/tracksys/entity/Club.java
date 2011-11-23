@@ -10,9 +10,9 @@ public class Club {
 	private int electronicBilling;
 	private int signedWaiver;
 	private int admin;
-	private int balance;
+	private float balance;
 		
-	public Club(int id, String name, String passwd, Address address, String email, String phone, int electronic, int signed, int admin, int balance)
+	public Club(int id, String name, String passwd, Address address, String email, String phone, int electronic, int signed, int admin, float balance)
 	{
 		this.id = id;
 		this.name = name;
@@ -108,7 +108,7 @@ public class Club {
 		return this.signedWaiver;
 	}
 	
-	public int getBalance()
+	public float getBalance()
 	{
 		return balance;
 	}
@@ -145,18 +145,17 @@ public class Club {
 		this.admin = a;
 	}
 	
-	public void setBalance(int balance)
+	public void setBalance(float balance)
 	{
 		this.balance = balance;
 	}
 	
-	public void increaseBalanceBy(int balance)
-	{
-		this.balance += balance;
-	}
-	
-	public void decreaseBalanceBy(int balance)
+	public void creditBalanceBy(float balance)
 	{
 		this.balance -= balance;
+	}
+	public void debitBalanceBy(float balance)
+	{
+		this.balance += balance;
 	}
 }
