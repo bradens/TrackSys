@@ -1,22 +1,41 @@
 var admin = {
 	init: function()
-	{
-		// Left pane init
-		/*
-		$("#leftAccordion").accordion({
-			fillSpace: true
-		});
-		
-		$('.accordion .head').click(function() {
-			$(this).next().toggle('slow');
-			return false;
-		}).next().hide();
-		*/
-		
+	{	
 		$('#datepicker').datepicker({ dateFormat: 'yy-mm-dd', currentText: 'Today' });
 		$('#datepicker').datepicker().change(function(){
 			admin.rewriteDayBookings();
 		});
+		
+		// Initialize the cancellation dialog
+		$("#cancel-dialog").dialog({
+			autoOpen: false,
+			height: 150,
+			width: 300,
+			buttons: {
+				"Yes": function() {
+					admin.cancelBooking();
+				},
+				"No": function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		});
+		
+		// Initialize the maintenance dialog
+		$("#maint-dialog").dialog({
+			autoOpen: false,
+			height: 150,
+			width: 300,
+			buttons: {
+				"Yes": function() {
+					admin.flipMaint();
+				},
+				"No": function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		});
+		
 		// Right pane init
 		$("#rightTabs").tabs();
 		// Get all notifications
@@ -92,7 +111,40 @@ var admin = {
 			+ bookingsArray[7] + '</td></tr>');
 		}
 	},
-
+	cancelBooking : function()
+	{
+		var id = $("#cancel-dialog").val();
+		
+		CommHandler.doPost(SERVER_LOC+PORT+"/home/cancelBooking", { id: id}, admin.cancelSuccess);
+	},
+	cancelSuccess : function(data)
+	{
+		window.location.href = "/home/admin.html";
+	},
+	openCancelDialog: function(data)
+	{
+		console.log(data);
+		$("#cancel-dialog").val(data);
+		console.log($("#cancel-dialog").val());
+		$("#cancel-dialog").dialog( "open" );
+	},
+	flipMaint : function()
+	{
+		var id = $("#maint-dialog").val();
+		
+		CommHandler.doPost(SERVER_LOC+PORT+"/home/flipMaint", { id: id}, admin.flipSuccess);
+	},
+	flipSuccess : function(data)
+	{
+		window.location.href = "/home/admin.html";
+	},
+	openMaintDialog: function(data)
+	{
+		console.log(data);
+		$("#maint-dialog").val(data);
+		console.log($("#maint-dialog").val());
+		$("#maint-dialog").dialog( "open" );
+	},
 	writeClubsList : function(data)
 	{
 		if (!data)
@@ -130,7 +182,8 @@ var admin = {
 		$(".loadingTracks").css('display', 'none');
 		for (var i = 0;i < data.length;i++)
 		{
-			$('.tracksTable tr:last').after('<tr class="tracksTableRow">' + 
+			$('.tracksTable tr:last').after('<tr class="tracksTableRow" onclick="admin.openMaintDialog(' +
+					data[i].trackID + ');">' + 
 			'<td>' + data[i].trackID + '</td>' +
 			'<td>' + data[i].isBookedForMaintenance + '</td>' + '</tr>');
 		}
@@ -146,7 +199,8 @@ var admin = {
 		$(".loadingBookings").css('display', 'none');
 		for (var i = 0;i < data.length;i++)
 		{
-			$('.recentBookingTable tr:last').after('<tr class="recentBookingRow">' + 
+			$('.recentBookingTable tr:last').after('<tr class="recentBookingRow" onclick=\"admin.openCancelDialog(' + 
+				data[i].id + ');\"">' +
 				'<td>' + data[i].clubName + '</td>' + '<td>' + data[i].trackID + '</td>' + 
 				'<td>' + data[i].startTime + '</td>' + '<td>' + data[i].endTime + '</td>' +
 				'<td>' + data[i].comment + '</td></tr>');

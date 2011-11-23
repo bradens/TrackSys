@@ -16,6 +16,16 @@
 		</style>
 	</head>
 	<body onload="admin.init();">
+	<div id="cancel-dialog" title="Booking Cancellation" value="">
+		<p>
+			Are you sure you want to cancel this booking?
+		</p>
+	</div>
+	<div id="maint-dialog" title="Track Maintanence" value="">
+		<p>
+			Are you sure you want to flip this track's maintenance?
+		</p>
+	</div>
 	<div class="underlay">
 		<div class="BannerWrap">
 			<span id="bannerText">admin</span>
@@ -24,7 +34,7 @@
 		<div class="column leftColumnWrap">
 			<div class="leftColumn">
 				<div id="leftAccordion">
-					<div class="sendNotificationWrap">
+					<div class="administrativeWrap">
 						<div class="titleBox">
 							<span class="notifLabel label">Title: </span>
 							<input class="formInputBox titleInput "/>
