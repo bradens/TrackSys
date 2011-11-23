@@ -128,6 +128,7 @@ var club = {
 				console.log("Failed to get future bookings");
 				return;
 			}
+			console.log("Creating future table");
 			$(".loadingBookingFuture").css('display', 'none');
 			$('#futureBookings').append('<tr class="header">' + 
 											'<th>Track</th>' +
@@ -198,7 +199,10 @@ var club = {
 		},
 		cancelSuccess : function(data)
 		{
-			window.location.href = "/home/club.html";
+			$( "#cancel-dialog").dialog("close");
+			$("#futureBookings tr").remove();
+			CommHandler.doPost(SERVER_LOC+PORT+"/home/getFutureBookings", null, club.writeFutureBookings);
+			$(".loadingBookingFuture").show('fast');
 		},
 		fillTransactionsTable : function(data)
 		{
@@ -221,7 +225,7 @@ var club = {
 			$("#cancel-dialog").val(data);
 			console.log($("#cancel-dialog").val());
 			$("#cancel-dialog").dialog( "open" );
-		}
+		},
 }
 
 function init() {

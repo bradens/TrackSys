@@ -11,6 +11,7 @@ var admin = {
 			autoOpen: false,
 			height: 150,
 			width: 300,
+			modal: true,
 			buttons: {
 				"Yes": function() {
 					admin.cancelBooking();
@@ -26,6 +27,7 @@ var admin = {
 			autoOpen: false,
 			height: 150,
 			width: 300,
+			modal: true,
 			buttons: {
 				"Yes": function() {
 					admin.flipMaint();
@@ -119,7 +121,11 @@ var admin = {
 	},
 	cancelSuccess : function(data)
 	{
-		window.location.href = "/home/admin.html";
+		$( "#cancel-dialog").dialog("close");
+		$("#futureBookings tr").remove();
+		$(".recentBookingTable tr").remove();
+		CommHandler.doPost(SERVER_LOC+PORT+"/home/getRecentBookings", null, admin.fillRecentBookings);
+		$(".loadingBookings").show('fast');
 	},
 	openCancelDialog: function(data)
 	{
@@ -197,6 +203,13 @@ var admin = {
 			return;
 		}
 		$(".loadingBookings").css('display', 'none');
+		$('.recentBookingTable').append('<tr class="header">' +
+								'<th>Club</th>' +
+								'<th>Track</th>' +
+								'<th>StartTime</th>' +
+								'<th>EndTime</th>' +
+								'<th>Comment</th>' +
+							'</tr>');
 		for (var i = 0;i < data.length;i++)
 		{
 			$('.recentBookingTable tr:last').after('<tr class="recentBookingRow" onclick=\"admin.openCancelDialog(' + 
