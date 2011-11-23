@@ -9,7 +9,7 @@ body {
 	height: 100%;
 	background: repeat url("../images/bg_stripes.png");
 	background-color: rgba(255,255,255,.8);
-	font-weight:lighter;
+	font-weight:100 !important;
 }
 
 .underlay {

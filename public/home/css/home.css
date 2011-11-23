@@ -102,6 +102,13 @@ div.leftAccordion {
 	height: 99%;
 } 
 
+.bookedCell {
+	background-color: rgba(255, 150, 150, .5);
+}
+
+
+/***************************** JQUERY OVERRIDES *********************************/
+
 .ui-tabs {
 	overflow:auto;
 }

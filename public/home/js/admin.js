@@ -76,9 +76,9 @@ var admin = {
 		$(".loadingNotifications").hide('fast');
 		for (var i = 0;i < data.length;i++)
 		{
-			$('.notificationsBox').append('<li><div class="notification">' +
+			$('.notificationsBox').append('<li><div class="notification"><a onclick="admin.removeNotification('+ data[i].id +');" class="button negative notificationRemoveButton"><span class="icon trash"></span></a>' +
 					'<span class="date">' + data[i].timestamp + '</span><span class="title">' + data[i].title + '</span>' + 
-					'<span class="message">' + data[i].message + '</span><a onclick="admin.removeNotification('+ data[i].id +');" class="button negative notificationRemoveButton">X</a></div></li>');
+					'<span class="message">' + data[i].message + '</span></div></li>');
 		}
 	},
 	
@@ -104,15 +104,19 @@ var admin = {
 		{
 			var bookingsArray = new Array(8);
 			for(var j = 0; j < 8; j++){
-				if(data[i-6][j] != 0)
+				if(data[i-6][j])
 					bookingsArray[j] = data[i-6][j];
 				else
 					bookingsArray[j] = "";
 			}
 			$('.bookingsDayTable tr:last').after('<tr class="bookingsDayTableRow">' + 
-			'<td>' + i + ':00</td><td>' + bookingsArray[0] + '</td><td>' + bookingsArray[1] + '</td><td>'+ bookingsArray[2] + '</td><td>'
+			'<td class="timeCell">' + i + ':00</td><td>' + bookingsArray[0] + '</td><td>' + bookingsArray[1] + '</td><td>'+ bookingsArray[2] + '</td><td>'
 			+ bookingsArray[3] + '</td><td>' + bookingsArray[4] + '</td><td>' + bookingsArray[5] + '</td><td>' + bookingsArray[6] + '</td><td>'
 			+ bookingsArray[7] + '</td></tr>');
+			$('.bookingsDayTable tr td:not(".timeCell")').each(function(item) {
+				if ($(this).html() != "")
+					$(this).addClass("bookedCell");
+			});
 		}
 	},
 	cancelBooking : function()

@@ -32,3 +32,7 @@
 .notificationRemoveButton{
 	float:right;
 }
+.notificationRemoveButton span.icon.trash{
+	margin:0;
+	top:0;
+}
