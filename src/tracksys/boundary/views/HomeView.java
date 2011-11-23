@@ -260,6 +260,8 @@ public class HomeView {
 			int track = generator.nextInt(8) + 1;
 			int clubid = manager.getClubIDFromCookie(req);
 			
+			boolean recure = true;
+			
 			if(recurring.equalsIgnoreCase("true"))
 			{
 				int i = 4;
@@ -267,7 +269,10 @@ public class HomeView {
 				while(i > 0)
 				{
 					Booking booking = new Booking(clubid, "", track, startDate, endDate, stamp, comment);
-					manager.addBooking(booking);
+					if(manager.addBooking(booking))
+						recure = recure;
+					else
+						recure = false;
 					
 					// Add to start date
 					c.setTime(startDate);
@@ -281,6 +286,11 @@ public class HomeView {
 					
 					i--;
 				}
+				
+				if(recure)
+					ServletHandler.writeResponse("true", resp);
+				else
+					ServletHandler.writeResponse("false", resp);
 			}
 			else
 			{
