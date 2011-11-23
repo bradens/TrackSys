@@ -13,7 +13,7 @@ var club = {
 				show: 'fade',
 				hide: 'fade',
 				modal: true,
-				height: 200,
+				height: 150,
 				width: 300,
 				buttons: {
 					"Yes": function() {
