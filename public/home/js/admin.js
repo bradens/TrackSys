@@ -51,7 +51,9 @@ var admin = {
 		var currentTime = new Date();
 		var month = currentTime.getMonth() + 1;
 		var day = currentTime.getDate();
-		var year = currentTime.getFullYear();	
+		var year = currentTime.getFullYear();
+		console.log(year + "-" + month + "-" + day);
+		$("#datepicker").val(year + "-" + month + "-" + day);
 		CommHandler.doPost(SERVER_LOC+PORT+"/home/getDayBookings", {date: year +'-'+month+'-'+day}, this.writeDayBookings);
 		CommHandler.doPost(SERVER_LOC+PORT+"/home/getAllTracks", null, this.fillTracksList);
 		$(".loadingTracks").show('fast');
