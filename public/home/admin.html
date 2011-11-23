@@ -24,8 +24,7 @@
 		<div class="column leftColumnWrap">
 			<div class="leftColumn">
 				<div id="leftAccordion">
-					<h3><a href="#">Administrative</a></h3>
-					<div class="profileInfo">
+					<div class="sendNotificationWrap">
 						<div class="titleBox">
 							<span class="notifLabel label">Title: </span>
 							<input class="formInputBox titleInput "/>
@@ -33,16 +32,16 @@
 						<span class="notifLabel label">Message: </span><br/>
 						<textarea class="formInputBox notifInput" rows="10" cols="33"></textarea>
 						<a class="button big sendNotifBtn" onclick="admin.addNotification();">Send Notification</a>
-						<span class="notificationsTitle">Notifications:</span>
-					    <div id="notificationsList">
-						    <ul class="notificationsBox">
-						  		<li class="loadingNotifications" style="display:none;">
-						  			<div class="ajaxLoading">
-						  			</div>
-						  		</li>
-						    </ul>
-					    </div>
 					</div>
+					<span class="notificationsTitle">Notifications:</span>
+				    <div id="notificationsList">
+					    <ul class="notificationsBox">
+					  		<li class="loadingNotifications" style="display:none;">
+					  			<div class="ajaxLoading">
+					  			</div>
+					  		</li>
+					    </ul>
+				    </div>
 				</div>
 			</div>
 		</div>
