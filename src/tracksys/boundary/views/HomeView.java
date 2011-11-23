@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import tracksys.Resources;
+import tracksys.boundary.database.BookingsDB;
 import tracksys.controller.ArenaManager;
 import tracksys.entity.Booking;
 import tracksys.entity.Club;
@@ -53,6 +54,10 @@ public class HomeView {
 			else
 				ServletHandler.writeErr("Not an admin", req, resp);
 		}
+		else if (target.endsWith("removeNotification"))
+		{
+			return this.removeNotification(req,resp);
+		}
 		else if (target.endsWith("getTransactions"))
 		{
 			return this.getTransactions(req, resp);
@@ -64,6 +69,10 @@ public class HomeView {
 		else if (target.endsWith("submitBooking"))
 		{
 			return this.addBooking(req, resp);
+		}
+		else if (target.endsWith("cancelBooking"))
+		{
+			return this.cancelBooking(req, resp);
 		}
 		else if (target.endsWith("getFutureBookings"))
 		{
@@ -222,6 +231,17 @@ public class HomeView {
 	}
 	
 	/**
+	 * Removes a notification
+	 * @param req
+	 * @param resp
+	 */
+	public boolean removeNotification(HttpServletRequest req, HttpServletResponse resp)
+	{
+		manager.removeNotification(Integer.parseInt(req.getParameter("id")));
+		return true;
+	}
+	
+	/**
 	 * Adds a booking.
 	 * @param req
 	 * @param resp
@@ -292,6 +312,21 @@ public class HomeView {
 			ServletHandler.writeResponse("false", resp);
 		}
 		
+		return true;
+	}
+	
+	/**
+	 * Cancels a booking.
+	 * @param req
+	 * @param resp
+	 */
+	public boolean cancelBooking(HttpServletRequest req, HttpServletResponse resp)
+	{
+		String ID = req.getParameter("id");
+		
+		BookingsDB db = new BookingsDB();
+		db.cancelBooking(Integer.parseInt(ID));
+		db.closeConnection();
 		return true;
 	}
 	

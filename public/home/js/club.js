@@ -17,6 +17,21 @@ var club = {
 			// Initialize all date pickers here
 			$('#datepicker').datepicker({ dateFormat: 'yy-mm-dd' });
 			
+			// Initialize the cancellation dialog
+			$("#cancel-dialog").dialog({
+				autoOpen: false,
+				height: 200,
+				width: 300,
+				buttons: {
+					"Yes": function() {
+						club.cancelBooking();
+					},
+					"No": function() {
+						$( this ).dialog( "close" );
+					}
+				}
+			});
+			
 			// Get all the notifications
 			CommHandler.doPost(SERVER_LOC+PORT+"/home/getNotifications", null, this.writeNotifications);
 			$(".loadingNotifications").show('fast');
@@ -100,7 +115,8 @@ var club = {
 											'</tr>');
 			for (var i = 0;i < data.length;i++)
 			{
-				$('#futureBookings').append('<tr class="transactionTableRow"><td>' +
+				$('#futureBookings').append('<tr class="transactionTableRow" onclick=\"club.openCancelDialog(' + 
+						data[i].id + ');\""><td>' +
 						data[i].trackID + '</td><td>' + 
 						data[i].startTime + '</td><td>' + 
 						data[i].endTime + '</td><td>' + 
@@ -151,6 +167,16 @@ var club = {
 				$(".errorPopup").fadeIn('fast');
 			}
 		},
+		cancelBooking : function()
+		{
+			var id = $("#cancel-dialog").val();
+			
+			CommHandler.doPost(SERVER_LOC+PORT+"/home/cancelBooking", { id: id}, club.cancelSuccess);
+		},
+		cancelSuccess : function(data)
+		{
+			window.location.href = "/home/club.html";
+		},
 		fillTransactionsTable : function(data)
 		{
 			if (!data)
@@ -165,6 +191,13 @@ var club = {
 					'<td>' + data[i].id + '</td>' + '<td>' + data[i].paymentFee + '</td>' + 
 					'<td>' + data[i].paymentTime + '</td>' + '<td>' + data[i].comment + '</tr>');
 			}
+		},
+		openCancelDialog: function(data)
+		{
+			console.log(data);
+			$("#cancel-dialog").val(data);
+			console.log($("#cancel-dialog").val());
+			$("#cancel-dialog").dialog( "open" );
 		}
 }
 

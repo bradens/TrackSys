@@ -237,4 +237,20 @@ public class BookingsDB {
 			return null;
 		}
 	}
+	
+	/* Deletes a booking */
+	public void cancelBooking(int ID)
+	{
+		String query = "DELETE FROM " + table + " WHERE id=\'" + ID + "\'";
+		
+		try
+		{
+			Statement s = conn.createStatement();
+			s.executeUpdate(query);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
 }
