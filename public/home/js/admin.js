@@ -55,7 +55,7 @@ var admin = {
 		{
 			$('.notificationsBox').append('<li><div class="notification">' +
 					'<span class="date">' + data[i].timestamp + '</span><span class="title">' + data[i].title + '</span>' + 
-					'<span class="message">' + data[i].message + '</span></div></li>');
+					'<span class="message">' + data[i].message + '</span><a onclick="admin.removeNotification('+ data[i].id +');" class="button negative">X</a></div></li>');
 		}
 	},
 	
