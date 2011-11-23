@@ -2,6 +2,7 @@ var admin = {
 	init: function()
 	{
 		// Left pane init
+		/*
 		$("#leftAccordion").accordion({
 			fillSpace: true
 		});
@@ -10,7 +11,7 @@ var admin = {
 			$(this).next().toggle('slow');
 			return false;
 		}).next().hide();
-		
+		*/
 		
 		$('#datepicker').datepicker({ dateFormat: 'yy-mm-dd', currentText: 'Today' });
 		$('#datepicker').datepicker().change(function(){
@@ -19,7 +20,7 @@ var admin = {
 		// Right pane init
 		$("#rightTabs").tabs();
 		// Get all notifications
-		CommHandler.doPost(SERVER_LOC+PORT+"/home/getNotifications", null, admin.writeNotifications);
+		CommHandler.doPost(SERVER_LOC+PORT+"/home/getNotifications", null, this.writeNotifications);
 		$(".loadingNotifications").show('fast');
 		CommHandler.doPost(SERVER_LOC+PORT+"/home/getRecentBookings", null, this.fillRecentBookings);
 		$(".loadingBookings").show('fast');
@@ -33,6 +34,13 @@ var admin = {
 		CommHandler.doPost(SERVER_LOC+PORT+"/home/getDayBookings", {date: year +'-'+month+'-'+day}, this.writeDayBookings);
 		CommHandler.doPost(SERVER_LOC+PORT+"/home/getAllTracks", null, this.fillTracksList);
 		$(".loadingTracks").show('fast');
+	},
+	
+	rewriteNotifications : function()
+	{
+		$(".loadingNotifications").show('fast');
+		$(".notification").remove();
+		CommHandler.doPost(SERVER_LOC+PORT+"/home/getNotifications", null, this.writeNotifications);
 	},
 	
 	writeNotifications : function(data)
@@ -49,6 +57,11 @@ var admin = {
 					'<span class="date">' + data[i].timestamp + '</span><span class="title">' + data[i].title + '</span>' + 
 					'<span class="message">' + data[i].message + '</span></div></li>');
 		}
+	},
+	
+	removeNotification : function(id)
+	{
+		CommHandler.doPost(SERVER_LOC+PORT+"/home/removeNotification", { id : id }, this._notificationChanged);
 	},
 	
 	rewriteDayBookings : function()
@@ -144,16 +157,15 @@ var admin = {
 	{
 		var title = $(".titleInput").val();
 		var message = $(".notifInput").val();
-		CommHandler.doPost(SERVER_LOC+PORT+"/home/addNotification", {title: title, message: message}, this._notificationAdded);
+		CommHandler.doPost(SERVER_LOC+PORT+"/home/addNotification", {title: title, message: message}, this._notificationChanged);
 		$(".titleInput").val("");
 		$(".notifInput").val("");
 	},
 	
-	_notificationAdded: function(data)
+	_notificationChanged: function(data)
 	{
-		$(".loadingNotifications").show('fast');
-		$(".notification").remove();
-		CommHandler.doPost(SERVER_LOC+PORT+"/home/getNotifications", null, admin.writeNotifications);
-		console.log("Successfully added notification.");
+		
+		console.log("Successfully changed notifications.");
+		admin.rewriteNotifications();
 	}
 }

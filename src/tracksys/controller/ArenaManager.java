@@ -183,6 +183,12 @@ public class ArenaManager {
 		ndb.closeConnection();
 	}
 	
+	public void removeNotification(int notificationID)
+	{
+		NotificationsDB ndb = new NotificationsDB();
+		ndb.removeNotification(notificationID);
+		ndb.closeConnection();
+	}
 	/**
 	 * Transaction methods
 	 */
