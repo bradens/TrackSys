@@ -64,7 +64,7 @@
 						</p>
 						<div class="errorPopup">
 							<span class="errorTitle">Error.</span><br/>
-							<span class="errorDesc">The booking you requested was not available, or your input was invalid.</span>
+							<span class="errorDesc">The booking you requested was not available, or your input was invalid. If you requested a recurring booking, some booking may have gone through and others may have been denied. Refresh the Future Bookings tab for details.</span>
 						</div>
 						<div class="bookingForm">
 							<span class="dayLabel label">Day: </span>
@@ -133,7 +133,18 @@
 						</div>
 					</div>
 					<div id="tabs-4">
-						<p>
+						<p>	
+							<div class="paymentRow paymentBottomRowWrap">
+								<div class="paymentBottomRow">
+									<div class="paymentBalanceHeader">
+										<span class="paymentText1">Current</span>
+										<span class="paymentText2">Balance</span>
+										<span class="paymentValue"></span>
+										<a href="http://www.paypal.com" target="_blank" class="big button">Pay Now</a>
+									</div>	
+									
+								</div>
+							</div>
 							<div class="paymentRow paymentTopRowWrap">
 								<div class="paymentTopRow">
 									<div class="paymentHeader">
@@ -154,13 +165,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="paymentRow paymentBottomRowWrap">
-								<div class="paymentBottomRow">
-									<div class="paymentHeader">
-										<span class="paymentText1">Current</span><span class="paymentText2">Balance</span>
-									</div>		
-								</div>
-							</div>
+
 						</p>
 					</div>
 				</div>
