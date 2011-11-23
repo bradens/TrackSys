@@ -20,7 +20,7 @@ var club = {
 			// Initialize the cancellation dialog
 			$("#cancel-dialog").dialog({
 				autoOpen: false,
-				height: 200,
+				height: 150,
 				width: 300,
 				buttons: {
 					"Yes": function() {
