@@ -4,13 +4,15 @@ public class Notification {
 	private Date timestamp;
 	private String title;
 	private String message;
+	private int id;
 	
 	public Notification() { }
-	public Notification(Date d, String t, String m)
+	public Notification(Date d, String t, String m, int id)
 	{
 		this.timestamp = d;
 		this.title = t;
 		this.message = m;
+		this.id = id;
 	}
 	
 	public String getMessage()
@@ -26,5 +28,10 @@ public class Notification {
 	public Date getTimeStamp()
 	{
 		return this.timestamp;
+	}
+	
+	public int getID()
+	{
+		return this.id;
 	}
 }

@@ -29,3 +29,6 @@
 .notifInput:focus {
 	background-color: rgba(255,255,255, .5);
 }
+.notificationRemoveButton{
+	float:right;
+}
