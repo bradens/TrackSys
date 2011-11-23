@@ -17,6 +17,22 @@ var admin = {
 		$('#datepicker').datepicker().change(function(){
 			admin.rewriteDayBookings();
 		});
+		
+		// Initialize the cancellation dialog
+		$("#cancel-dialog").dialog({
+			autoOpen: false,
+			height: 150,
+			width: 300,
+			buttons: {
+				"Yes": function() {
+					admin.cancelBooking();
+				},
+				"No": function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		});
+		
 		// Right pane init
 		$("#rightTabs").tabs();
 		// Get all notifications
@@ -92,7 +108,23 @@ var admin = {
 			+ bookingsArray[7] + '</td></tr>');
 		}
 	},
-
+	cancelBooking : function()
+	{
+		var id = $("#cancel-dialog").val();
+		
+		CommHandler.doPost(SERVER_LOC+PORT+"/home/cancelBooking", { id: id}, admin.cancelSuccess);
+	},
+	cancelSuccess : function(data)
+	{
+		window.location.href = "/home/admin.html";
+	},
+	openCancelDialog: function(data)
+	{
+		console.log(data);
+		$("#cancel-dialog").val(data);
+		console.log($("#cancel-dialog").val());
+		$("#cancel-dialog").dialog( "open" );
+	},
 	writeClubsList : function(data)
 	{
 		if (!data)
@@ -146,7 +178,8 @@ var admin = {
 		$(".loadingBookings").css('display', 'none');
 		for (var i = 0;i < data.length;i++)
 		{
-			$('.recentBookingTable tr:last').after('<tr class="recentBookingRow">' + 
+			$('.recentBookingTable tr:last').after('<tr class="recentBookingRow" onclick=\"admin.openCancelDialog(' + 
+				data[i].id + ');\"">' +
 				'<td>' + data[i].clubName + '</td>' + '<td>' + data[i].trackID + '</td>' + 
 				'<td>' + data[i].startTime + '</td>' + '<td>' + data[i].endTime + '</td>' +
 				'<td>' + data[i].comment + '</td></tr>');
