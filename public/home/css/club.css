@@ -150,8 +150,24 @@ div.bookingHr {
 	font-size: 16px;
 }
 
+#leftAccordion {
+	padding-top:10px;
+}
+
+table.profileTbl {
+	margin-top:10px;
+}
+
 span.profileInformation {
-	font-family: georgia;
-	font-size: 16px;
-	color: #696969;
+	font-size:14px;
+	margin-bottom:10px;
+}
+
+span.profileTitle {
+	padding-left:10px;
+	font-size:16px;
+}
+
+.editBtn {
+	margin : 10px 0 10px 10px;
 }

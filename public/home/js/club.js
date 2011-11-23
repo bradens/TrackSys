@@ -51,14 +51,25 @@ var club = {
 				return;
 			}
 			$(".loadingClubProfile").hide('fast');
-			$('.profileInformation').append(
-				'<p>' + 'Club: '+ data.name + '</p>' +
-				'<p>' + 'Address: ' + data.address.street +'</p>' +
-				'<p>' + 'City: ' + data.address.city +', ' + data.address.province +'</p>' +
-				'<p>' + 'Postal Code: ' + data.address.postal + '</p>' +
-				'<p>' + 'Phone: ' + data.phone + '</p>' +
-				'<p>' + 'Email: ' + data.email + '</p>' +
-				'<p>' + 'Balance: $' + data.balance + '</p>' );
+			$(".profileTbl").append(
+				'<tr class="profileRow"><td><span class="lbl">Club:</span></td><td><span class=lblVal>' + data.name + '</span></td></tr>' +
+				'<tr class="profileRow"><td><span class="lbl">Address:</span></td><td><span class=lblVal>' + data.address.street + '</span></td></tr>' +
+				'<tr class="profileRow"><td><span class="lbl">City:</span></td><td><span class=lblVal>' + data.address.city + '</span></td></tr>' +
+				'<tr class="profileRow"><td><span class="lbl">Postal Code:</span></td><td><span class=lblVal>' + data.address.postal + '</span></td></tr>' +
+				'<tr class="profileRow"><td><span class="lbl">Phone:</span></td><td><span class=lblVal>' + data.phone + '</span></td></tr>' +
+				'<tr class="profileRow"><td><span class="lbl">Email:</span></td><td><span class=lblVal>' + data.email + '</span></td></tr>' +
+				'<tr class="profileRow"><td><span class="lbl">Balance:</span></td><td><span class=lblVal>' + data.balance + '</span></td></tr>'
+			);
+	
+			
+//			$('.profileInformation').append(
+//				'<span class="lbl">' + 'Club: </span><span class="lblVal">'+ data.name + '</span><br/>' +
+//				'<span class="lbl">' + 'Address: </span><span class="lblVal">' + data.address.street +'</span><br/>' +
+//				'<span class="lbl">' + 'City: </span><span class="lblVal">' + data.address.city +', ' + data.address.province +'</span><br/>' +
+//				'<span class="lbl">' + 'Postal Code: </span><span class="lblVal">' + data.address.postal + '</span><br/>' +
+//				'<span class="lbl">' + 'Phone: </span><span class="lblVal">' + data.phone + '</span><br/>' +
+//				'<span class="lbl">' + 'Email: </span><span class="lblVal">' + data.email + '</span><br/>' +
+//				'<span class="lbl">' + 'Balance: </span><span class="lblVal">$' + data.balance + '</span><br/>' );
 		},
 		
 		writeClubBalancePaymentTab: function(data)
