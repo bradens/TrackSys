@@ -33,6 +33,21 @@ var admin = {
 			}
 		});
 		
+		// Initialize the maintenance dialog
+		$("#maint-dialog").dialog({
+			autoOpen: false,
+			height: 150,
+			width: 300,
+			buttons: {
+				"Yes": function() {
+					admin.flipMaint();
+				},
+				"No": function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		});
+		
 		// Right pane init
 		$("#rightTabs").tabs();
 		// Get all notifications
@@ -125,6 +140,23 @@ var admin = {
 		console.log($("#cancel-dialog").val());
 		$("#cancel-dialog").dialog( "open" );
 	},
+	flipMaint : function()
+	{
+		var id = $("#maint-dialog").val();
+		
+		CommHandler.doPost(SERVER_LOC+PORT+"/home/flipMaint", { id: id}, admin.flipSuccess);
+	},
+	flipSuccess : function(data)
+	{
+		window.location.href = "/home/admin.html";
+	},
+	openMaintDialog: function(data)
+	{
+		console.log(data);
+		$("#maint-dialog").val(data);
+		console.log($("#maint-dialog").val());
+		$("#maint-dialog").dialog( "open" );
+	},
 	writeClubsList : function(data)
 	{
 		if (!data)
@@ -162,7 +194,8 @@ var admin = {
 		$(".loadingTracks").css('display', 'none');
 		for (var i = 0;i < data.length;i++)
 		{
-			$('.tracksTable tr:last').after('<tr class="tracksTableRow">' + 
+			$('.tracksTable tr:last').after('<tr class="tracksTableRow" onclick="admin.openMaintDialog(' +
+					data[i].trackID + ');">' + 
 			'<td>' + data[i].trackID + '</td>' +
 			'<td>' + data[i].isBookedForMaintenance + '</td>' + '</tr>');
 		}

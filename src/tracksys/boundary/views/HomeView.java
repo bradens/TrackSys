@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import tracksys.Resources;
 import tracksys.boundary.database.BookingsDB;
+import tracksys.boundary.database.TracksDB;
 import tracksys.controller.ArenaManager;
 import tracksys.entity.Booking;
 import tracksys.entity.Club;
@@ -93,6 +94,10 @@ public class HomeView {
 		else if (target.endsWith("getAllTracks"))
 		{
 			return this.getTracks(req, resp);
+		}
+		else if (target.endsWith("flipMaint"))
+		{
+			return this.flipMaint(req, resp);
 		}
 		else if (target.endsWith("getCurrentClubProfile"))
 		{
@@ -326,6 +331,22 @@ public class HomeView {
 		
 		BookingsDB db = new BookingsDB();
 		db.cancelBooking(Integer.parseInt(ID));
+		db.closeConnection();
+		return true;
+	}
+	
+	/**
+	 * Flips a track maintenance setting.
+	 * @param req
+	 * @param resp
+	 */
+	public boolean flipMaint(HttpServletRequest req, HttpServletResponse resp)
+	{
+		String ID = req.getParameter("id");
+		
+		TracksDB db = new TracksDB();
+		boolean flip = db.getTrackMaintenance(Integer.parseInt(ID));
+		db.editTrack(Integer.parseInt(ID), flip);
 		db.closeConnection();
 		return true;
 	}
