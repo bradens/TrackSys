@@ -99,8 +99,11 @@
 						</div>
 					</div>
 					<div id="tabs-4">
-						<span class="dayLabel label">Day: </span>
-						<input id="datepicker"/>
+						<div id="dayControls">
+							<a class="button small prevDayBtn" onclick="admin.prevDay();"><< Previous Day</a>
+							<input id="datepicker"/>
+							<a class="button small nextDayBtn" onclick="admin.nextDay();">Next Day >></a>
+						</div>
 						<table class="bookingsDayTable">
 							<tr class="header">
 								<th>&nbsp;</th>

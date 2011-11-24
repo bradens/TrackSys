@@ -115,6 +115,16 @@ var admin = {
 			+ bookingsArray[7] + '</td></tr>');
 		}
 	},
+	nextDay : function()
+	{
+		$('#datepicker').datepicker('setDate','+1');
+		this.rewriteDayBookings();
+	},
+	prevDay : function()
+	{
+		$('#datepicker').datepicker('setDate','-1');
+		this.rewriteDayBookings();
+	},
 	cancelBooking : function()
 	{
 		var id = $("#cancel-dialog").val();

@@ -32,3 +32,6 @@
 .notificationRemoveButton{
 	float:right;
 }
+#dayControls{
+	padding:10px;
+}
