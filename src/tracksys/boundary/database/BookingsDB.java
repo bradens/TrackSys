@@ -14,7 +14,8 @@ import tracksys.entity.Booking;
 public class BookingsDB {
 	private Connection conn = null;
 	private String table = "tracksys.bookings";
-	public BookingsDB() {
+	private static BookingsDB ref;
+	private BookingsDB() {
 		try
 		{
 			Class.forName ("com.mysql.jdbc.Driver").newInstance ();
@@ -24,6 +25,13 @@ public class BookingsDB {
 		{
 			e.printStackTrace();
 		}
+	}
+	
+	public static BookingsDB getInstance() 
+	{
+		if (ref == null)
+			ref = new BookingsDB();
+		return ref;
 	}
 	
 	public void closeConnection()

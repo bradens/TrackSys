@@ -1,5 +1,6 @@
 package tracksys.boundary.database;
 import tracksys.Resources;
+import tracksys.controller.ArenaManager;
 import tracksys.entity.*;
 
 import java.sql.*;
@@ -9,8 +10,9 @@ import java.util.List;
 public class ClubDB {
 	private String table = "tracksys.club";	
 	private Connection conn = null;
-	
-	public ClubDB()
+	private static ClubDB ref;
+
+	private ClubDB()
 	{
 		try
 		{
@@ -21,6 +23,13 @@ public class ClubDB {
 		{
 			System.err.println("Error connecting to the datase from ClubDB");
 		}
+	}
+	
+	public static ClubDB getInstance() 
+	{
+		if (ref == null)
+			ref = new ClubDB();
+		return ref;
 	}
 	
 	public void closeConnection()

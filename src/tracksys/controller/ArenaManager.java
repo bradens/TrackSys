@@ -1,7 +1,5 @@
 package tracksys.controller;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -13,17 +11,16 @@ import tracksys.Resources;
 import tracksys.boundary.database.BookingsDB;
 import tracksys.boundary.database.ClubDB;
 import tracksys.boundary.database.NotificationsDB;
-import tracksys.boundary.database.TransactionsDB;
 import tracksys.boundary.database.TracksDB;
-
+import tracksys.boundary.database.TransactionsDB;
 import tracksys.boundary.views.HomeView;
 import tracksys.boundary.views.LoginView;
 import tracksys.boundary.views.RegistrationView;
 import tracksys.entity.Booking;
 import tracksys.entity.Club;
 import tracksys.entity.Notification;
-import tracksys.entity.Transaction;
 import tracksys.entity.Track;
+import tracksys.entity.Transaction;
 import tracksys.servletHandler.ServletHandler;
 
 public class ArenaManager {
@@ -127,14 +124,14 @@ public class ArenaManager {
 	
 	public void AddNewClub(Club club)
 	{
-		ClubDB db = new ClubDB();
+		ClubDB db= ClubDB.getInstance();
 		db.insertClub(club);
 		db.closeConnection();
 	}
 	
 	public Club getClubID(int ID)
 	{
-		ClubDB db = new ClubDB();
+		ClubDB db = ClubDB.getInstance();
 		Club club = db.getClubFromID(ID);
 		db.closeConnection();
 		return club;
@@ -142,7 +139,7 @@ public class ArenaManager {
 	
 	public Club getClubName(String name)
 	{
-		ClubDB db = new ClubDB();
+		ClubDB db = ClubDB.getInstance();
 		Club club = db.getClubFromName(name);
 		db.closeConnection();
 		return club;
@@ -150,7 +147,7 @@ public class ArenaManager {
 	
 	public List<Club> getAllClubs()
 	{
-		ClubDB db = new ClubDB();
+		ClubDB db = ClubDB.getInstance();
 		List<Club> list = db.getAllClubs();
 		db.closeConnection();
 		return list;
@@ -208,7 +205,7 @@ public class ArenaManager {
 		tdb.closeConnection();
 		
 		// Update club balance
-		ClubDB cdb = new ClubDB();
+		ClubDB cdb = ClubDB.getInstance();
 		Club club = cdb.getClubFromID(newTrans.getClubID());
 		club.creditBalanceBy(newTrans.getPaymentFee());
 		cdb.updateClub(club);
@@ -230,7 +227,7 @@ public class ArenaManager {
 	 */
 	public List<Booking> getRecentBookings()
 	{
-		BookingsDB bdb = new BookingsDB();
+		BookingsDB bdb = BookingsDB.getInstance();
 		List<Booking> bookings = bdb.getRecentBookings();
 		bdb.closeConnection();
 		return bookings;
@@ -238,7 +235,7 @@ public class ArenaManager {
 	
 	public List<Booking> getFutureBookings(int ID)
 	{
-		BookingsDB bdb = new BookingsDB();
+		BookingsDB bdb = BookingsDB.getInstance();
 		List<Booking> bookings = bdb.getFutureBookingsByClubID(ID);
 		bdb.closeConnection();
 		return bookings;
@@ -246,7 +243,7 @@ public class ArenaManager {
 	
 	public List<Booking> getHistoricBookings(int ID)
 	{
-		BookingsDB bdb = new BookingsDB();
+		BookingsDB bdb = BookingsDB.getInstance();
 		List<Booking> bookings = bdb.getHistoricBookingsByClubID(ID);
 		bdb.closeConnection();
 		return bookings;
@@ -254,7 +251,7 @@ public class ArenaManager {
 	
 	public List<Booking> getDayBookings(Date dateStart, Date dateEnd)
 	{
-		BookingsDB bdb = new BookingsDB();
+		BookingsDB bdb = BookingsDB.getInstance();
 		List<Booking> bookings = bdb.getDayBookings(dateStart, dateEnd);
 		return bookings;
 	}
@@ -262,7 +259,7 @@ public class ArenaManager {
 	public boolean addBooking(Booking booking)
 	{
 		
-		BookingsDB db = new BookingsDB();
+		BookingsDB db = BookingsDB.getInstance();
 		try 
 		{
 			if(bookingIsValid(db, booking))

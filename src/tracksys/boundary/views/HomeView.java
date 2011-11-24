@@ -149,6 +149,7 @@ public class HomeView {
 		return true;
 	}
 	
+	@SuppressWarnings("deprecation")
 	public boolean getDayBookings(HttpServletRequest req, HttpServletResponse resp)
 	{
 		String day = req.getParameter("date"); 
@@ -362,7 +363,7 @@ public class HomeView {
 	{
 		String ID = req.getParameter("id");
 		
-		BookingsDB db = new BookingsDB();
+		BookingsDB db = BookingsDB.getInstance();
 		db.cancelBooking(Integer.parseInt(ID));
 		db.closeConnection();
 		return true;
