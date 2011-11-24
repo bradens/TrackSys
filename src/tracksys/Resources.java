@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 
 /**
  * Static Resources class.  Put your global strings and enums here.
- *
  */
 public class Resources {
 	public static String COOKIE_LOGIN = "loggedIn";

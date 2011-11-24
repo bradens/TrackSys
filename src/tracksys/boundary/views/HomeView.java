@@ -158,14 +158,14 @@ public class HomeView {
 			Date dateEnd = Resources.DATE_FORMAT.parse(day + " 23:59:59");
 			List<Booking> bookings = manager.getDayBookings(dateStart,dateEnd);
 			Gson g = new Gson();
-			int[][] dayBookings = new int[17][8];
+			String[][] dayBookings = new String[17][8];
 			for(int i = 0, n = bookings.size(); i < n; i++) {
 				Booking tempBook = bookings.get(i);
 				int startHour = tempBook.getStartTime().getHours();
 				int hoursBooked = tempBook.getEndTime().getHours()-startHour;
 				for(int j = 0; j < hoursBooked; j++)
 				{
-					dayBookings[startHour+j-6][tempBook.getTrackID()-1] = tempBook.getClubID();
+					dayBookings[startHour+j-6][tempBook.getTrackID()-1] = tempBook.getClubName();
 				}
 				
 		    }

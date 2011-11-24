@@ -35,3 +35,7 @@
 #dayControls{
 	padding:10px;
 }
+.notificationRemoveButton span.icon.trash{
+	margin:0;
+	top:0;
+}
