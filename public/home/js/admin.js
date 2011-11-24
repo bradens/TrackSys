@@ -121,12 +121,16 @@ var admin = {
 	},
 	nextDay : function()
 	{
-		$('#datepicker').datepicker('setDate','+1');
+		var date=new Date($('#datepicker').datepicker('getDate'));
+    	date.setDate(date.getDate()+1);
+    	$('#datepicker').datepicker('setDate', date);
 		this.rewriteDayBookings();
 	},
 	prevDay : function()
 	{
-		$('#datepicker').datepicker('setDate','-1');
+		var date=new Date($('#datepicker').datepicker('getDate'));
+    	date.setDate(date.getDate()-1);
+    	$('#picker').datepicker('setDate', date);
 		this.rewriteDayBookings();
 	},
 	cancelBooking : function()
