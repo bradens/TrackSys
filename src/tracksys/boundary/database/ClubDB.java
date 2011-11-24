@@ -1,11 +1,14 @@
 package tracksys.boundary.database;
-import tracksys.Resources;
-import tracksys.controller.ArenaManager;
-import tracksys.entity.*;
-
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import tracksys.Resources;
+import tracksys.entity.Address;
+import tracksys.entity.Club;
 
 public class ClubDB {
 	private String table = "tracksys.club";	

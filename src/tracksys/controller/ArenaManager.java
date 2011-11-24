@@ -126,14 +126,12 @@ public class ArenaManager {
 	{
 		ClubDB db= ClubDB.getInstance();
 		db.insertClub(club);
-		db.closeConnection();
 	}
 	
 	public Club getClubID(int ID)
 	{
 		ClubDB db = ClubDB.getInstance();
 		Club club = db.getClubFromID(ID);
-		db.closeConnection();
 		return club;
 	}
 	
@@ -141,7 +139,6 @@ public class ArenaManager {
 	{
 		ClubDB db = ClubDB.getInstance();
 		Club club = db.getClubFromName(name);
-		db.closeConnection();
 		return club;
 	}
 	
@@ -149,7 +146,6 @@ public class ArenaManager {
 	{
 		ClubDB db = ClubDB.getInstance();
 		List<Club> list = db.getAllClubs();
-		db.closeConnection();
 		return list;
 	}
 	
@@ -166,59 +162,52 @@ public class ArenaManager {
 	 */
 	public List<Notification> getNotifications()
 	{
-		NotificationsDB ndb = new NotificationsDB();
+		NotificationsDB ndb = NotificationsDB.getInstance();
 		List<Notification> notifications = ndb.getNotifications();
-		ndb.closeConnection();
 		return notifications;
 	}
 	
 	public void addNotification(String title, String message)
 	{
-		NotificationsDB ndb = new NotificationsDB();
+		NotificationsDB ndb = NotificationsDB.getInstance();
 		Date date = new Date();
 		ndb.addNotification(title, message, Resources.DATE_FORMAT.format(date));
-		ndb.closeConnection();
 	}
 	
 	public void removeNotification(int notificationID)
 	{
-		NotificationsDB ndb = new NotificationsDB();
+		NotificationsDB ndb = NotificationsDB.getInstance();
 		ndb.removeNotification(notificationID);
-		ndb.closeConnection();
 	}
 	/**
 	 * Transaction methods
 	 */
 	public List<Transaction> getTransactions(int clubID)
 	{
-		TransactionsDB tdb = new TransactionsDB();
+		TransactionsDB tdb = TransactionsDB.getInstance();
 		List<Transaction> transactions = tdb.getTransactions(clubID);
-		tdb.closeConnection();
 		return transactions;
 	}
 	
 	public void addTransactions(Transaction newTrans)
 	{
 		// Create transaction
-		TransactionsDB tdb = new TransactionsDB();
+		TransactionsDB tdb = TransactionsDB.getInstance();
 		tdb.insertTransactions(newTrans);	
-		tdb.closeConnection();
 		
 		// Update club balance
 		ClubDB cdb = ClubDB.getInstance();
 		Club club = cdb.getClubFromID(newTrans.getClubID());
 		club.creditBalanceBy(newTrans.getPaymentFee());
 		cdb.updateClub(club);
-		cdb.closeConnection();
 	}
 	/**
 	 * Tracks methods
 	 */
 	public List<Track> getTracks()
 	{
-		TracksDB trackdb = new TracksDB();
+		TracksDB trackdb = TracksDB.getInstance();
 		List<Track> tracks = trackdb.getTracks();
-		trackdb.closeConnection();
 		return tracks;
 	}
 	
@@ -229,7 +218,6 @@ public class ArenaManager {
 	{
 		BookingsDB bdb = BookingsDB.getInstance();
 		List<Booking> bookings = bdb.getRecentBookings();
-		bdb.closeConnection();
 		return bookings;
 	}
 	
@@ -237,7 +225,6 @@ public class ArenaManager {
 	{
 		BookingsDB bdb = BookingsDB.getInstance();
 		List<Booking> bookings = bdb.getFutureBookingsByClubID(ID);
-		bdb.closeConnection();
 		return bookings;
 	}
 	
@@ -245,7 +232,6 @@ public class ArenaManager {
 	{
 		BookingsDB bdb = BookingsDB.getInstance();
 		List<Booking> bookings = bdb.getHistoricBookingsByClubID(ID);
-		bdb.closeConnection();
 		return bookings;
 	}
 	
@@ -265,12 +251,10 @@ public class ArenaManager {
 			if(bookingIsValid(db, booking))
 			{
 				db.insertBooking(booking);
-				db.closeConnection();
 				return true;
 			}
 			else
 			{
-				db.closeConnection();
 				return false;
 			}
 		}

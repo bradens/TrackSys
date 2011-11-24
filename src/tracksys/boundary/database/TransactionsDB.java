@@ -2,9 +2,7 @@ package tracksys.boundary.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +13,8 @@ import tracksys.entity.Transaction;
 
 public class TransactionsDB {
 	private Connection conn = null;
-	public TransactionsDB() {
+	private static TransactionsDB ref;
+	private TransactionsDB() {
 		try
 		{
 			Class.forName ("com.mysql.jdbc.Driver").newInstance ();
@@ -25,6 +24,13 @@ public class TransactionsDB {
 		{
 			e.printStackTrace();
 		}
+	}
+	
+	public static TransactionsDB getInstance()
+	{
+		if (ref == null)
+			ref = new TransactionsDB();
+		return ref;
 	}
 	
 	public void closeConnection()

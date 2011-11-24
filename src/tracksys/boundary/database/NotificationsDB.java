@@ -13,7 +13,8 @@ import tracksys.entity.Notification;
 
 public class NotificationsDB {
 	private Connection conn = null;
-	public NotificationsDB() {
+	private static NotificationsDB ref;
+	private NotificationsDB() {
 		try
 		{
 			Class.forName ("com.mysql.jdbc.Driver").newInstance ();
@@ -23,6 +24,13 @@ public class NotificationsDB {
 		{
 			e.printStackTrace();
 		}
+	}
+	
+	public static NotificationsDB getInstance()
+	{
+		if (ref == null)
+			ref = new NotificationsDB();
+		return ref;
 	}
 	
 	public void closeConnection()

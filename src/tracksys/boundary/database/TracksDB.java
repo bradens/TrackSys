@@ -11,7 +11,8 @@ import tracksys.entity.Track;
 
 public class TracksDB {
 	private Connection conn = null;
-	public TracksDB() {
+	private static TracksDB ref; 
+	private TracksDB() {
 		try
 		{
 			Class.forName ("com.mysql.jdbc.Driver").newInstance ();
@@ -21,6 +22,13 @@ public class TracksDB {
 		{
 			e.printStackTrace();
 		}
+	}
+	
+	public static TracksDB getInstance()
+	{
+		if (ref == null)
+			ref = new TracksDB();
+		return ref;
 	}
 	
 	public void closeConnection()

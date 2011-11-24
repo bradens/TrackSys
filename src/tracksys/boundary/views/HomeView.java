@@ -365,7 +365,6 @@ public class HomeView {
 		
 		BookingsDB db = BookingsDB.getInstance();
 		db.cancelBooking(Integer.parseInt(ID));
-		db.closeConnection();
 		return true;
 	}
 	
@@ -378,10 +377,9 @@ public class HomeView {
 	{
 		String ID = req.getParameter("id");
 		
-		TracksDB db = new TracksDB();
+		TracksDB db = TracksDB.getInstance();
 		boolean flip = db.getTrackMaintenance(Integer.parseInt(ID));
 		db.editTrack(Integer.parseInt(ID), flip);
-		db.closeConnection();
 		return true;
 	}
 	
