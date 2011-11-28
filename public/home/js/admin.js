@@ -236,6 +236,11 @@ var admin = {
 		CommHandler.doPost(SERVER_LOC+PORT+"/home/submitMaintenance", { track: track, date: date, start: start, end: end, comment: comment}, admin.maintenanceSuccess);
 	},
 	
+	printTrackHistory : function()
+	{
+		//todo
+	},
+	
 	maintenanceSuccess : function(data)
 	{
 		if (data == "true")
