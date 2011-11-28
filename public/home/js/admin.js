@@ -117,7 +117,18 @@ var admin = {
 			+ bookingsArray[7] + '</td></tr>');
 			$('.bookingsDayTable tr td:not(".timeCell")').each(function(item) {
 				if ($(this).html() != "")
-					$(this).addClass("bookedCell");
+					{
+						if($(this).html() == "admin")
+						{
+							$(this).html("Maintenance");
+							$(this).addClass("maintenanceBookedCell");
+						}
+						else if($(this).html() != "Maintenance" && $(this).html() != "admin")
+						{
+							$(this).html("Booked");
+							$(this).addClass("bookedCell");
+						}
+					}
 			});
 		}
 	},

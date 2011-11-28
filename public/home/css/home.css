@@ -115,6 +115,9 @@ div.leftAccordion {
 .bookedCell {
 	background-color: rgba(255, 150, 150, .5);
 }
+.maintenanceBookedCell {
+	background-color: rgba(155, 250, 150, .5);
+}
 
 
 /***************************** JQUERY OVERRIDES *********************************/
