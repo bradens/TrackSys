@@ -11,8 +11,11 @@ var club = {
 			$("#tabs").tabs();
 			
 			// Initialize all date pickers here
-			$('#datepicker').datepicker({ dateFormat: 'yy-mm-dd' });
-			
+			$('#datepicker, #datepicker-dayview').datepicker({ dateFormat: 'yy-mm-dd' });
+			$('#datepicker-dayview').datepicker().change(function(){
+				club.rewriteDayBookings();
+			});
+						
 			// Initialize the cancellation dialog
 			$("#cancel-dialog").dialog({
 				autoOpen: false,
@@ -31,6 +34,13 @@ var club = {
 				}
 			});
 			
+			var currentTime = new Date();
+			var month = currentTime.getMonth() + 1;
+			var day = currentTime.getDate();
+			var year = currentTime.getFullYear();
+			$("#datepicker-dayview").val(year + "-" + month + "-" + day);
+			CommHandler.doPost(SERVER_LOC+PORT+"/home/getDayBookings", {date: year +'-'+month+'-'+day}, this.writeDayBookings);
+
 			// Get all the notifications
 			CommHandler.doPost(SERVER_LOC+PORT+"/home/getNotifications", null, this.writeNotifications);
 			$(".loadingNotifications").show('fast');
@@ -71,6 +81,55 @@ var club = {
 		finishEdit: function(data)
 		{
 			console.log(data);
+		},
+		
+		rewriteDayBookings : function()
+		{
+			$('.bookingsDayTableRow').remove()
+			CommHandler.doPost(SERVER_LOC+PORT+"/home/getDayBookings", {date: $('#datepicker-dayview').val()}, this.writeDayBookings);
+		},
+		writeDayBookings : function(data)
+		{
+			if(!data)
+			{
+				return;
+			}
+		
+			for (var i = 6; i <= 22; i++)
+			{
+				var bookingsArray = new Array(8);
+				for(var j = 0; j < 8; j++){
+					if(data[i-6][j])
+						bookingsArray[j] = data[i-6][j];
+					else
+						bookingsArray[j] = "";
+				}
+				$('.bookingsDayTable tr:last').after('<tr class="bookingsDayTableRow">' + 
+				'<td class="timeCell">' + i + ':00</td><td>' + bookingsArray[0] + '</td><td>' + bookingsArray[1] + '</td><td>'+ bookingsArray[2] + '</td><td>'
+				+ bookingsArray[3] + '</td><td>' + bookingsArray[4] + '</td><td>' + bookingsArray[5] + '</td><td>' + bookingsArray[6] + '</td><td>'
+				+ bookingsArray[7] + '</td></tr>');
+				$('.bookingsDayTable tr td:not(".timeCell")').each(function(item) {
+					if ($(this).html() != "")
+					{
+						$(this).html("Booked");
+						$(this).addClass("bookedCell");
+					}
+				});
+			}
+		},
+		nextDay : function()
+		{
+			var date=new Date($('#datepicker-dayview').datepicker('getDate'));
+	    	date.setDate(date.getDate()+1);
+	    	$('#datepicker-dayview').datepicker('setDate', date);
+			this.rewriteDayBookings();
+		},
+		prevDay : function()
+		{
+			var date=new Date($('#datepicker-dayview').datepicker('getDate'));
+	    	date.setDate(date.getDate()-1);
+	    	$('#datepicker-dayview').datepicker('setDate', date);
+			this.rewriteDayBookings();
 		},
 		
 		writeClubProfile: function(data)

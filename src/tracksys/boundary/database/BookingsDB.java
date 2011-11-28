@@ -218,9 +218,11 @@ public class BookingsDB {
 	/* Retrieve a list of future bookings that could conflict with the given date and track */
 	public List<Booking> getFutureBookingConflicts(Date start, Date end, int track)
 	{
-		String query = "SELECT * FROM tracksys.bookings JOIN tracksys.club on bookings.clubid=club.id WHERE trackID=\'" + track + "\' AND (startTime>=\'" + Resources.DATE_FORMAT.format(start) +
-					"\' AND startTime<\'" + Resources.DATE_FORMAT.format(end) + "\') AND (endTime>\'" + Resources.DATE_FORMAT.format(start) +
-					"\' AND endTime<=\'" + Resources.DATE_FORMAT.format(end) + "\')";
+		String query = "SELECT * FROM tracksys.bookings JOIN tracksys.club on bookings.clubid=club.id WHERE trackID=\'" + track +
+				    "\' AND (startTime>=\'" + Resources.DATE_FORMAT.format(start) +
+					"\' AND startTime<\'"   + Resources.DATE_FORMAT.format(end) +
+					"\') OR (endTime>\'" + Resources.DATE_FORMAT.format(start) +
+					"\' AND endTime<=\'"    + Resources.DATE_FORMAT.format(end) + "\')";
 		List<Booking> bookings = new ArrayList<Booking>();
 		
 		try

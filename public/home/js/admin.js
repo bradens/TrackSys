@@ -132,7 +132,7 @@ var admin = {
 	{
 		var date=new Date($('#datepicker').datepicker('getDate'));
     	date.setDate(date.getDate()-1);
-    	$('#picker').datepicker('setDate', date);
+    	$('#datepicker').datepicker('setDate', date);
 		this.rewriteDayBookings();
 	},
 	cancelBooking : function()
@@ -243,12 +243,39 @@ var admin = {
 	
 	maintenanceSuccess : function(data)
 	{
-		if (data == "true")
+		if (!data)
+		{
+			console.log("Failed to get tracks");
+			return;
+		}
+		
+		// no conflict when book maintenance
+		if (data.length == 0)
 		{
 			window.location.href = "/home/admin.html";
 		}
+		// conflict with some booking, list them out
 		else
 		{
+			$('.conflictBookingTable').append('<tr class="header">' +
+						'<th>Club</th>' +
+						'<th>StartTime</th>' +
+						'<th>EndTime</th>' +
+						'<th>Comment</th>' +
+						'<th>Delete</th>' +
+						'</tr>');
+			for (var i = 0;i < data.length;i++)
+			{
+				$('.conflictBookingTable tr:last').after('<tr class="conflictBookingRow">' +
+					'<td>' + data[i].clubName + '</td>' +
+					'<td>' + data[i].startTime + '</td>' +
+					'<td>' + data[i].endTime + '</td>' +
+					'<td>' + data[i].comment + '</td>' +
+					'<td><a onclick="admin.openCancelDialog('+ data[i].id +');" class="button negative removeButton"><span class="icon trash"></span></a></td>'+
+					'</tr>');
+			}
+			
+			// show warning
 			$(".warningPopup").fadeIn('fast');
 		}
 	},
