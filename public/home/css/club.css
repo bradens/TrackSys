@@ -192,3 +192,13 @@ span.profileTitle {
 .editBtn {
 	margin : 10px 0 10px 10px;
 }
+.removeButton{
+	float:right;
+}
+#dayControls{
+	padding:10px;
+}
+.removeButton span.icon.trash{
+	margin:0;
+	top:0;
+}

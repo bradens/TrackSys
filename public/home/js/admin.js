@@ -6,6 +6,8 @@ var admin = {
 			admin.rewriteDayBookings();
 		});
 		
+		$('#maintenanceDatepicker').datepicker({ dateFormat: 'yy-mm-dd' , currentText: 'Today' });
+		
 		// Initialize the cancellation dialog
 		$("#cancel-dialog").dialog({
 			autoOpen: false,
@@ -76,7 +78,7 @@ var admin = {
 		$(".loadingNotifications").hide('fast');
 		for (var i = 0;i < data.length;i++)
 		{
-			$('.notificationsBox').append('<li><div class="notification"><a onclick="admin.removeNotification('+ data[i].id +');" class="button negative notificationRemoveButton"><span class="icon trash"></span></a>' +
+			$('.notificationsBox').append('<li><div class="notification"><a onclick="admin.removeNotification('+ data[i].id +');" class="button negative removeButton"><span class="icon trash"></span></a>' +
 					'<span class="date">' + data[i].timestamp + '</span><span class="title">' + data[i].title + '</span>' + 
 					'<span class="message">' + data[i].message + '</span></div></li>');
 		}
@@ -221,6 +223,36 @@ var admin = {
 		}
 	},
 	
+	////////////////////////////////////////
+	// track maintenance: same as booking
+	createMaintenance : function()
+	{
+		var track   = $("#trackIDSelect").val();
+		var date    = $("#maintenanceDatepicker").val();
+		var start   = $("#startTimeSelect").val();
+		var end     = $("#endTimeSelect").val();
+		var comment = $("#trackCommentInputBox").val();
+
+		CommHandler.doPost(SERVER_LOC+PORT+"/home/submitMaintenance", { track: track, date: date, start: start, end: end, comment: comment}, admin.maintenanceSuccess);
+	},
+	
+	printTrackHistory : function()
+	{
+		//todo
+	},
+	
+	maintenanceSuccess : function(data)
+	{
+		if (data == "true")
+		{
+			window.location.href = "/home/admin.html";
+		}
+		else
+		{
+			$(".warningPopup").fadeIn('fast');
+		}
+	},
+	
 	fillRecentBookings: function(data)
 	{
 		if (!data)
@@ -235,14 +267,16 @@ var admin = {
 								'<th>StartTime</th>' +
 								'<th>EndTime</th>' +
 								'<th>Comment</th>' +
+								'<th>Delete</td>' +
 							'</tr>');
 		for (var i = 0;i < data.length;i++)
 		{
-			$('.recentBookingTable tr:last').after('<tr class="recentBookingRow" onclick=\"admin.openCancelDialog(' + 
-				data[i].id + ');\"">' +
+			$('.recentBookingTable tr:last').after('<tr class="recentBookingRow">' +
 				'<td>' + data[i].clubName + '</td>' + '<td>' + data[i].trackID + '</td>' + 
 				'<td>' + data[i].startTime + '</td>' + '<td>' + data[i].endTime + '</td>' +
-				'<td>' + data[i].comment + '</td></tr>');
+				'<td>' + data[i].comment + '</td>' +
+				'<td><a onclick="admin.openCancelDialog('+ data[i].id +');" class="button negative removeButton"><span class="icon trash"></span></a></td>' +
+				'</tr>');
 		}
 	},
 	
