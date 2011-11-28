@@ -6,6 +6,8 @@ var admin = {
 			admin.rewriteDayBookings();
 		});
 		
+		$('#maintenanceDatepicker').datepicker({ dateFormat: 'yy-mm-dd' , currentText: 'Today' });
+		
 		// Initialize the cancellation dialog
 		$("#cancel-dialog").dialog({
 			autoOpen: false,
@@ -218,6 +220,31 @@ var admin = {
 					data[i].trackID + ');">' + 
 			'<td>' + data[i].trackID + '</td>' +
 			'<td>' + data[i].isBookedForMaintenance + '</td>' + '</tr>');
+		}
+	},
+	
+	////////////////////////////////////////
+	// track maintenance: same as booking
+	createMaintenance : function()
+	{
+		var track   = $("#trackIDSelect").val();
+		var date    = $("#maintenanceDatepicker").val();
+		var start   = $("#startTimeSelect").val();
+		var end     = $("#endTimeSelect").val();
+		var comment = $("#trackCommentInputBox").val();
+
+		CommHandler.doPost(SERVER_LOC+PORT+"/home/submitMaintenance", { track: track, date: date, start: start, end: end, comment: comment}, admin.maintenanceSuccess);
+	},
+	
+	maintenanceSuccess : function(data)
+	{
+		if (data == "true")
+		{
+			window.location.href = "/home/admin.html";
+		}
+		else
+		{
+			$(".warningPopup").fadeIn('fast');
 		}
 	},
 	

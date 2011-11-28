@@ -92,6 +92,10 @@ public class HomeView {
 		{
 			return this.getAllClubs(req, resp);
 		}
+		else if (target.endsWith("submitMaintenance"))
+		{
+			return this.addMaintenance(req, resp);
+		}
 		else if (target.endsWith("getAllTracks"))
 		{
 			return this.getTracks(req, resp);
@@ -417,5 +421,42 @@ public class HomeView {
 			ServletHandler.writeResponse("/home/club.html", resp);
 		else
 			ServletHandler.writeResponse("/login/", resp);
+	}
+	
+	//////////////////////////////////////////////////////////////////////////////
+	// Add maintenance booking
+	public boolean addMaintenance(HttpServletRequest req, HttpServletResponse resp)
+	{
+		String track = req.getParameter("track");
+		String date = req.getParameter("date");
+		String start = req.getParameter("start");
+		String end = req.getParameter("end");
+		String comment = req.getParameter("comment");
+		comment += "***MAINTENANCE***";
+		
+		try 
+		{
+			Date startDate 	= Resources.DATE_FORMAT.parse(date + " " + start + ":00");
+			Date endDate 	= Resources.DATE_FORMAT.parse(date + " " + end + ":00");
+			Date stamp 		= new Date();
+			Resources.DATE_FORMAT.format(stamp);
+			
+			// get track number
+			Integer trackID = new Integer(track);
+			int clubID = manager.getClubIDFromCookie(req);
+			
+			Booking booking = new Booking(clubID, "", trackID, startDate, endDate, stamp, comment);
+			if(manager.addMaintenance(booking))
+				ServletHandler.writeResponse("true", resp);
+			else
+				ServletHandler.writeResponse("false", resp);
+		}
+		catch (Exception e)
+		{
+			System.out.println("Error creating booking Maintenance");
+			ServletHandler.writeResponse("false", resp);
+		}
+		
+		return true;
 	}
 }

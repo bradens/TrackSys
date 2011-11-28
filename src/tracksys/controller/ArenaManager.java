@@ -287,4 +287,32 @@ public class ArenaManager {
 			return false;
 		}
 	}
+	
+	public boolean addMaintenance(Booking booking)
+	{
+		
+		BookingsDB db = BookingsDB.getInstance();
+		try 
+		{
+			List<Booking> conflicts = db.getFutureBookingConflicts(booking.getStartTime(), booking.getEndTime(), booking.getTrackID());
+					
+			// Not Conflict with current booking
+			if(conflicts.isEmpty())
+			{
+				db.insertBooking(booking);
+				return true;
+			}
+			else
+			{
+				// Todo: cancel current bookings
+				db.insertBooking(booking);
+				return false;
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println("Error inserting new booking for maintenance");
+			return false;
+		}
+	}
 }

@@ -100,26 +100,26 @@
 										<span class="trackText2">Maintenance</span>
 										</div>	
 									<div class="trackWarning warningPopup">
-										<span class="warningTitle">Booking Conflict Warning.</span><br/>
+										<span class="warningTitle">Warning: Booking Conflict!</span><br/>
 										<span class="errorDesc">The maintenance you are trying to book will cancel other club bookings.</span>
 									</div>
 									<div class="trackForm">
-										<span class="trackLabel label">Select: </span>
+										<span class="trackLabel label">Select track: </span>
 										<div class="trackSelect">
 											<select id="trackIDSelect">
-											<option>Track 1</option>
-											<option>Track 2</option>
-											<option>Track 3</option>
-											<option>Track 4</option>
-											<option>Track 5</option>
-											<option>Track 6</option>
-											<option>Track 7</option>
-											<option>Track 8</option>
+											<option>1</option>
+											<option>2</option>
+											<option>3</option>
+											<option>4</option>
+											<option>5</option>
+											<option>6</option>
+											<option>7</option>
+											<option>8</option>
 											</select>
 										</div>
 										<div id="maintenanceDayControls">
 											<span class="trackLabel label">Maintenance day: </span>
-											<input id="datepicker"/>
+											<input id="maintenanceDatepicker"/>
 										</div>
 										<span class="trackLabel label">Start Time: </span>
 										<div class="trackSelect">
@@ -168,7 +168,7 @@
 								
 										<span class="trackLabel label">Comment: </span>
 										<input id="trackCommentInputBox" class="trackCommentInput formInputBox" type="text" />
-										<a onclick="club.paynow();" class="big button">Book maintenance</a>
+										<a onclick="admin.createMaintenance();" class="big button">Book for maintenance</a>
 									</div>
 								</div>
 							</div>
