@@ -2,6 +2,7 @@ package tracksys.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.ArrayList;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -288,7 +289,7 @@ public class ArenaManager {
 		}
 	}
 	
-	public boolean addMaintenance(Booking booking)
+	public List<Booking> addMaintenance(Booking booking)
 	{
 		
 		BookingsDB db = BookingsDB.getInstance();
@@ -300,19 +301,27 @@ public class ArenaManager {
 			if(conflicts.isEmpty())
 			{
 				db.insertBooking(booking);
-				return true;
+				return conflicts;
 			}
 			else
 			{
-				// Todo: cancel current bookings
+				// Cancel current booking
+				//for(int i=0; i< conflicts.size(); i++)
+				//{
+				//	int bookingID = conflicts.get(i).getID();
+				//	db.cancelBooking(bookingID);
+				//}
+				
+				// insert new booking
 				db.insertBooking(booking);
-				return false;
+				return conflicts;
 			}
 		}
 		catch (Exception e)
 		{
 			System.out.println("Error inserting new booking for maintenance");
-			return false;
+			List<Booking> tmp = new ArrayList<Booking>();
+			return tmp;
 		}
 	}
 }

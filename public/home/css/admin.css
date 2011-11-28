@@ -53,8 +53,8 @@
 }
 div.trackTopRowWrap {
 	width: 99%;
-	height: 50%;
-	min-width: 50%;
+	height: 35%;
+	min-width: 35%;
 }
 div.trackTopRow {
 	float: left;
@@ -63,7 +63,7 @@ div.trackTopRow {
 }
 div.trackBottomRowWrap {
 	width: 99%;
-	height: 45%;
+	height: 65%;
 	min-width: 45%;
 	margin-top: 20px;
 }

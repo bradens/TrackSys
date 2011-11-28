@@ -428,9 +428,9 @@ public class HomeView {
 	public boolean addMaintenance(HttpServletRequest req, HttpServletResponse resp)
 	{
 		String track = req.getParameter("track");
-		String date = req.getParameter("date");
+		String date  = req.getParameter("date");
 		String start = req.getParameter("start");
-		String end = req.getParameter("end");
+		String end   = req.getParameter("end");
 		String comment = req.getParameter("comment");
 		comment += "***MAINTENANCE***";
 		
@@ -446,10 +446,14 @@ public class HomeView {
 			int clubID = manager.getClubIDFromCookie(req);
 			
 			Booking booking = new Booking(clubID, "", trackID, startDate, endDate, stamp, comment);
-			if(manager.addMaintenance(booking))
-				ServletHandler.writeResponse("true", resp);
-			else
-				ServletHandler.writeResponse("false", resp);
+			
+			List<Booking> conflictBookings = manager.addMaintenance(booking);
+			
+			// Return the list of conflict bookings
+			Gson g = new Gson();
+			resp.setContentType("application/json");
+			String s = g.toJson(conflictBookings);
+			ServletHandler.writeResponse(s, resp);
 		}
 		catch (Exception e)
 		{
