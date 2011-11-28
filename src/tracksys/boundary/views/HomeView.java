@@ -317,9 +317,7 @@ public class HomeView {
 				while(i > 0)
 				{
 					Booking booking = new Booking(clubid, "", track, startDate, endDate, stamp, comment);
-					if(manager.addBooking(booking))
-						recure = recure;
-					else
+					if(!manager.addBooking(booking))
 						recure = false;
 					
 					// Add to start date
