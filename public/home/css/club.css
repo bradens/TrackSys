@@ -19,6 +19,7 @@ div.paymentTopRowWrap {
 	min-width: 50%;
 }
 div.paymentTopRow {
+	padding: 5px;
 	float: left;
 	width: 100%;
 	height: 100%;

@@ -6,6 +6,8 @@ var admin = {
 			admin.rewriteDayBookings();
 		});
 		
+		$('#maintenanceDatepicker').datepicker({ dateFormat: 'yy-mm-dd' , currentText: 'Today' });
+		
 		// Initialize the cancellation dialog
 		$("#cancel-dialog").dialog({
 			autoOpen: false,
@@ -218,6 +220,63 @@ var admin = {
 					data[i].trackID + ');">' + 
 			'<td>' + data[i].trackID + '</td>' +
 			'<td>' + data[i].isBookedForMaintenance + '</td>' + '</tr>');
+		}
+	},
+	
+	////////////////////////////////////////
+	// track maintenance: same as booking
+	createMaintenance : function()
+	{
+		var track   = $("#trackIDSelect").val();
+		var date    = $("#maintenanceDatepicker").val();
+		var start   = $("#startTimeSelect").val();
+		var end     = $("#endTimeSelect").val();
+		var comment = $("#trackCommentInputBox").val();
+
+		CommHandler.doPost(SERVER_LOC+PORT+"/home/submitMaintenance", { track: track, date: date, start: start, end: end, comment: comment}, admin.maintenanceSuccess);
+	},
+	
+	printTrackHistory : function()
+	{
+		//todo
+	},
+	
+	maintenanceSuccess : function(data)
+	{
+		if (!data)
+		{
+			console.log("Failed to get tracks");
+			return;
+		}
+		
+		// no conflict when book maintenance
+		if (data.length == 0)
+		{
+			window.location.href = "/home/admin.html";
+		}
+		// conflict with some booking, list them out
+		else
+		{
+			$('.conflictBookingTable').append('<tr class="header">' +
+						'<th>Club</th>' +
+						'<th>StartTime</th>' +
+						'<th>EndTime</th>' +
+						'<th>Comment</th>' +
+						'<th>Delete</th>' +
+						'</tr>');
+			for (var i = 0;i < data.length;i++)
+			{
+				$('.conflictBookingTable tr:last').after('<tr class="conflictBookingRow">' +
+					'<td>' + data[i].clubName + '</td>' +
+					'<td>' + data[i].startTime + '</td>' +
+					'<td>' + data[i].endTime + '</td>' +
+					'<td>' + data[i].comment + '</td>' +
+					'<td><a onclick="admin.openCancelDialog('+ data[i].id +');" class="button negative removeButton"><span class="icon trash"></span></a></td>'+
+					'</tr>');
+			}
+			
+			// show warning
+			$(".warningPopup").fadeIn('fast');
 		}
 	},
 	

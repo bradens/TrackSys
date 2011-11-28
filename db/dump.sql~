@@ -34,7 +34,6 @@ CREATE TABLE `accounts` (
 
 LOCK TABLES `accounts` WRITE;
 /*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
-INSERT INTO `accounts` VALUES (15,500);
 /*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -54,7 +53,7 @@ CREATE TABLE `bookings` (
   `bookedTime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `comment` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=128 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -63,7 +62,7 @@ CREATE TABLE `bookings` (
 
 LOCK TABLES `bookings` WRITE;
 /*!40000 ALTER TABLE `bookings` DISABLE KEYS */;
-INSERT INTO `bookings` VALUES (2,0,1,'2011-11-24 17:00:00','2011-11-24 18:00:00','2011-11-21 01:58:39','Comment'),(3,0,1,'2011-11-26 17:00:00','2011-11-26 18:00:00','2011-11-21 02:03:55','Comment'),(4,13,1,'2011-11-25 17:00:00','2011-11-25 18:00:00','2011-11-21 02:21:51','Comment'),(5,13,1,'2011-11-27 17:00:00','2011-11-27 18:00:00','2011-11-21 02:22:51','Comment'),(6,13,7,'2011-11-28 17:00:00','2011-11-28 18:00:00','2011-11-21 02:24:02','Comment'),(7,13,1,'2011-11-30 17:00:00','2011-11-30 18:00:00','2011-11-21 02:36:49','null'),(8,13,6,'2011-12-01 03:00:00','2011-11-30 18:00:00','2011-11-21 02:38:04','I am a comment'),(9,13,5,'2011-11-30 22:00:00','2011-12-01 01:00:00','2011-11-21 02:48:48','Comment'),(28,19,8,'2011-11-25 17:00:00','2011-11-25 18:00:00','2011-11-21 06:32:04','So stoked!'),(29,18,8,'2011-11-23 17:00:00','2011-11-23 18:00:00','2011-11-21 06:32:24','Randy Dandy'),(35,15,4,'2011-11-03 16:00:00','2011-11-03 17:00:00','2011-11-21 09:45:26',''),(36,15,1,'2011-12-01 17:00:00','2011-12-01 18:00:00','2011-11-21 09:45:43',''),(37,15,4,'2011-12-17 02:00:00','2011-12-17 01:00:00','2011-11-21 09:46:04','');
+INSERT INTO `bookings` VALUES (2,0,1,'2011-11-24 17:00:00','2011-11-24 18:00:00','2011-11-21 01:58:39','Comment'),(3,0,1,'2011-11-26 17:00:00','2011-11-26 18:00:00','2011-11-21 02:03:55','Comment'),(4,13,1,'2011-11-25 17:00:00','2011-11-25 18:00:00','2011-11-21 02:21:51','Comment'),(5,13,1,'2011-11-27 17:00:00','2011-11-27 18:00:00','2011-11-21 02:22:51','Comment'),(6,13,7,'2011-11-28 17:00:00','2011-11-28 18:00:00','2011-11-21 02:24:02','Comment'),(8,13,6,'2011-12-01 03:00:00','2011-11-30 18:00:00','2011-11-21 02:38:04','I am a comment'),(9,13,5,'2011-11-30 22:00:00','2011-12-01 01:00:00','2011-11-21 02:48:48','Comment'),(28,19,8,'2011-11-25 17:00:00','2011-11-25 18:00:00','2011-11-21 06:32:04','So stoked!'),(29,18,8,'2011-11-23 17:00:00','2011-11-23 18:00:00','2011-11-21 06:32:24','Randy Dandy'),(40,20,3,'2011-11-23 17:00:00','2011-11-24 05:00:00','2011-11-22 02:02:18','Snape granted a special permission for Slytherins practice. All day.'),(54,21,8,'2011-11-30 17:00:00','2011-11-30 18:00:00','2011-11-22 07:36:59','adsfasfdasdfadsf'),(56,20,6,'2011-11-01 13:00:00','2011-11-01 19:00:00','2011-11-22 21:00:19','Fall practice '),(90,33,4,'2011-11-28 14:00:00','2011-11-28 18:00:00','2011-11-22 23:17:04','Monday booking'),(95,33,3,'2011-11-28 14:00:00','2011-11-28 18:00:00','2011-11-22 23:20:54','test2'),(118,39,1,'2011-12-07 14:00:00','2011-12-07 15:00:00','2011-11-24 22:37:30','asdfasfas'),(119,20,1,'2011-11-28 16:00:00','2011-11-28 20:00:00','2011-11-25 21:58:11','extra practice'),(120,20,1,'2011-12-05 16:00:00','2011-12-05 20:00:00','2011-11-25 21:58:11','extra practice'),(121,20,1,'2011-12-12 16:00:00','2011-12-12 20:00:00','2011-11-25 21:58:11','extra practice'),(124,22,3,'2011-11-15 14:00:00','2011-11-15 15:00:00','2011-11-28 02:53:23','Brisk morning jog'),(125,22,3,'2011-11-22 14:00:00','2011-11-22 15:00:00','2011-11-28 02:53:23','Brisk morning jog'),(126,22,3,'2011-11-29 14:00:00','2011-11-29 15:00:00','2011-11-28 02:53:23','Brisk morning jog'),(127,22,3,'2011-12-06 14:00:00','2011-12-06 15:00:00','2011-11-28 02:53:23','Brisk morning jog');
 /*!40000 ALTER TABLE `bookings` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -89,7 +88,7 @@ CREATE TABLE `club` (
   `waiver` tinyint(1) DEFAULT '0',
   `balance` double DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1 COMMENT='Stores clubs';
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1 COMMENT='Stores clubs';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -98,7 +97,7 @@ CREATE TABLE `club` (
 
 LOCK TABLES `club` WRITE;
 /*!40000 ALTER TABLE `club` DISABLE KEYS */;
-INSERT INTO `club` VALUES (2,'ClubTest2','pass','123 Fake St','Victoria','BC','V8T 3Y9','fake@you.com','1-250-555-1234',0,0,0,0),(3,'ClubTest3','password','123 Fake St','Victoria','BC','V8T 3Y9','fake@you.com','1-250-555-1234',0,0,0,0),(11,'ClubTest4','pass','123 Fake St','Victoria','BC','V8T 3Y9','fake@you.com','1-250-555-1234',0,0,0,0),(12,'admin','password','dsf','dsfsd','sdfds','dsfds','sdfds','sdfs',1,0,0,0),(14,'clubtest5','pass','huigg','vy','yvuv','uyv','vyu','vy',0,0,0,0),(15,'asdf','something','asdf','asdf','asdf','asdf','asdf','1234123412',0,0,0,0),(16,'','','','','','','','',0,0,0,0),(17,'','','','','','','','',0,0,0,0);
+INSERT INTO `club` VALUES (2,'ClubTest2','pass','123 Fake St','Victoria','BC','V8T 3Y9','fake@you.com','1-250-555-1234',0,0,0,100),(3,'ClubTest3','password','123 Fake St','Victoria','BC','V8T 3Y9','fake@you.com','1-250-555-1234',0,1,0,1000),(11,'ClubTest4','pass','123 Fake St','Victoria','BC','V8T 3Y9','fake@you.com','1-250-555-1234',0,0,0,0),(12,'admin','password','dsf','dsfsd','sdfds','dsfds','sdfds','sdfs',1,1,0,0),(14,'clubtest5','pass','huigg','vy','yvuv','uyv','vyu','vy',0,0,0,0),(20,'Slytherins','mudblood','Hogwarts','Forbidden Forest','MAGIC','strawgoh','hogwarts@uk.com','none',0,1,0,-132),(21,'jazzlers','a','asdf','asdf','asdf','asdf','asdf','asdf',0,0,0,0),(22,'Brians Ballers','ballin','somewhere on','quadra','bc','v8v 8v8','b.richter3@gmail.com','250 896 2896',0,0,0,-5000000),(23,'running people','asdf','asdf','asdf','asdf','asdf','asdf','aasdf',0,0,0,0),(33,'Jordan','pass','123 Fake St','Victoria','BC','V8T 4T6','jordan@fake.org','1-250-555-1234',0,1,1,0),(38,'','','','','','','','',0,1,1,0),(40,'clubbin','something','1234 fake','Victoria','BC','VAD SSD','b@c.ca','1-234-1234',0,1,1,0);
 /*!40000 ALTER TABLE `club` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -115,7 +114,7 @@ CREATE TABLE `notifications` (
   `message` text,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -124,7 +123,7 @@ CREATE TABLE `notifications` (
 
 LOCK TABLES `notifications` WRITE;
 /*!40000 ALTER TABLE `notifications` DISABLE KEYS */;
-INSERT INTO `notifications` VALUES (12,'Track closed','Wooooooooooops','2011-11-21 02:49:37'),(13,'CHUNKY!','IT\"S RAINING SIDEWAYS','2011-11-21 03:18:44'),(14,'SENG 330 Evaluations','Don\'t forget to come prepared to complete the SENG 330 evaluations.','2011-11-21 05:47:33'),(15,'testttttttttt 1 2','yessssssssss','2011-11-21 09:28:10'),(16,'test22222','boom boom','2011-11-21 09:40:52'),(17,'CODES CONFLICT!','Brian, you and I are working on the same task -Clubs tab in Admin view!\nI kept yours and will work on the Tracks Tab then','2011-11-21 21:53:08');
+INSERT INTO `notifications` VALUES (39,'SOmething','something new','2011-11-24 05:25:57');
 /*!40000 ALTER TABLE `notifications` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -148,7 +147,7 @@ CREATE TABLE `tracks` (
 
 LOCK TABLES `tracks` WRITE;
 /*!40000 ALTER TABLE `tracks` DISABLE KEYS */;
-INSERT INTO `tracks` VALUES (1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0),(8,0);
+INSERT INTO `tracks` VALUES (1,1),(2,0),(3,0),(4,1),(5,0),(6,0),(7,0),(8,1);
 /*!40000 ALTER TABLE `tracks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -160,13 +159,13 @@ DROP TABLE IF EXISTS `transactions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `transactions` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `clubid` int(11) DEFAULT NULL,
   `paymentfee` float DEFAULT NULL,
   `paymenttime` timestamp NULL DEFAULT NULL,
   `comment` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -175,7 +174,7 @@ CREATE TABLE `transactions` (
 
 LOCK TABLES `transactions` WRITE;
 /*!40000 ALTER TABLE `transactions` DISABLE KEYS */;
-INSERT INTO `transactions` VALUES (0,15,20,'2011-12-14 00:23:13','This is a comment');
+INSERT INTO `transactions` VALUES (1,20,100,'2011-11-23 04:12:54','triet paid'),(2,20,100,'2011-11-23 04:12:54','triet paid2 '),(3,20,105,'2011-11-23 04:37:08','triet paid3'),(4,20,-122,'2011-11-23 04:47:08','sdfdsf'),(5,20,20,'2011-11-23 04:52:48','new payment'),(6,20,30,'2011-11-23 05:07:26','paid by credit'),(7,20,40,'2011-11-23 05:12:27','dffdsfsdfsdf'),(8,20,20,'2011-11-23 05:25:15','newest'),(9,20,15,'2011-11-23 05:27:42','minimum payment'),(10,20,24,'2011-11-23 05:29:10','pay moar'),(11,20,43,'2011-11-23 05:33:42','humm'),(12,15,50,'2011-11-23 05:34:52','paid by triet'),(13,15,40,'2011-11-23 05:38:22','repaid by t'),(14,15,45,'2011-11-23 06:05:53','overtime'),(15,15,32,'2011-11-23 06:07:00','d'),(16,15,1234,'2011-11-24 04:02:50','adsafasdaf'),(17,22,5000000,'2011-11-24 07:29:02','paid 5 milly'),(18,15,123412000000,'2011-11-24 22:15:46','');
 /*!40000 ALTER TABLE `transactions` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -188,4 +187,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-11-21 14:08:54
+-- Dump completed on 2011-11-27 18:55:39
