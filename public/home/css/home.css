@@ -7,6 +7,14 @@
 	padding:10px;
 }
 
+.editClubWrap .label {
+	width:30%;
+}
+
+.editClubWrap input {
+	width:70%;
+}
+
 div.BannerWrap {
 	font-size: 35px;
 	font-weight: 100;

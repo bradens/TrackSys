@@ -1,6 +1,12 @@
 var club = {
+		editDialog: null,
 		init : function()
 		{	
+			// get the dialog html
+			CommHandler.doGet(SERVER_LOC+"80/registration/editDialog.html", null, function(data) {
+				club.editDialog = data;
+			});
+			
 			// Right column initialization
 			$("#tabs").tabs();
 			
@@ -43,6 +49,30 @@ var club = {
 			$(".loadingTransactions").show('fast');
 		},
 		
+		editClub: function() 
+		{
+			$(club.editDialog).dialog({
+				show: 'fade',
+				hide: 'fade',
+				width: '450',
+				modal: true,
+				title: "Edit Profile",
+				buttons: {
+					"Apply": function() {
+						club.finishEdit();
+					},
+					"Cancel": function() {
+						$(this).dialog( "close" );
+					}
+				}
+			});
+		},
+		
+		finishEdit: function(data)
+		{
+			console.log(data);
+		},
+		
 		writeClubProfile: function(data)
 		{
 			if (!data)
@@ -60,16 +90,6 @@ var club = {
 				'<tr class="profileRow"><td><span class="lbl">Email:</span></td><td><span class=lblVal>' + data.email + '</span></td></tr>' +
 				'<tr class="profileRow"><td><span class="lbl">Balance:</span></td><td><span class=lblVal>' + data.balance + '</span></td></tr>'
 			);
-	
-			
-//			$('.profileInformation').append(
-//				'<span class="lbl">' + 'Club: </span><span class="lblVal">'+ data.name + '</span><br/>' +
-//				'<span class="lbl">' + 'Address: </span><span class="lblVal">' + data.address.street +'</span><br/>' +
-//				'<span class="lbl">' + 'City: </span><span class="lblVal">' + data.address.city +', ' + data.address.province +'</span><br/>' +
-//				'<span class="lbl">' + 'Postal Code: </span><span class="lblVal">' + data.address.postal + '</span><br/>' +
-//				'<span class="lbl">' + 'Phone: </span><span class="lblVal">' + data.phone + '</span><br/>' +
-//				'<span class="lbl">' + 'Email: </span><span class="lblVal">' + data.email + '</span><br/>' +
-//				'<span class="lbl">' + 'Balance: </span><span class="lblVal">$' + data.balance + '</span><br/>' );
 		},
 		
 		writeClubBalancePaymentTab: function(data)
@@ -225,9 +245,5 @@ var club = {
 			$("#cancel-dialog").val(data);
 			console.log($("#cancel-dialog").val());
 			$("#cancel-dialog").dialog( "open" );
-		},
-}
-
-function init() {
-	
+		}
 }
