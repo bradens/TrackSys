@@ -92,12 +92,105 @@
 						</div>
 					</div>
 					<div id="tabs-3">
-						<table class="tracksTable">
-						</table>
-						<div class="loadingTracks" style="display:none;">
-							<div class="ajaxLoading">
-				  			</div>
-						</div>
+						<p>	
+							<div class="trackRow trackBottomRowWrap">
+								<div class="trackBottomRow">
+									<div class="trackHeader">
+										<span class="trackText1">Tracks</span>
+										<span class="trackText2">Maintenance</span>
+										</div>	
+									<div class="trackWarning warningPopup">
+										<span class="warningTitle">Booking Conflict Warning.</span><br/>
+										<span class="errorDesc">The maintenance you are trying to book will cancel other club bookings.</span>
+									</div>
+									<div class="trackForm">
+										<span class="trackLabel label">Select: </span>
+										<div class="trackSelect">
+											<select id="trackIDSelect">
+											<option>Track 1</option>
+											<option>Track 2</option>
+											<option>Track 3</option>
+											<option>Track 4</option>
+											<option>Track 5</option>
+											<option>Track 6</option>
+											<option>Track 7</option>
+											<option>Track 8</option>
+											</select>
+										</div>
+										<div id="maintenanceDayControls">
+											<span class="trackLabel label">Maintenance day: </span>
+											<input id="datepicker"/>
+										</div>
+										<span class="trackLabel label">Start Time: </span>
+										<div class="trackSelect">
+										<select id="startTimeSelect">
+											<option>06:00</option>
+											<option>07:00</option>
+											<option>08:00</option>
+											<option>09:00</option>
+											<option>10:00</option>
+											<option>11:00</option>
+											<option>12:00</option>
+											<option>13:00</option>
+											<option>14:00</option>
+											<option>15:00</option>
+											<option>16:00</option>
+											<option>17:00</option>
+											<option>18:00</option>
+											<option>19:00</option>
+											<option>20:00</option>
+											<option>21:00</option>
+											</select>
+										</div>
+										
+										<span class="trackLabel label">End Time: </span>
+										<div class="trackSelect">
+											<select id="endTimeSelect">
+											<option>07:00</option>
+											<option>08:00</option>
+											<option>09:00</option>
+											<option>10:00</option>
+											<option>10:00</option>
+											<option>11:00</option>
+											<option>12:00</option>
+											<option>13:00</option>
+											<option>14:00</option>
+											<option>15:00</option>
+											<option>16:00</option>
+											<option>17:00</option>
+											<option>18:00</option>
+											<option>19:00</option>
+											<option>20:00</option>
+											<option>21:00</option>
+											<option>22:00</option>
+											</select>
+										</div>
+								
+										<span class="trackLabel label">Comment: </span>
+										<input id="trackCommentInputBox" class="trackCommentInput formInputBox" type="text" />
+										<a onclick="club.paynow();" class="big button">Book maintenance</a>
+									</div>
+								</div>
+							</div>
+							</p>
+							<p>
+							<div class="trackRow trackTopRowWrap">
+								<div class="trackTopRow">
+									<div class="trackHeader">
+										<span class="trackText1">Tracks</span>
+										<span class="trackText2">History</span>
+										<span class="trackID">#</span>
+									</div>
+									<div class="tracksTableSection">
+										<table class="tracksTable">
+										</table>
+										<div class="loadingTracks" style="display:none;">
+											<div class="ajaxLoading"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</p>
 					</div>
 					<div id="tabs-4">
 						<div id="dayControls">
