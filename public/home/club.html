@@ -51,12 +51,37 @@
 			<div class="rightColumn">
 				<div id="tabs">
 					<ul>
-						<li><a href="#tabs-1">Future Bookings</a></li>
-						<li><a href="#tabs-2">Make Booking</a></li>
-						<li><a href="#tabs-3">Previous Bookings</a></li>
-						<li><a href="#tabs-4">Payments</a></li>
+						<li><a href="#tabs-1">Day View</a></li>
+						<li><a href="#tabs-2">Future Bookings</a></li>
+						<li><a href="#tabs-3">Make Booking</a></li>
+						<li><a href="#tabs-4">Previous Bookings</a></li>
+						<li><a href="#tabs-5">Payments</a></li>
 					</ul>
 					<div id="tabs-1">
+						<div id="dayControls">
+							<a class="button small prevDayBtn" onclick="club.prevDay();"><< Previous Day</a>
+							<input id="datepicker-dayview"/>
+							<a class="button small nextDayBtn" onclick="club.nextDay();">Next Day >></a>
+						</div>
+						<table class="bookingsDayTable">
+							<tr class="header">
+								<th>&nbsp;</th>
+								<th>Track 1</th>
+								<th>Track 2</th>
+								<th>Track 3</th>
+								<th>Track 4</th>
+								<th>Track 5</th>
+								<th>Track 6</th>
+								<th>Track 7</th>
+								<th>Track 8</th>
+							</tr>
+						</table>
+						<div class="loadingClubs" style="display:none;">
+							<div class="ajaxLoading">
+				  			</div>
+						</div>
+					</div>
+					<div id="tabs-2">
 						<table class="table transactionTable" id="futureBookings">
 							<!-- future bookings get inserted here -->
 						</table>
@@ -64,7 +89,7 @@
 							<div class="ajaxLoading"></div>
 						</div>
 					</div>
-					<div id="tabs-2">
+					<div id="tabs-3">
 						<div class="makeBooking">
 							<p>
 								Please fill in the information below to request a booking.
@@ -132,7 +157,7 @@
 							</div>
 						</div>
 					</div>
-					<div id="tabs-3">
+					<div id="tabs-4">
 						<table class="table transactionTable" id="historyBookings">
 							<!-- history bookings get inserted here -->
 						</table>
@@ -140,7 +165,7 @@
 							<div class="ajaxLoading"></div>
 						</div>
 					</div>
-					<div id="tabs-4">
+					<div id="tabs-5">
 						<p>	
 							<div class="paymentRow paymentBottomRowWrap">
 								<div class="paymentBottomRow">

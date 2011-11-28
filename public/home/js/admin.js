@@ -130,7 +130,7 @@ var admin = {
 	{
 		var date=new Date($('#datepicker').datepicker('getDate'));
     	date.setDate(date.getDate()-1);
-    	$('#picker').datepicker('setDate', date);
+    	$('#datepicker').datepicker('setDate', date);
 		this.rewriteDayBookings();
 	},
 	cancelBooking : function()
