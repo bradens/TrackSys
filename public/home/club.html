@@ -94,11 +94,24 @@
 							<p>
 								Please fill in the information below to request a booking.
 							</p>
-							<div class="errorPopup">
+							<div class="bookingPopup errorPopup">
 								<span class="errorTitle">Error.</span><br/>
 								<span class="errorDesc">The booking you requested was not available, or your input was invalid. If you requested a recurring booking, some booking may have gone through and others may have been denied. Refresh the Future Bookings tab for details.</span>
 							</div>
 							<div class="bookingForm">
+								<span class="startLabel label">Select track: </span>
+								<div class="bookingSelect">
+									<select id="trackIDSelect">
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
+									<option>5</option>
+									<option>6</option>
+									<option>7</option>
+									<option>8</option>
+									</select>
+								</div>
 								<span class="dayLabel label">Day: </span>
 								<input id="datepicker" />
 								
@@ -166,48 +179,35 @@
 						</div>
 					</div>
 					<div id="tabs-5">
-						<p>	
-							<div class="paymentRow paymentBottomRowWrap">
-								<div class="paymentBottomRow">
-									<div class="paymentBalanceHeader">
-										<span class="paymentText1">Current</span>
-										<span class="paymentText2">Balance</span>
-										<span class="paymentValue">$</span>
-									</div>	
-									<div class="paymenterror errorPopup">
-										<span class="errorTitle">Error.</span><br/>
-										<span class="errorDesc">The payment you requested was invalid, please make sure your payment amount are in numeric format.</span>
-									</div>
-									<div class="paymentForm">
-										<span class="paymentLabel label">Payment amount: </span><input id="payInputBox" class="payAmountInput formInputBox" type="int" />
-										<span class="paymentLabel label">Comment: </span><input id="payCommentInputBox" class="payCommentInput formInputBox" type="text" />
-										<a onclick="club.paynow();" class="big button">Pay Now</a>
-									</div>
+						<div class="paymentBottomRow">
+							<div class="paymentBalanceHeader">
+								<span class="paymentText1">Current</span>
+								<span class="paymentText2">Balance</span>
+								<span class="paymentValue">$</span>
+							</div>	
+							<div class="paymenterror errorPopup">
+								<span class="errorTitle">Error.</span><br/>
+								<span class="errorDesc">The payment you requested was invalid, please make sure your payment amount are in numeric format.</span>
+							</div>
+							<div class="paymentForm">
+								<span class="paymentLabel label">Payment amount: </span><input id="payInputBox" class="payAmountInput formInputBox" type="int" />
+								<span class="paymentLabel label">Comment: </span><input id="payCommentInputBox" class="payCommentInput formInputBox" type="text" />
+								<a onclick="club.paynow();" class="big button">Pay Now</a>
+							</div>
+						</div>
+						<div class="paymentHr"><hr /></div>
+						<div class="paymentTopRow">
+							<div class="paymentHeader">
+								<span class="paymentText1">Payment</span><span class="paymentText2">History</span>
+							</div>
+							<div class="paymentTable">
+								<table class="table transactionTable" id="transactions">
+								</table>
+								<div class="loadingTransactions" style="display:none">
+									<div class="ajaxLoading"></div>
 								</div>
 							</div>
-							</p>
-							<p>
-							<div class="paymentRow paymentTopRowWrap">
-								<div class="paymentTopRow">
-									<div class="paymentHeader">
-										<span class="paymentText1">Payment</span><span class="paymentText2">History</span>
-									</div>
-									<div class="paymentTable">
-										<table class="table transactionTable">
-											<tr class="header">
-												<th>Transaction ID</th>
-												<th>Fee</th>
-												<th>Time</th>
-												<th>Comment</th>
-											</tr>
-										</table>
-										<div class="loadingTransactions" style="display:none">
-											<div class="ajaxLoading"></div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</p>
+						</div>
 					</div>
 				</div>
 			</div>

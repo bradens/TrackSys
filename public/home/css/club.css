@@ -22,7 +22,7 @@ div.paymentTopRowWrap {
 div.paymentTopRow {
 	float: left;
 	width: 100%;
-	height: 100%;
+	/*height: 100%;*/
 }
 div.paymentBottomRowWrap {
 	width: 99%;
@@ -33,7 +33,15 @@ div.paymentBottomRowWrap {
 div.paymentBottomRow {
 	float: left;
 	width: 100%;
-	height: 100%;
+	margin-bottom: 30px;
+	/*height: 100%;*/
+}
+div.paymentHr {
+	display: block;
+	margin: 20px 0px 10px 0px;
+	padding: 40px 5px 10px 5px;
+	width: 98%;
+	border: 1;
 }
 /* Payment font stuff */
 div.paymentHeader {
@@ -169,6 +177,11 @@ div.bookingHr {
 
 .errorTitle {
 	font-size: 16px;
+}
+
+.errorDesc {
+	white-space: normal;	
+}
 }
 
 #leftAccordion {

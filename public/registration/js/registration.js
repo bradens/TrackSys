@@ -35,10 +35,10 @@ function init() {
 		width: 400
 	});
 	
-	$(".loginForm input").focus(function() {
+	$(".registerForm input").focus(function() {
 		$(".errorPopup").fadeOut('fast');
 	});
-	$(".loginForm input").keyup(function(k) {
+	$(".registerForm input").keyup(function(k) {
 		if (k.keyCode == '13')
 			register.submit();
 	});

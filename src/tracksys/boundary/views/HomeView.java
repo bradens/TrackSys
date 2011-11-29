@@ -112,6 +112,10 @@ public class HomeView {
 		{
 			return this.addPayment(req, resp);
 		}
+		else if (target.endsWith("billClub"))
+		{
+			return this.billClub(req, resp);
+		}
 		return false;
 	}
 	
@@ -291,6 +295,7 @@ public class HomeView {
 	 */
 	public boolean addBooking(HttpServletRequest req, HttpServletResponse resp)
 	{
+		String trackId = req.getParameter("track");
 		String date = req.getParameter("date");
 		String start = req.getParameter("start");
 		String end = req.getParameter("end");
@@ -304,8 +309,10 @@ public class HomeView {
 			Date stamp = new Date();
 			Resources.DATE_FORMAT.format(stamp);
 			
-			Random generator = new Random();
-			int track = generator.nextInt(8) + 1;
+			//Random generator = new Random();
+			//int track = generator.nextInt(8) + 1;
+			
+			Integer track = new Integer(trackId);
 			int clubid = manager.getClubIDFromCookie(req);
 			
 			boolean recure = true;
@@ -317,9 +324,7 @@ public class HomeView {
 				while(i > 0)
 				{
 					Booking booking = new Booking(clubid, "", track, startDate, endDate, stamp, comment);
-					if(manager.addBooking(booking))
-						recure = recure;
-					else
+					if(!manager.addBooking(booking))
 						recure = false;
 					
 					// Add to start date
@@ -461,6 +466,22 @@ public class HomeView {
 			ServletHandler.writeResponse("false", resp);
 		}
 		
+		return true;
+	}
+	
+	// Bill a club
+	public boolean billClub(HttpServletRequest req, HttpServletResponse resp)
+	{
+		String name = req.getParameter("club");
+		String value  = req.getParameter("fee");
+		
+		if(manager.billClub(name, Float.parseFloat(value)))
+		{
+			ServletHandler.writeResponse("true", resp);
+			return true;
+		}
+		
+		ServletHandler.writeResponse("false", resp);
 		return true;
 	}
 }

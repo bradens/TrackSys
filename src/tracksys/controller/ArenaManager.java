@@ -324,4 +324,22 @@ public class ArenaManager {
 			return tmp;
 		}
 	}
+	
+	public boolean billClub(String name, float value)
+	{
+		ClubDB db = ClubDB.getInstance();
+		try
+		{
+			Club club =  db.getClubFromName(name);
+			
+			club.setBalance(club.getBalance() + value);
+			db.updateClubBalance(club);
+		}
+		catch (Exception e)
+		{
+			System.out.println("Error billing the club");
+			return false;
+		}
+		return true;
+	}
 }

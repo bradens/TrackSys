@@ -57,6 +57,16 @@ var club = {
 			// get all transactions
 			CommHandler.doPost(SERVER_LOC+PORT+"/home/getTransactions", null, this.fillTransactionsTable);
 			$(".loadingTransactions").show('fast');
+			
+			// Hide booking error after focus change
+			$(".bookingForm input").focus(function() {
+				$(".errorPopup").fadeOut('fast');
+			});
+			
+			// Hide payment error after focus change
+			$(".paymentForm input").focus(function() {
+				$(".paymenterror").fadeOut('fast');
+			});
 		},
 		
 		editClub: function() 
@@ -111,8 +121,16 @@ var club = {
 				$('.bookingsDayTable tr td:not(".timeCell")').each(function(item) {
 					if ($(this).html() != "")
 					{
-						$(this).html("Booked");
-						$(this).addClass("bookedCell");
+						if($(this).html() == "admin")
+						{
+							$(this).html("Maintenance");
+							$(this).addClass("maintenanceBookedCell");
+						}
+						else if($(this).html() != "Maintenance" && $(this).html() != "admin")
+						{
+							$(this).html("Booked");
+							$(this).addClass("bookedCell");
+						}
 					}
 				});
 			}
@@ -158,7 +176,8 @@ var club = {
 				console.log("Failed to get current club profile");
 				return;
 			}
-			$('.paymentValue').append(data.balance +'.00' );
+			$('.paymentValue').empty();
+			$('.paymentValue').append('$' + data.balance);
 		},
 				
 		paynow: function(data)
@@ -173,10 +192,10 @@ var club = {
 		{
 			if (data == "true")
 			{
-				window.location.href = "/home/club.html";
-				// Todo: just load all transactions back, not the whole page
-				//CommHandler.doPost(SERVER_LOC+PORT+"/home/getTransactions", null, this.fillTransactionsTable);
-				//$(".loadingTransactions").show('fast');
+				console.log("TEST");
+				CommHandler.doPost(SERVER_LOC+PORT+"/home/getTransactions", null, club.fillTransactionsTable);
+				$(".loadingTransactions").show('fast');
+				CommHandler.doPost(SERVER_LOC+PORT+"/home/getCurrentClubProfile", null, club.writeClubBalancePaymentTab);
 			}
 			else
 			{
@@ -255,13 +274,14 @@ var club = {
 		
 		makeBooking : function()
 		{
+			var track = $("#trackIDSelect").val();
 			var date = $("#datepicker").val();
 			var start = $("#startTimeSelect").val();
 			var end = $("#endTimeSelect").val();
 			var comment = $("#commentInputBox").val();
 			var recurring = document.reccuring.recure.checked;
 			
-			CommHandler.doPost(SERVER_LOC+PORT+"/home/submitBooking", { date: date, start: start, end: end, comment: comment, recurring: recurring}, club.bookingSuccess);
+			CommHandler.doPost(SERVER_LOC+PORT+"/home/submitBooking", { track:track, date: date, start: start, end: end, comment: comment, recurring: recurring}, club.bookingSuccess);
 		},
 		
 		bookingSuccess : function(data)
@@ -270,7 +290,7 @@ var club = {
 				window.location.href = "/home/club.html";
 			else
 			{
-				$(".errorPopup").fadeIn('fast');
+				$(".bookingPopup").fadeIn('fast');
 			}
 		},
 		cancelBooking : function()
@@ -294,6 +314,13 @@ var club = {
 				return;
 			}
 			$(".loadingTransactions").css('display', 'none');
+			$("#transactions tr").remove();
+			$('#transactions').append('<tr class="header">' +
+										'<th>Transaction ID</th>' +
+										'<th>Fee</th>' +
+										'<th>Time</th>' +
+										'<th>Comment</th>' +
+									'</tr>')
 			for (var i = 0;i < data.length;i++)
 			{
 				$('.transactionTable tr:last').after('<tr class="transactionTableRow">' + 
