@@ -42,6 +42,8 @@ var admin = {
 		
 		// Right pane init
 		$("#rightTabs").tabs();
+		$("#trackTabs").tabs();
+		
 		// Get all notifications
 		CommHandler.doPost(SERVER_LOC+PORT+"/home/getNotifications", null, this.writeNotifications);
 		$(".loadingNotifications").show('fast');
@@ -291,6 +293,21 @@ var admin = {
 	printTrackHistory : function()
 	{
 		//todo
+	},
+	
+	writeTrackHistory : function()
+	{
+		var track   = $("#trackHistoryIDSelect").val();
+		CommHandler.doPost(SERVER_LOC+PORT+"/home/getTrackHistory", {track: track}, admin.trackHistorySuccess);
+	},
+	
+	trackHistorySuccess : function(data)
+	{
+		if (!data)
+		{
+			console.log("Failed to get tracks");
+			return;
+		}
 	},
 	
 	maintenanceSuccess : function(data)
