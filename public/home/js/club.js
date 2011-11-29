@@ -233,7 +233,7 @@ var club = {
 											'<th>Start Time</th>' + 
 											'<th>End Time</th>' +
 											'<th>Comment</th>' +
-											'<th>Delete</th>' +
+											'<th class="futureLastColumn">Delete</th>' +
 											'</tr>');
 			for (var i = 0;i < data.length;i++)
 			{
@@ -242,8 +242,8 @@ var club = {
 						data[i].trackID + '</td><td>' + 
 						data[i].startTime + '</td><td>' + 
 						data[i].endTime + '</td><td>' + 
-						data[i].comment + '</td><td>' +
-						'<a onclick="club.openCancelDialog('+ data[i].id +');" class="button negative"><span class="icon trash"></span></a></td>' +
+						data[i].comment + '</td><td class="futureLastColumn">' +
+						'<a onclick="club.openCancelDialog('+ data[i].id +');" class="button negative removeButton"><span class="icon trash"></span></a></td>' +
 						'</tr>');
 			}
 		},
