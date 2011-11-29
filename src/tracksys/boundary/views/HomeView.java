@@ -120,6 +120,10 @@ public class HomeView {
 		{
 			return this.getTrackHistory(req, resp);
 		}
+		else if (target.endsWith("getClubsByName"))
+		{
+			return this.getClubsByName(req, resp);
+		}
 		return false;
 	}
 	
@@ -426,6 +430,16 @@ public class HomeView {
 	public boolean getAllClubs(HttpServletRequest req, HttpServletResponse resp)
 	{
 		List<Club> clubs = manager.getAllClubs();
+		Gson g = new Gson();
+		resp.setContentType("application/json");
+		String s = g.toJson(clubs);
+		ServletHandler.writeResponse(s, resp);
+		return true;
+	}
+	
+	public boolean getClubsByName(HttpServletRequest req, HttpServletResponse resp)
+	{
+		List<Club> clubs = manager.getClubsByName(req.getParameter("searchStr"));
 		Gson g = new Gson();
 		resp.setContentType("application/json");
 		String s = g.toJson(clubs);

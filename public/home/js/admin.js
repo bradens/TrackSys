@@ -1,6 +1,13 @@
 var admin = {
 	init: function()
 	{	
+		$("#clubSearch").keyup(function(key) {
+			var val = $(this).val();
+			CommHandler.doPost(SERVER_LOC+PORT+"/home/getClubsByName", {searchStr: val}, function(data) {
+				$('.clubsTable tr:not(".header")').remove();
+				admin.writeClubsList(data);
+			});
+		});
 		$('#datepicker').datepicker({ dateFormat: 'yy-mm-dd', currentText: 'Today' });
 		$('#datepicker').datepicker().change(function(){
 			admin.rewriteDayBookings();

@@ -150,6 +150,13 @@ public class ArenaManager {
 		return list;
 	}
 	
+	public List<Club> getClubsByName(String searchParm)
+	{
+		ClubDB db = ClubDB.getInstance();
+		List<Club> list = db.getClubsFromName(searchParm);
+		return list;
+	}
+	
 	public Club getCurrentLoginClub(HttpServletRequest req)
 	{
 		int clubID = getClubIDFromCookie(req);

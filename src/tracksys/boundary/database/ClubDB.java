@@ -137,6 +137,35 @@ public class ClubDB {
 		}
 	}
 	
+	/** 
+	 * Gets the clubs that starts with the string in searchParm
+	 * @param searchParm
+	 * @return
+	 */
+	public List<Club> getClubsFromName(String searchParm)
+	{
+		List<Club> clubs = new ArrayList<Club>();
+		PreparedStatement ps = null;
+		String query = "select * from tracksys.club where name like \"" + searchParm + "%\" AND admin!=1;";
+		try
+		{
+			ps = conn.prepareStatement(query);
+			ResultSet s = ps.executeQuery();
+			Club tempClub;
+			while(s.next())
+			{
+				Address tempAddress = new Address(s.getString("street"), s.getString("city"), s.getString("province"), "", s.getString("postal"));
+				tempClub = new Club(s.getInt("id"), s.getString("name"), s.getString("passwd"), tempAddress, s.getString("email"), s.getString("phone"), s.getInt("electronicbilling"),s.getInt("waiver"), s.getInt("admin"), s.getFloat("balance"));
+				clubs.add(tempClub);
+			}
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return clubs;
+	}
+	
 	/**
 	 * Used for the autocomplete
 	 * @param search
