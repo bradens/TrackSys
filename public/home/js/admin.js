@@ -3,8 +3,10 @@ var admin = {
 	{	
 		$("#clubSearch").keyup(function(key) {
 			var val = $(this).val();
-			$('.clubsTable tr:not(".header")').remove();
-			CommHandler.doPost(SERVER_LOC+PORT+"/home/getClubsByName", {searchStr: val}, admin.writeClubsList);
+			CommHandler.doPost(SERVER_LOC+PORT+"/home/getClubsByName", {searchStr: val}, function(data) {
+				$('.clubsTable tr:not(".header")').remove();
+				admin.writeClubsList(data);
+			});
 		});
 		$('#datepicker').datepicker({ dateFormat: 'yy-mm-dd', currentText: 'Today' });
 		$('#datepicker').datepicker().change(function(){
