@@ -141,7 +141,6 @@ var admin = {
 						}
 						else if($(this).html() != "Maintenance" && $(this).html() != "admin")
 						{
-							$(this).html("Booked");
 							$(this).addClass("bookedCell");
 						}
 					}
