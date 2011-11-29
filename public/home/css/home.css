@@ -118,7 +118,11 @@ div.leftAccordion {
 .maintenanceBookedCell {
 	background-color: rgba(155, 250, 150, .5);
 }
-
+.hasDatePicker {
+	width: 200px !important;
+	display:inline-block !important;
+	margin:0px !important;
+}
 
 /***************************** JQUERY OVERRIDES *********************************/
 
