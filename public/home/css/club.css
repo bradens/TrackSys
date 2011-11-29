@@ -215,3 +215,9 @@ span.profileTitle {
 	margin:0;
 	top:0;
 }
+.futureLastColumn{
+	text-align:right;	
+}
+.removebutton {
+	float: right;
+}
