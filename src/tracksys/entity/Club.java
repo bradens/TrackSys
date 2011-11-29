@@ -1,4 +1,5 @@
 package tracksys.entity;
+import java.text.DecimalFormat;
 
 public class Club {
 	private int id;
@@ -23,7 +24,8 @@ public class Club {
 		this.electronicBilling = electronic;
 		this.signedWaiver = signed;
 		this.admin = admin;
-		this.balance = balance;
+		DecimalFormat twoDForm = new DecimalFormat("#.##");
+		this.balance = Float.valueOf(twoDForm.format(balance));
 	}
 	
 	public Club(int id, String name, String passwd, Address address, String email, String phone, int electronic, int signed, int admin)
@@ -110,7 +112,8 @@ public class Club {
 	
 	public float getBalance()
 	{
-		return balance;
+		DecimalFormat twoDForm = new DecimalFormat("#.##");
+		return Float.valueOf(twoDForm.format(balance));
 	}
 	
 	public void setName(String name)
@@ -147,7 +150,8 @@ public class Club {
 	
 	public void setBalance(float balance)
 	{
-		this.balance = balance;
+		DecimalFormat twoDForm = new DecimalFormat("#.##");
+		this.balance = Float.valueOf(twoDForm.format(balance));
 	}
 	
 	public void creditBalanceBy(float balance)
