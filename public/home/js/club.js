@@ -263,13 +263,14 @@ var club = {
 		
 		makeBooking : function()
 		{
+			var track = $("#trackIDSelect").val();
 			var date = $("#datepicker").val();
 			var start = $("#startTimeSelect").val();
 			var end = $("#endTimeSelect").val();
 			var comment = $("#commentInputBox").val();
 			var recurring = document.reccuring.recure.checked;
 			
-			CommHandler.doPost(SERVER_LOC+PORT+"/home/submitBooking", { date: date, start: start, end: end, comment: comment, recurring: recurring}, club.bookingSuccess);
+			CommHandler.doPost(SERVER_LOC+PORT+"/home/submitBooking", { track:track, date: date, start: start, end: end, comment: comment, recurring: recurring}, club.bookingSuccess);
 		},
 		
 		bookingSuccess : function(data)
