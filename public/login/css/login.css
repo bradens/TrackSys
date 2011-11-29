@@ -81,3 +81,24 @@ span.bannerText2 {
 .errorTitle {
 	font-size: 16px;
 }
+
+.dlgContent { 
+	display:none;
+	padding:5px;
+	width:100%;
+	height:100%;
+}
+
+.success {
+	display: none;
+	width:90%;
+	margin: 10px 0 10px 0;
+	padding: 4px;
+	border-radius: 3px;
+	border: thin solid #666;
+	background-color: rgba(150, 255, 150, .5);
+}
+
+.dlgContent .label {
+	margin: 8px 5px 0 0;
+}

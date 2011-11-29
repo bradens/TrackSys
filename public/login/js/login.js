@@ -29,7 +29,21 @@ var login = {
 			$("#passwdInputBox").val("");
 			$(".errorPopup").fadeIn('fast');
 		}
+	},
+	forgotPass: function()
+	{
+		$(".dlgContent").dialog({
+			show:"fade",
+			hide:"fade",
+			height:'180',
+			width: '350',
+			title: "Forgot Password"
+		});
+	},
+	forgotPassSubmit: function() {
+		$(".dlgContent .success").show('fast');
 	}
+	
 };
 
 function init() {
