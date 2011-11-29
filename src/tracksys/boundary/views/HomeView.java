@@ -291,6 +291,7 @@ public class HomeView {
 	 */
 	public boolean addBooking(HttpServletRequest req, HttpServletResponse resp)
 	{
+		String trackId = req.getParameter("track");
 		String date = req.getParameter("date");
 		String start = req.getParameter("start");
 		String end = req.getParameter("end");
@@ -304,8 +305,10 @@ public class HomeView {
 			Date stamp = new Date();
 			Resources.DATE_FORMAT.format(stamp);
 			
-			Random generator = new Random();
-			int track = generator.nextInt(8) + 1;
+			//Random generator = new Random();
+			//int track = generator.nextInt(8) + 1;
+			
+			Integer track = new Integer(trackId);
 			int clubid = manager.getClubIDFromCookie(req);
 			
 			boolean recure = true;
