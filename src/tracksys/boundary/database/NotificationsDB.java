@@ -81,8 +81,15 @@ public class NotificationsDB {
 			ResultSet rs = s.getResultSet();
 			while(rs.next())
 			{
+				try {
 				tempNot = new Notification(Resources.DATE_FORMAT.parse(rs.getString("date")), rs.getString("title"), rs.getString("message"), rs.getInt("id"));
-				notifications.add(tempNot);
+				}
+				catch (NumberFormatException e)
+				{
+					tempNot = null;
+				}
+				if (tempNot != null)	
+					notifications.add(tempNot);
 			}
 			return notifications;
 		}
