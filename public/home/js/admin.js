@@ -49,6 +49,9 @@ var admin = {
 		$(".loadingBookings").show('fast');
 		CommHandler.doPost(SERVER_LOC+PORT+"/home/getAllClubs", null, this.writeClubsList);
 		$(".loadingClubs").show('fast');
+		
+		//Get all clubs for the fee tab
+		CommHandler.doPost(SERVER_LOC+PORT+"/home/getAllClubs", null, admin.writeClubsFeeList);
 
 		var currentTime = new Date();
 		var month = currentTime.getMonth() + 1;
@@ -211,6 +214,38 @@ var admin = {
 			waiver = "no";
 			elecBilling = "no";
 		}
+	},
+	writeClubsFeeList : function(data)
+	{
+		if (!data)
+		{
+			console.log("Failed to get clubs");
+			return;
+		}
+		console.log("Wiritng clubs list for fee");
+		for (var i = 0;i < data.length;i++)
+		{
+			console.log("Writing club");
+			$('#clubNameSelect').append('<option>' + data[i].name + '</option>');
+		}
+	},
+	billClub : function()
+	{
+		var club   = $("#clubNameSelect").val();
+		var fee    = $("#feeValueInputBox").val();
+
+		CommHandler.doPost(SERVER_LOC+PORT+"/home/billClub", {club: club, fee: fee}, admin.billClubSuccess);
+	},
+	billClubSuccess : function(data)
+	{
+		if (!data)
+		{
+			$(".billFail").fadeIn('fast');
+			return;
+		}
+		$("#feeValueInputBox").val("");
+		$(".successPopup").fadeIn('fast');
+		console.log("Billed club");
 	},
 	
 	fillTracksList : function(data)

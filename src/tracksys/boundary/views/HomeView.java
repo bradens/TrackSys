@@ -112,6 +112,10 @@ public class HomeView {
 		{
 			return this.addPayment(req, resp);
 		}
+		else if (target.endsWith("billClub"))
+		{
+			return this.billClub(req, resp);
+		}
 		return false;
 	}
 	
@@ -462,6 +466,22 @@ public class HomeView {
 			ServletHandler.writeResponse("false", resp);
 		}
 		
+		return true;
+	}
+	
+	// Bill a club
+	public boolean billClub(HttpServletRequest req, HttpServletResponse resp)
+	{
+		String name = req.getParameter("club");
+		String value  = req.getParameter("fee");
+		
+		if(manager.billClub(name, Float.parseFloat(value)))
+		{
+			ServletHandler.writeResponse("true", resp);
+			return true;
+		}
+		
+		ServletHandler.writeResponse("false", resp);
 		return true;
 	}
 }

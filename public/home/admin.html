@@ -64,6 +64,7 @@
 						<li><a href="#tabs-2">Clubs</a></li>
 						<li><a href="#tabs-3">Tracks</a></li>
 						<li><a href="#tabs-4">Daily View</a></li>
+						<li><a href="#tabs-5">Fees</a></li>
 					</ul>
 					<div id="tabs-1">
 						<table class="recentBookingTable">
@@ -215,6 +216,32 @@
 						<div class="loadingClubs" style="display:none;">
 							<div class="ajaxLoading">
 				  			</div>
+						</div>
+					</div>
+					<div id="tabs-5">
+						<p>
+							Please fill in the information below to bill a club.
+						</p>
+						
+						<div class="successPopup">
+							<span class="warningTitle">Success</span><br/>
+							<span class="errorDesc">The fee has been successfully applied to the club.</span>
+						</div>
+						<div class="billFail warningPopup">
+							<span class="warningTitle">Error</span><br/>
+							<span class="errorDesc">The fee was unable to be applied to the club. Please double check your input data.</span>
+						</div>
+									
+						<div class="feeForm">
+							<span class="feeLabel label">Club: </span>
+							<div class="feeSelect">
+								<select id="clubNameSelect">
+								</select>
+							</div>
+								
+							<span class="feeLabel label">Fee: </span>
+							<input id="feeValueInputBox" class="feeValueInput formInputBox" type="text" />
+							<a onclick="admin.billClub();" class="big button">Bill Club</a>
 						</div>
 					</div>
 				</div>
