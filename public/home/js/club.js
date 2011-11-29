@@ -304,8 +304,8 @@ var club = {
 				return;
 			}
 			$(".loadingTransactions").css('display', 'none');
-			$(".transactionTable tr").remove();
-			$('.transactionTable').append('<tr class="header">' +
+			$("#transactions tr").remove();
+			$('#transactions').append('<tr class="header">' +
 										'<th>Transaction ID</th>' +
 										'<th>Fee</th>' +
 										'<th>Time</th>' +
