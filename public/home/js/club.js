@@ -57,6 +57,16 @@ var club = {
 			// get all transactions
 			CommHandler.doPost(SERVER_LOC+PORT+"/home/getTransactions", null, this.fillTransactionsTable);
 			$(".loadingTransactions").show('fast');
+			
+			// Hide booking error after focus change
+			$(".bookingForm input").focus(function() {
+				$(".errorPopup").fadeOut('fast');
+			});
+			
+			// Hide payment error after focus change
+			$(".paymentForm input").focus(function() {
+				$(".paymenterror").fadeOut('fast');
+			});
 		},
 		
 		editClub: function() 
@@ -280,7 +290,7 @@ var club = {
 				window.location.href = "/home/club.html";
 			else
 			{
-				$(".errorPopup").fadeIn('fast');
+				$(".bookingPopup").fadeIn('fast');
 			}
 		},
 		cancelBooking : function()
