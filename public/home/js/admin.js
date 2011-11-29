@@ -62,6 +62,12 @@ var admin = {
 		CommHandler.doPost(SERVER_LOC+PORT+"/home/getDayBookings", {date: year +'-'+month+'-'+day}, this.writeDayBookings);
 		CommHandler.doPost(SERVER_LOC+PORT+"/home/getAllTracks", null, this.fillTracksList);
 		$(".loadingTracks").show('fast');
+		
+		// Hide fee error / success after focus change
+		$(".feeForm input").focus(function() {
+			$(".successPopup").fadeOut('fast');
+			$(".billFail").fadeOut('fast');
+		});
 	},
 	
 	rewriteNotifications : function()
