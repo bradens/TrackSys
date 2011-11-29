@@ -171,6 +171,11 @@ div.bookingHr {
 	font-size: 16px;
 }
 
+.errorDesc {
+	white-space: normal;	
+}
+}
+
 #leftAccordion {
 	padding-top:10px;
 }
