@@ -308,6 +308,16 @@ var admin = {
 			console.log("Failed to get tracks");
 			return;
 		}
+		
+		for (var i = 0;i < data.length;i++)
+		{
+			$('.tracksHistoryTable tr:last').after('<tr class="trackHistoryRow">' +
+				'<td>' + data[i].clubName + '</td>' +
+				'<td>' + data[i].startTime + '</td>' + 
+				'<td>' + data[i].endTime + '</td>' +
+				'<td>' + data[i].comment + '</td>' +
+				'</tr>');
+		}
 	},
 	
 	maintenanceSuccess : function(data)
