@@ -166,7 +166,7 @@ var club = {
 				console.log("Failed to get current club profile");
 				return;
 			}
-			$('.paymentValue').append(data.balance +'.00' );
+			$('.paymentValue').append(data.balance);
 		},
 				
 		paynow: function(data)
