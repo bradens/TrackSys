@@ -258,7 +258,9 @@ var admin = {
 			return;
 		}
 		$("#feeValueInputBox").val("");
+		$('.clubsTable tr:not(".header")').remove();
 		$(".successPopup").fadeIn('fast');
+		CommHandler.doPost(SERVER_LOC+PORT+"/home/getAllClubs", null, admin.writeClubsList);
 		console.log("Billed club");
 	},
 	
