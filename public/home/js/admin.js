@@ -42,8 +42,7 @@ var admin = {
 		
 		// Right pane init
 		$("#rightTabs").tabs();
-		$("#trackTabs").tabs();
-		
+
 		// Get all notifications
 		CommHandler.doPost(SERVER_LOC+PORT+"/home/getNotifications", null, this.writeNotifications);
 		$(".loadingNotifications").show('fast');
@@ -309,6 +308,8 @@ var admin = {
 			return;
 		}
 		
+		$('.trackHistoryRow').remove();
+		
 		for (var i = 0;i < data.length;i++)
 		{
 			$('.tracksHistoryTable tr:last').after('<tr class="trackHistoryRow">' +
@@ -343,6 +344,8 @@ var admin = {
 						'<th>Comment</th>' +
 						'<th>Delete</th>' +
 						'</tr>');
+						
+			$('.conflictBookingRow').remove();	
 			for (var i = 0;i < data.length;i++)
 			{
 				$('.conflictBookingTable tr:last').after('<tr class="conflictBookingRow">' +

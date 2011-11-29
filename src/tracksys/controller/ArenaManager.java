@@ -306,13 +306,6 @@ public class ArenaManager {
 			}
 			else
 			{
-				// Cancel current booking
-				//for(int i=0; i< conflicts.size(); i++)
-				//{
-				//	int bookingID = conflicts.get(i).getID();
-				//	db.cancelBooking(bookingID);
-				//}
-				
 				// insert new booking
 				db.insertBooking(booking);
 				return conflicts;
@@ -342,5 +335,12 @@ public class ArenaManager {
 			return false;
 		}
 		return true;
+	}
+	
+	public List<Booking> getTrackHistory(int trackID)
+	{
+		BookingsDB bdb = BookingsDB.getInstance();
+		List<Booking> bookings = bdb.getHistoricBookingsByTrackID(trackID);
+		return bookings;
 	}
 }

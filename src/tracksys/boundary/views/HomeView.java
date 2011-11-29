@@ -116,6 +116,10 @@ public class HomeView {
 		{
 			return this.billClub(req, resp);
 		}
+		else if (target.endsWith("getTrackHistory"))
+		{
+			return this.getTrackHistory(req, resp);
+		}
 		return false;
 	}
 	
@@ -150,6 +154,19 @@ public class HomeView {
 	public boolean getRecentBookings(HttpServletRequest req, HttpServletResponse resp)
 	{
 		List<Booking> bookings = manager.getRecentBookings();
+		Gson g = new Gson();
+		String s = g.toJson(bookings);
+		resp.setContentType("application/json");
+		ServletHandler.writeResponse(s, resp);
+		return true;
+	}
+	
+	public boolean getTrackHistory(HttpServletRequest req, HttpServletResponse resp)
+	{
+		String trackID = req.getParameter("track");
+		Integer track = new Integer(trackID);
+		
+		List<Booking> bookings = manager.getTrackHistory(track.intValue());
 		Gson g = new Gson();
 		String s = g.toJson(bookings);
 		resp.setContentType("application/json");

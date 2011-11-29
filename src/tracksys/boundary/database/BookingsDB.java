@@ -341,4 +341,45 @@ public class BookingsDB {
 			e.printStackTrace();
 		}
 	}
+	
+	/* Retrieve a list of history bookings from the database for a track */
+	public List<Booking> getHistoricBookingsByTrackID(int ID)
+	{
+		String query = "SELECT * FROM tracksys.bookings JOIN tracksys.club on bookings.clubid=club.id WHERE trackid=\'" + ID + "\' AND startTime<now() ORDER BY bookedTime";
+		List<Booking> bookings = new ArrayList<Booking>();
+		try
+		{
+			Statement s = conn.createStatement();
+			s.executeQuery(query);
+			ResultSet rs = s.getResultSet();
+			Booking tB;
+			
+			while(rs.next())
+			{
+				String startTime = rs.getString("startTime");
+				String endTime = rs.getString("endTime");
+				String bookedTime = rs.getString("bookedTime");
+				try {
+				tB = new Booking(Integer.parseInt(rs.getString("id")), Integer.parseInt(rs.getString("clubid")), rs.getString("name"), Integer.parseInt(rs.getString("trackid")),
+						Resources.DATE_FORMAT.parse(startTime.substring(0, startTime.length() - 2)), Resources.DATE_FORMAT.parse(endTime.substring(0, endTime.length() - 2)),
+						Resources.DATE_FORMAT.parse(bookedTime.substring(0, bookedTime.length() -2)), rs.getString("comment"));
+				}
+				catch (NumberFormatException e)
+				{
+					tB = null;
+				}
+				if (tB == null)
+					System.out.println();
+				else
+					bookings.add(tB);
+			}
+			
+			return bookings;
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+	}
 }
