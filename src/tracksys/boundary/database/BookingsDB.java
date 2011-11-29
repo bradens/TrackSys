@@ -94,8 +94,12 @@ public class BookingsDB {
 			ResultSet rs = s.getResultSet();
 			while(rs.next())
 			{
+				String startTime = rs.getString("startTime");
+				String endTime = rs.getString("endTime");
+				String bookedTime = rs.getString("bookedTime");
 				tB = new Booking(Integer.parseInt(rs.getString("id")), Integer.parseInt(rs.getString("clubid")), rs.getString("name"), Integer.parseInt(rs.getString("trackid")),
-						Resources.DATE_FORMAT.parse(rs.getString("startTime")), Resources.DATE_FORMAT.parse(rs.getString("endTime")), Resources.DATE_FORMAT.parse(rs.getString("bookedTime")), rs.getString("comment"));
+						Resources.DATE_FORMAT.parse(startTime.substring(0, startTime.length() - 2)), Resources.DATE_FORMAT.parse(endTime.substring(0, endTime.length() - 2)),
+						Resources.DATE_FORMAT.parse(bookedTime.substring(0, bookedTime.length() -2)), rs.getString("comment"));
 				bookings.add(tB);
 			}
 			return bookings;
@@ -118,8 +122,13 @@ public class BookingsDB {
 			ResultSet rs = s.getResultSet();
 			while(rs.next())
 			{
+				
+				String startTime = rs.getString("startTime");
+				String endTime = rs.getString("endTime");
+				String bookedTime = rs.getString("bookedTime");
 				tB = new Booking(Integer.parseInt(rs.getString("id")), Integer.parseInt(rs.getString("clubid")), rs.getString("name"), Integer.parseInt(rs.getString("trackid")),
-						Resources.DATE_FORMAT.parse(rs.getString("startTime")), Resources.DATE_FORMAT.parse(rs.getString("endTime")), Resources.DATE_FORMAT.parse(rs.getString("bookedTime")), rs.getString("comment"));
+						Resources.DATE_FORMAT.parse(startTime.substring(0, startTime.length() - 2)), Resources.DATE_FORMAT.parse(endTime.substring(0, endTime.length() - 2)),
+						Resources.DATE_FORMAT.parse(bookedTime.substring(0, bookedTime.length() -2)), rs.getString("comment"));
 				bookings.add(tB);
 			}
 			return bookings;
@@ -145,8 +154,12 @@ public class BookingsDB {
 			
 			while(rs.next())
 			{
+				String startTime = rs.getString("startTime");
+				String endTime = rs.getString("endTime");
+				String bookedTime = rs.getString("bookedTime");
 				tB = new Booking(Integer.parseInt(rs.getString("id")), Integer.parseInt(rs.getString("clubid")), rs.getString("name"), Integer.parseInt(rs.getString("trackid")),
-						Resources.DATE_FORMAT.parse(rs.getString("startTime")), Resources.DATE_FORMAT.parse(rs.getString("endTime")), Resources.DATE_FORMAT.parse(rs.getString("bookedTime")), rs.getString("comment"));
+						Resources.DATE_FORMAT.parse(startTime.substring(0, startTime.length() - 2)), Resources.DATE_FORMAT.parse(endTime.substring(0, endTime.length() - 2)),
+						Resources.DATE_FORMAT.parse(bookedTime.substring(0, bookedTime.length() -2)), rs.getString("comment"));
 				bookings.add(tB);
 			}
 			
@@ -173,8 +186,12 @@ public class BookingsDB {
 			
 			while(rs.next())
 			{
+				String startTime = rs.getString("startTime");
+				String endTime = rs.getString("endTime");
+				String bookedTime = rs.getString("bookedTime");
 				tB = new Booking(Integer.parseInt(rs.getString("id")), Integer.parseInt(rs.getString("clubid")), rs.getString("name"), Integer.parseInt(rs.getString("trackid")),
-						Resources.DATE_FORMAT.parse(rs.getString("startTime")), Resources.DATE_FORMAT.parse(rs.getString("endTime")), Resources.DATE_FORMAT.parse(rs.getString("bookedTime")), rs.getString("comment"));
+						Resources.DATE_FORMAT.parse(startTime.substring(0, startTime.length() - 2)), Resources.DATE_FORMAT.parse(endTime.substring(0, endTime.length() - 2)),
+						Resources.DATE_FORMAT.parse(bookedTime.substring(0, bookedTime.length() -2)), rs.getString("comment"));
 				bookings.add(tB);
 			}
 			
@@ -201,8 +218,12 @@ public class BookingsDB {
 			
 			while(rs.next())
 			{
+				String startTime = rs.getString("startTime");
+				String endTime = rs.getString("endTime");
+				String bookedTime = rs.getString("bookedTime");
 				tB = new Booking(Integer.parseInt(rs.getString("id")), Integer.parseInt(rs.getString("clubid")), rs.getString("name"), Integer.parseInt(rs.getString("trackid")),
-						Resources.DATE_FORMAT.parse(rs.getString("startTime")), Resources.DATE_FORMAT.parse(rs.getString("endTime")), Resources.DATE_FORMAT.parse(rs.getString("bookedTime")), rs.getString("comment"));
+						Resources.DATE_FORMAT.parse(startTime.substring(0, startTime.length() - 2)), Resources.DATE_FORMAT.parse(endTime.substring(0, endTime.length() - 2)),
+						Resources.DATE_FORMAT.parse(bookedTime.substring(0, bookedTime.length() -2)), rs.getString("comment"));
 				bookings.add(tB);
 			}
 			
@@ -234,8 +255,12 @@ public class BookingsDB {
 			
 			while(rs.next())
 			{
+				String startTime = rs.getString("startTime");
+				String endTime = rs.getString("endTime");
+				String bookedTime = rs.getString("bookedTime");
 				tB = new Booking(Integer.parseInt(rs.getString("id")), Integer.parseInt(rs.getString("clubid")), rs.getString("name"), Integer.parseInt(rs.getString("trackid")),
-						Resources.DATE_FORMAT.parse(rs.getString("startTime")), Resources.DATE_FORMAT.parse(rs.getString("endTime")), Resources.DATE_FORMAT.parse(rs.getString("bookedTime")), rs.getString("comment"));
+						Resources.DATE_FORMAT.parse(startTime.substring(0, startTime.length() - 2)), Resources.DATE_FORMAT.parse(endTime.substring(0, endTime.length() - 2)),
+						Resources.DATE_FORMAT.parse(bookedTime.substring(0, bookedTime.length() -2)), rs.getString("comment"));
 				bookings.add(tB);
 			}
 			

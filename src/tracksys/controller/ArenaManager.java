@@ -180,6 +180,7 @@ public class ArenaManager {
 		NotificationsDB ndb = NotificationsDB.getInstance();
 		ndb.removeNotification(notificationID);
 	}
+	
 	/**
 	 * Transaction methods
 	 */

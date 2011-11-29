@@ -2,6 +2,7 @@ package tracksys.boundary.database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
 import tracksys.Resources;
 import tracksys.entity.Address;
 import tracksys.entity.Club;
+import java.sql.PreparedStatement;
 
 public class ClubDB {
 	private String table = "tracksys.club";	
@@ -134,11 +136,40 @@ public class ClubDB {
 			System.err.println("Error running database query");
 		}
 	}
+	
+	/**
+	 * Used for the autocomplete
+	 * @param search
+	 * @return
+	 */
+	public List<String> getClubNames(String search)
+	{
+		List<String> clubnames = new ArrayList<String>();
+		PreparedStatement ps = null;
+		String query = "Select name from club WHERE name like \"?%\";";
+		try
+		{
+			ps = conn.prepareStatement(query);
+			ps.setString(1, search);
+			ResultSet s = ps.executeQuery();
+			while (s.next())
+			{
+				clubnames.add(s.getString("name"));
+			}
+			return clubnames;
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	/* Get all clubs from the database */
 	public List<Club> getAllClubs()
 	{
 		List<Club> clubs = new ArrayList<Club>();
-		String query = "SELECT * From " + table;
+		String query = "SELECT * From " + table + " WHERE admin != 1;";
 		try
 		{
 			Club tempClub;

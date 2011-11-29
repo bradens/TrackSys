@@ -134,23 +134,25 @@ div.leftAccordion {
 	height:99%;
 }
 
-table { 
+table {
+	border:thin solid lightblue;
     width: 100%;
     border-collapse: collapse;
     text-align: left;
 }
 table th, table td {
     padding : 4px;
+    border-left: thin solid lightblue;
 }
-table th{
+table:not(.ui-datepicker-calendar) th{
     border-bottom: 2px solid lightblue;
     font-weight:bold;
 }
-table tbody tr:nth-child(odd) {
+table:not(.ui-datepicker-calendar) tbody tr:nth-child(odd) {
 	-webkit-transition: background-color .15s ease-in;
     background-color:#EFF2FF;
 }
-table tbody tr:hover {
+table:not(.ui-datepicker-calendar) tbody tr:hover {
     background-color:lightblue;
     color: #333;
 }
