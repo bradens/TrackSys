@@ -166,7 +166,8 @@ var club = {
 				console.log("Failed to get current club profile");
 				return;
 			}
-			$('.paymentValue').append(data.balance);
+			$('.paymentValue').empty();
+			$('.paymentValue').append('$' + data.balance);
 		},
 				
 		paynow: function(data)
@@ -181,10 +182,10 @@ var club = {
 		{
 			if (data == "true")
 			{
-				window.location.href = "/home/club.html";
-				// Todo: just load all transactions back, not the whole page
-				//CommHandler.doPost(SERVER_LOC+PORT+"/home/getTransactions", null, this.fillTransactionsTable);
-				//$(".loadingTransactions").show('fast');
+				console.log("TEST");
+				CommHandler.doPost(SERVER_LOC+PORT+"/home/getTransactions", null, club.fillTransactionsTable);
+				$(".loadingTransactions").show('fast');
+				CommHandler.doPost(SERVER_LOC+PORT+"/home/getCurrentClubProfile", null, club.writeClubBalancePaymentTab);
 			}
 			else
 			{
@@ -303,6 +304,13 @@ var club = {
 				return;
 			}
 			$(".loadingTransactions").css('display', 'none');
+			$(".transactionTable tr").remove();
+			$('.transactionTable').append('<tr class="header">' +
+										'<th>Transaction ID</th>' +
+										'<th>Fee</th>' +
+										'<th>Time</th>' +
+										'<th>Comment</th>' +
+									'</tr>')
 			for (var i = 0;i < data.length;i++)
 			{
 				$('.transactionTable tr:last').after('<tr class="transactionTableRow">' + 
