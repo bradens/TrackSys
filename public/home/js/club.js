@@ -196,6 +196,8 @@ var club = {
 				CommHandler.doPost(SERVER_LOC+PORT+"/home/getTransactions", null, club.fillTransactionsTable);
 				$(".loadingTransactions").show('fast');
 				CommHandler.doPost(SERVER_LOC+PORT+"/home/getCurrentClubProfile", null, club.writeClubBalancePaymentTab);
+				$("#payInputBox").val("");
+				$("#payCommentInputBox").val("");
 			}
 			else
 			{
