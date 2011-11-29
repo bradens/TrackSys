@@ -93,7 +93,13 @@
 						</div>
 					</div>
 					<div id="tabs-3">
-						<p>	
+						<div id="trackTabs">
+						<ul>
+							<li><a href="#tracktabs-1">Tracks Maintenance</a></li>
+							<li><a href="#tracktabs-2">Tracks History</a></li>
+							<li><a href="#tracktabs-3">Tracks Status</a></li>
+						</ul>
+						<div id="tracktabs-1">
 							<div class="trackRow trackBottomRowWrap">
 								<div class="trackBottomRow">
 									<div class="trackHeader">
@@ -173,16 +179,56 @@
 									</div>
 								</div>
 							</div>
-							</p>
-							<p>
+						</div>
+						<div id="tracktabs-2">
 							<div class="trackRow trackTopRowWrap">
 								<div class="trackTopRow">
 									<div class="trackHeader">
 										<span class="trackText1">Tracks</span>
 										<span class="trackText2">History</span>
-										<span class="trackID">#</span>
+										<a onclick="admin.printTrackHistory();" class="small button">Print</a>
 									</div>
-									<a onclick="admin.printTrackHistory();" class="small button">Print</a>
+																		
+									<span class="trackLabel label">Track: </span>
+									<div class="trackSelect">
+										<select id="trackHistoryIDSelect">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+										<option>6</option>
+										<option>7</option>
+										<option>8</option>
+										</select>
+									</div>
+									
+									<a onclick="admin.writeTrackHistory();" class="big button">Get history</a>
+										
+									<div class="tracksTableSection">
+										<table class="tracksHistoryTable">
+											<tr class="header">
+												<th>Club</th>
+												<th>StartTime</th>
+												<th>EndTime</th>
+												<th>Comment</th>
+											</tr>
+										</table>
+										<div class="loadingTracks" style="display:none;">
+											<div class="ajaxLoading"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div id="tracktabs-3">
+							<div class="trackRow trackTopRowWrap">
+								<div class="trackTopRow">
+									<div class="trackHeader">
+										<span class="trackText1">Tracks</span>
+										<span class="trackText2">Status</span>
+									</div>
+								
 									<div class="tracksTableSection">
 										<table class="tracksTable">
 										</table>
@@ -192,7 +238,7 @@
 									</div>
 								</div>
 							</div>
-						</p>
+						</div>
 					</div>
 					<div id="tabs-4">
 						<div id="dayControls">
