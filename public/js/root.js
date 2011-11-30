@@ -1,1 +1,1 @@
-window.location = "/login/";
+window.location = "/public/login/";

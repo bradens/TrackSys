@@ -35,11 +35,11 @@ public class ClubView {
 	{	
 		if (manager.isAdmin(req))
 		{
-			ServletHandler.writeResponse("/home/admin.html", resp);
+			ServletHandler.writeResponse("/tracksys/home/admin.html", resp);
 		}
 		else if (manager.isClub(req))
-			ServletHandler.writeResponse("/home/club.html", resp);
+			ServletHandler.writeResponse("/tracksys/home/club.html", resp);
 		else
-			ServletHandler.writeResponse("/login/", resp);
+			ServletHandler.writeResponse("/tracksys/login/", resp);
 	}
 }

@@ -3,7 +3,7 @@ var club = {
 		init : function()
 		{	
 			// get the dialog html
-			CommHandler.doGet(SERVER_LOC+"80/registration/editDialog.html", null, function(data) {
+			CommHandler.doGet(SERVER_LOC+"1234/public/registration/editDialog.html", null, function(data) {
 				club.editDialog = data;
 			});
 			
@@ -289,7 +289,7 @@ var club = {
 		bookingSuccess : function(data)
 		{
 			if (data == "true")
-				window.location.href = "/home/club.html";
+				window.location.href = "/public/home/club.html";
 			else
 			{
 				$(".bookingPopup").fadeIn('fast');

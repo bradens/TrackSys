@@ -7,7 +7,8 @@
 
 // check if the user is already logged in.  If so, redirect home.
 CommHandler.doPost(SERVER_LOC+PORT+"/home/homeLocation", null, function(data){
-	if (data != "/login/")
+	debugger;
+	if (data != "/public/login/")
 		window.location.href = data;	
 });
 
@@ -21,7 +22,7 @@ var login = {
 	loginSuccess : function(data)
 	{
 		if (data == "true"){
-			window.location.href = "/home/";	
+			window.location.href = "/public/home/";	
 		}
 		else
 		{

@@ -1,5 +1,5 @@
 var SERVER_LOC 	= "http://localhost:";
-var PORT 		= "1234";
+var PORT 		= "1234/servlet";
 
 function logout() 
 {
@@ -8,7 +8,7 @@ function logout()
 
 function onLogout()
 {
-	window.location = "/login/";
+	window.location = "/public/login/";
 }
 
 var CommHandler = {

@@ -191,3 +191,7 @@ span.trackText2 {
 	font-size:15px !important;	
 	margin:10px 0 5px 10px !important;
 }
+
+.errorDesc {
+	white-space:normal;
+}

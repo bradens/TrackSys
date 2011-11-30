@@ -340,7 +340,7 @@ var admin = {
 		// no conflict when book maintenance
 		if (data.length == 0)
 		{
-			window.location.href = "/home/admin.html";
+			window.location.href = "/public/home/admin.html";
 		}
 		// conflict with some booking, list them out
 		else
@@ -366,7 +366,7 @@ var admin = {
 			}
 			
 			// show warning
-			$(".warningPopup").fadeIn('fast');
+			$(".trackWarning").fadeIn('fast');
 		}
 	},
 	

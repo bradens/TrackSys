@@ -1,10 +1,8 @@
 package tracksys.boundary.views;
 
-import java.util.Date;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
-import java.util.Random;
-import java.lang.Float;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,9 +14,8 @@ import tracksys.controller.ArenaManager;
 import tracksys.entity.Booking;
 import tracksys.entity.Club;
 import tracksys.entity.Notification;
-import tracksys.entity.Transaction;
 import tracksys.entity.Track;
-
+import tracksys.entity.Transaction;
 import tracksys.servletHandler.ServletHandler;
 
 import com.google.gson.Gson;
@@ -451,12 +448,12 @@ public class HomeView {
 	{	
 		if (manager.isAdmin(req))
 		{
-			ServletHandler.writeResponse("/home/admin.html", resp);
+			ServletHandler.writeResponse("/public/home/admin.html", resp);
 		}
 		else if (manager.isClub(req))
-			ServletHandler.writeResponse("/home/club.html", resp);
+			ServletHandler.writeResponse("/public/home/club.html", resp);
 		else
-			ServletHandler.writeResponse("/login/", resp);
+			ServletHandler.writeResponse("/public/login/", resp);
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////
