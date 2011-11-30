@@ -19,14 +19,14 @@ public class Resources {
 	public static String RESOURCE_BASE = getResource();
 	
 	
-//	public static String username = "modus";
-//	public static String password = "pwnens";
-//	public static String database = "jdbc:mysql://bradensimpson.com";
+	public static String username = "modus";
+	public static String password = "pwnens";
+	public static String database = "jdbc:mysql://bradensimpson.com";
 	
 	// Comment these out if you want to use online db
-	public static String username = "root";
-	public static String password = "root";
-	public static String database = "jdbc:mysql://localhost";
+//	public static String username = "root";
+//	public static String password = "root";
+//	public static String database = "jdbc:mysql://localhost";
 	
 	public static String NOTIFICATION_TITLE_PARAM = "title";
 	public static String NOTIFICATION_MESSAGE_PARAM = "message";
