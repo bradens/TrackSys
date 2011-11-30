@@ -15,7 +15,14 @@ public class TrackSysApplication {
 		
 		// STATIC RESOURCES
 		ServletHttpContext context1 = (ServletHttpContext) server.getContext("/");
-		context1.setResourceBase(Resources.RESOURCE_BASE);
+		
+		String dir = System.getProperty("user.dir");
+		System.out.println(
+		 "========================================\n" + 
+		 "TrackSys Running serving static files from directory\n" + dir +
+		 "\n========================================"
+		 );
+		context1.setResourceBase(dir);
 		context1.addServlet("/", "org.mortbay.jetty.servlet.Default");
         server.start();
         server.join();
