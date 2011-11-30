@@ -15,7 +15,7 @@ public class TrackSysApplication {
 		
 		// STATIC RESOURCES
 		ServletHttpContext context1 = (ServletHttpContext) server.getContext("/");
-		context1.setResourceBase("/Users/braden/SEng330/TrackSys/");
+		context1.setResourceBase(Resources.RESOURCE_BASE);
 		context1.addServlet("/", "org.mortbay.jetty.servlet.Default");
         server.start();
         server.join();
