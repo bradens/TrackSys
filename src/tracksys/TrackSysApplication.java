@@ -2,7 +2,11 @@ package tracksys;
 import org.mortbay.jetty.Server;
 import org.mortbay.jetty.servlet.ServletHttpContext;
 
-
+/**
+ * Main entry point for the TrackSys project.
+ * Starts both servlets.
+ *
+ */
 public class TrackSysApplication {
 	public static void main(String[] args) throws Exception
 	{
