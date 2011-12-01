@@ -138,15 +138,15 @@ public class ClubDB {
 	}
 	
 	/** 
-	 * Gets the clubs that starts with the string in searchParm
-	 * @param searchParm
-	 * @return
+	 * <h2>Gets the clubs that starts with the string in searchParm.</h2>
+	 * @param searchParm String search key.
+	 * @return List of clubs that match
 	 */
 	public List<Club> getClubsFromName(String searchParm)
 	{
 		List<Club> clubs = new ArrayList<Club>();
 		PreparedStatement ps = null;
-		String query = "select * from tracksys.club where name like \"" + searchParm + "%\" AND admin!=1;";
+		String query = "select * from tracksys.club where name like \"%" + searchParm + "%\" AND admin!=1;";
 		try
 		{
 			ps = conn.prepareStatement(query);

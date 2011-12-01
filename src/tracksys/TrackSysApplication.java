@@ -18,9 +18,9 @@ public class TrackSysApplication {
 		
 		String dir = System.getProperty("user.dir");
 		System.out.println(
-		 "========================================\n" + 
-		 "TrackSys Running serving static files from directory\n" + dir +
-		 "\n========================================"
+		 "================================================================================\n" + 
+		 "TrackSys System Running serving static files from directory\n" + dir +
+		 "\n================================================================================"
 		 );
 		context1.setResourceBase(dir);
 		context1.addServlet("/", "org.mortbay.jetty.servlet.Default");
