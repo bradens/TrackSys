@@ -4,13 +4,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import tracksys.Resources;
 import tracksys.boundary.database.BookingsDB;
-import tracksys.boundary.database.ClubDB;
 import tracksys.boundary.database.TracksDB;
 import tracksys.controller.ArenaManager;
 import tracksys.entity.Address;
