@@ -1,5 +1,6 @@
 var club = {
 		editDialog: null,
+		profileData: null,
 		init : function()
 		{	
 			// get the dialog html
@@ -34,6 +35,25 @@ var club = {
 				}
 			});
 			
+			$("#editClubDlg").dialog({
+				autoOpen: false,
+				show: 'fade',
+				hide: 'fade',
+				width: '450',
+				modal: true,
+				title: "Edit Profile",
+				buttons: {
+					"Apply": function() {
+						club.finishEdit();
+					},
+					"Cancel": function() {
+						$(this).dialog( "close" );
+					}
+				}
+			});
+			
+			club.editDialog = $("#editClubDlg");
+			
 			var currentTime = new Date();
 			var month = currentTime.getMonth() + 1;
 			var day = currentTime.getDate();
@@ -45,8 +65,10 @@ var club = {
 			CommHandler.doPost(SERVER_LOC+PORT+"/home/getNotifications", null, this.writeNotifications);
 			$(".loadingNotifications").show('fast');
 			// Get the current club profile
-			CommHandler.doPost(SERVER_LOC+PORT+"/home/getCurrentClubProfile", null, this.writeClubProfile);
-			CommHandler.doPost(SERVER_LOC+PORT+"/home/getCurrentClubProfile", null, this.writeClubBalancePaymentTab);
+			CommHandler.doPost(SERVER_LOC+PORT+"/home/getCurrentClubProfile", null, function (data) {
+				club.writeClubProfile(data);
+				club.writeClubBalancePaymentTab(data);
+			});
 			$(".loadingClubProfile").show('fast');
 			// Get all the future bookings
 			CommHandler.doPost(SERVER_LOC+PORT+"/home/getFutureBookings", null, this.writeFutureBookings);
@@ -71,26 +93,38 @@ var club = {
 		
 		editClub: function() 
 		{
-			$(club.editDialog).dialog({
-				show: 'fade',
-				hide: 'fade',
-				width: '450',
-				modal: true,
-				title: "Edit Profile",
-				buttons: {
-					"Apply": function() {
-						club.finishEdit();
-					},
-					"Cancel": function() {
-						$(this).dialog( "close" );
-					}
-				}
-			});
+			$("#editClubDlg").dialog("open");
+			// Load the information into the edit dialog.
+			$("#nameInputBox").val(club.profileData.name);
+			$("#streetInputBox").val(club.profileData.address.street);
+			$("#cityInputBox").val(club.profileData.address.city);
+			$("#provinceInputBox").val(club.profileData.address.province);
+			$("#postalInputBox").val(club.profileData.address.postal);
+			$("#phoneInputBox").val(club.profileData.phone);
+			$("#emailInputBox").val(club.profileData.email);
 		},
 		
 		finishEdit: function(data)
 		{
-			console.log(data);
+			var name = $("#editClubDlg #nameInputBox").val();
+			var street = $("#editClubDlg #streetInputBox").val();
+			var city = $("#editClubDlg #cityInputBox").val();
+			var province = $("#editClubDlg #provinceInputBox").val();
+			var postal = $("#editClubDlg #postalInputBox").val();
+			var email = $("#editClubDlg #emailInputBox").val();
+			var phone = $("#editClubDlg #phoneInputBox").val();
+			var billing = $("#editClubDlg #billingSelect").val();
+			
+			CommHandler.doPost(SERVER_LOC+PORT+"/home/editClub", { name: name, street: street, city: city, province: province, postal: postal,
+				email: email, phone: phone, billing: billing}, function(data) {
+				console.log(data);
+				$("#editClubDlg").dialog("close");
+				// Get the current club profile
+				CommHandler.doPost(SERVER_LOC+PORT+"/home/getCurrentClubProfile", null, function (data) {
+					club.writeClubProfile(data);
+					club.writeClubBalancePaymentTab(data);
+				});
+			});
 		},
 		
 		rewriteDayBookings : function()
@@ -157,6 +191,8 @@ var club = {
 				console.log("Failed to get current club profile");
 				return;
 			}
+			$(".profileRow").remove();
+			club.profileData = data;
 			$(".loadingClubProfile").hide('fast');
 			$(".profileTbl").append(
 				'<tr class="profileRow"><td><span class="lbl">Club:</span></td><td><span class=lblVal>' + data.name + '</span></td></tr>' +

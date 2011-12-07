@@ -4,13 +4,16 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import tracksys.Resources;
 import tracksys.boundary.database.BookingsDB;
+import tracksys.boundary.database.ClubDB;
 import tracksys.boundary.database.TracksDB;
 import tracksys.controller.ArenaManager;
+import tracksys.entity.Address;
 import tracksys.entity.Booking;
 import tracksys.entity.Club;
 import tracksys.entity.Notification;
@@ -121,7 +124,43 @@ public class HomeView {
 		{
 			return this.getClubsByName(req, resp);
 		}
+		else if (target.endsWith("editClub"))
+		{
+			return this.editClub(req, resp);
+		}
 		return false;
+	}
+	
+	
+	public boolean editClub(HttpServletRequest req, HttpServletResponse resp)
+	{
+		Club currClub = manager.getCurrentLoginClub(req);		
+		currClub.setName(req.getParameter("name"));
+		currClub.setAddress(new Address(req.getParameter("street"), req.getParameter("city"), req.getParameter("province"), req.getParameter("phone"), req.getParameter("postal")));
+		currClub.setEmail(req.getParameter("email"));
+		String billing = req.getParameter("billing");
+		
+		int boolBilling;
+		
+		if(billing.equalsIgnoreCase("Electronic"))
+			boolBilling = 1;
+		else 
+			boolBilling = 0;
+		
+		currClub.setElectronicBilling(boolBilling);
+		
+		if (currClub.getName().equalsIgnoreCase("") || currClub.getAddress().street.equalsIgnoreCase("") || currClub.getAddress().city.equalsIgnoreCase("") ||
+				currClub.getAddress().postal.equalsIgnoreCase("") || currClub.getEmail().equalsIgnoreCase("") || currClub.getPhoneNumber().equalsIgnoreCase(""))
+		{
+			ServletHandler.writeResponse("false", resp);
+			return false;
+		}
+		else
+		{
+			manager.editClub(currClub);
+			ServletHandler.writeResponse("true", resp);
+			return true;
+		}
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////

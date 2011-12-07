@@ -189,6 +189,17 @@ public class ArenaManager {
 	}
 	
 	/**
+	 * Edits the club record with the updated data.
+	 * @param club
+	 */
+	public void editClub(Club club)
+	{
+		
+		ClubDB cdb = ClubDB.getInstance();
+		cdb.updateClub(club);
+	}
+	
+	/**
 	 * Transaction methods
 	 */
 	public List<Transaction> getTransactions(int clubID)
