@@ -9,7 +9,7 @@ var checkForWebkit = function() {
 			title: "Browser Incompatibility",
 			modal: true,
 			show: 'fade',
-			hide: 'fade'
+			hide: 'fade',
 			height:'300',
 			width:'400'
 		});

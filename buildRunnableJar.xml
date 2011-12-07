@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Create Runnable Jar for Project TrackSys">
+    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
+    <!--ANT 1.7 is required                                        -->
+    <target name="create_run_jar">
+        <jar destfile="/home/braden/TrackSys/Tracksys.jar" filesetmanifest="mergewithoutmain">
+            <manifest>
+                <attribute name="Main-Class" value="tracksys.TrackSysApplication"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
+            <fileset dir="/home/braden/TrackSys/bin"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/braden/TrackSys/lib/org.mortbay.jetty.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/braden/TrackSys/lib/javax.servlet.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/braden/TrackSys/lib/mysql-connector-java-5.1.18-bin.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/braden/TrackSys/lib/gson-2.0.jar"/>
+        </jar>
+    </target>
+</project>

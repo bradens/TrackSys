@@ -130,6 +130,13 @@ public class HomeView {
 	}
 	
 	
+	/**
+	 * Applies the current club's updates to their profile data.
+	 * Calls the manager to access DB.
+	 * @param req
+	 * @param resp
+	 * @return
+	 */
 	public boolean editClub(HttpServletRequest req, HttpServletResponse resp)
 	{
 		Club currClub = manager.getCurrentLoginClub(req);		
@@ -161,8 +168,12 @@ public class HomeView {
 		}
 	}
 	
-	//////////////////////////////////////////////////////////////////////////////
-	// Add new transaction
+	/**
+	 * Adds a new transaction.
+	 * @param req
+	 * @param resp
+	 * @return
+	 */
 	public boolean addPayment(HttpServletRequest req, HttpServletResponse resp)
 	{
 		Date payDate    = new Date();
@@ -189,6 +200,12 @@ public class HomeView {
 		return true;
 	}
 	
+	/**
+	 * Get the last 50 bookings based on bookedDate.
+	 * @param req
+	 * @param resp
+	 * @return
+	 */
 	public boolean getRecentBookings(HttpServletRequest req, HttpServletResponse resp)
 	{
 		List<Booking> bookings = manager.getRecentBookings();
@@ -199,6 +216,12 @@ public class HomeView {
 		return true;
 	}
 	
+	/**
+	 * Get the latest bookings for a given TrackID.
+	 * @param req
+	 * @param resp
+	 * @return
+	 */
 	public boolean getTrackHistory(HttpServletRequest req, HttpServletResponse resp)
 	{
 		String trackID = req.getParameter("track");
@@ -212,6 +235,12 @@ public class HomeView {
 		return true;
 	}
 	
+	/**
+	 * Get the bookings for a certain day.  Writes back to be used for the calendar view.
+	 * @param req
+	 * @param resp
+	 * @return
+	 */
 	@SuppressWarnings("deprecation")
 	public boolean getDayBookings(HttpServletRequest req, HttpServletResponse resp)
 	{
@@ -447,7 +476,8 @@ public class HomeView {
 		return true;
 	}
 	
-	/* Returns a JSON encoded response of the all past transactions.
+	/** 
+	 * Returns a JSON encoded response of the all past transactions.
 	 * @param req
 	 * @param resp
 	 */
@@ -461,6 +491,12 @@ public class HomeView {
 		ServletHandler.writeResponse(s, resp);
 		return true;
 	}
+	/**
+	 * Gets a JSON encoded response of all the clubs.
+	 * @param req
+	 * @param resp
+	 * @return
+	 */
 	public boolean getAllClubs(HttpServletRequest req, HttpServletResponse resp)
 	{
 		List<Club> clubs = manager.getAllClubs();
@@ -471,6 +507,12 @@ public class HomeView {
 		return true;
 	}
 	
+	/**
+	 * Get all the clubs that contain a certain substring, specified by <i>searchStr</i>
+	 * @param req
+	 * @param resp
+	 * @return
+	 */
 	public boolean getClubsByName(HttpServletRequest req, HttpServletResponse resp)
 	{
 		List<Club> clubs = manager.getClubsByName(req.getParameter("searchStr"));
@@ -481,6 +523,11 @@ public class HomeView {
 		return true;
 	}
 	
+	/**
+	 * Redirects the request to the appropriate page, admin or club.
+	 * @param req
+	 * @param resp
+	 */
 	public void directToHome(HttpServletRequest req, HttpServletResponse resp)
 	{	
 		if (manager.isAdmin(req))
@@ -493,8 +540,12 @@ public class HomeView {
 			ServletHandler.writeResponse("/public/login/", resp);
 	}
 	
-	//////////////////////////////////////////////////////////////////////////////
-	// Add maintenance booking
+	/**
+	 * Add a maintenance booking.
+	 * @param req
+	 * @param resp
+	 * @return
+	 */
 	public boolean addMaintenance(HttpServletRequest req, HttpServletResponse resp)
 	{
 		String track = req.getParameter("track");
@@ -534,7 +585,12 @@ public class HomeView {
 		return true;
 	}
 	
-	// Bill a club
+	/**
+	 * Bills a club specified by <i>club</i>
+	 * @param req
+	 * @param resp
+	 * @return
+	 */
 	public boolean billClub(HttpServletRequest req, HttpServletResponse resp)
 	{
 		String name = req.getParameter("club");

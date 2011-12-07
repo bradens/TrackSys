@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="javadoc">
+    <target name="javadoc">
+        <javadoc access="public" author="true" classpath="lib/gson-2.0.jar:lib/org.mortbay.jetty.jar:lib/mysql-connector-java-5.1.18-bin.jar:lib/javax.servlet.jar" destdir="doc" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" packagenames="tracksys.boundary.views,tracksys.controller,tracksys,tracksys.boundary.database,tracksys.servletHandler,tracksys.entity" source="1.6" sourcepath="src" splitindex="true" use="true" version="true"/>
+    </target>
+</project>
