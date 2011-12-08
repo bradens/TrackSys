@@ -13,6 +13,7 @@ div.mainColumnWrap {
 	background-color: #E7E8E8;
 	padding:15px;
 	box-shadow: 0px 1px 4px 4px rgba(200,200,255, .7);
+	-webkit-box-shadow: 0px 1px 4px 4px rgba(200,200,255, .7);
 }
 div.mainColumn {
 	font-size:15px;

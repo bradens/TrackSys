@@ -18,7 +18,7 @@ public class Resources {
 	public static String password = "pwnens";
 	public static String database = "jdbc:mysql://bradensimpson.com";
 	
-	// Comment these out if you want to use online db
+//  Comment these out if you want to use online db
 //	public static String username = "root";
 //	public static String password = "root";
 //	public static String database = "jdbc:mysql://localhost";
