@@ -1,3 +1,7 @@
+/**
+ * TODO remove all DB References..Everything needs to go through the manager first.
+ */
+
 package tracksys.boundary.views;
 
 import java.util.Calendar;

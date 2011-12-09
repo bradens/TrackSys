@@ -6,11 +6,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import tracksys.Resources;
 import tracksys.controller.ArenaManager;
-import tracksys.entity.*;
+import tracksys.entity.Address;
+import tracksys.entity.Club;
 import tracksys.servletHandler.ServletHandler;
 
 public class RegistrationView {
-	public int activeClub; 
 	public ArenaManager manager;
 	
 	public RegistrationView(ArenaManager manager)
