@@ -35,7 +35,7 @@ public class HomeView {
 	
 	/**
 	 * Performs some logic on the request and calls the specific
-	 * operation in the login view.
+	 * operation in the view.
 	 * @param req
 	 * @param resp
 	 * @param target

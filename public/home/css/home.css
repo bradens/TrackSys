@@ -36,6 +36,8 @@ div.BannerWrap {
 	display: inline-block;
 	margin: 0 5px 0 5px;
 	box-shadow: 0px 1px 4px 4px rgba(200,200,255, .3);
+	-webkit-box-shadow: 0px 1px 4px 4px rgba(200,200,255, .3);
+	
 }
 
 div.leftColumnWrap {
@@ -84,6 +86,7 @@ div.leftAccordion {
 	padding: 3px;
 	background: #ECEDFE url(../../jqueryui/css/TrackSys/images/ui-bg_inset-hard_50%_ecedfe_1x100.png) 50% 50% repeat-x;
 	box-shadow: 0px 1px 1px 1px rgba(0,0,0,.3);
+	-webkit-box-shadow: 0px 1px 1px 1px rgba(0,0,0,.3);
 	-webkit-transition: background-color .15s ease-in;
 }
 

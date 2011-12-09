@@ -71,11 +71,13 @@ input.formInputBox:focus {
 	border: none;
 	border-bottom: thin solid #AAA;
 	box-shadow: rgba(0,0,0,.3) 0px 1px 2px 1px;
+	-webkit-box-shadow: rgba(0,0,0,.3) 0px 1px 2px 1px;
 	border-radius: 2px 2px 0 0px;
 }
 
 .ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-draggable.ui-resizable {
 	box-shadow: rgb(102, 102, 102) 0px 0px 16px 0.5px;
+	-webkit-box-shadow: rgb(102, 102, 102) 0px 0px 16px 0.5px;
 	padding:0;
 }
 
