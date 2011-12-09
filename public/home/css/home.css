@@ -156,10 +156,13 @@ table:not(.ui-datepicker-calendar) th{
     font-weight:bold;
 }
 table:not(.ui-datepicker-calendar) tbody tr:nth-child(odd) {
-	-webkit-transition: background-color .15s ease-in;
+    -webkit-transition: background-color .15s ease-in;
     background-color:rgb(230,230,255);
 }
 table:not(.ui-datepicker-calendar) tbody tr:hover {
     background-color:lightblue;
     color: #333;
+}
+table:not(.ui-datepicker-calendar) tr:hover td {
+    border-color:#E6E6FF;
 }
