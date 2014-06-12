@@ -6,3 +6,4 @@ The src folder contains the java code being served by Jetty (http://jetty.codeha
 The public folder is the html/css/js files that will be served with a jetty static servlet, which then make calls to the dynamic java servlet.  
 
 To get this project running you need java 5+, and eclipse.  Just simply import the project and run it.  Access the web app at http://localhost:1234
+asdfa
